@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Carrinho</title>
+</head>
+
+<body>
+
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <p>
+                        <figure>
+                            <img src="" alt="Minha Figura">
+                        </figure>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <form action="/descricao/" method="GET">
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="text" id="descricao" name="descricao" class="form-control"
+                                    placeholder="Pesquise Seus Produtos">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md">
+                    <p>
+                        <a href="/carrinho">Carrinho</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active ">
+                        <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Computador
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Acessórios
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Impressoras
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Telefonia
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Notebooks
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Televisão
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-2 bg-light">
+                <ul>
+                    <%
+                  categories.map(function(categoria){
+                      %>
+                    <li><a href=<%='/categorias/' + categoria.descricao + '?page=1' %>><%= categoria.descricao%></a>
+                    </li>
+                    <%
+                  });
+                  %>
+                </ul>
+
+            </div>
+            <div class="col-10 bg-light">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-10 col-md-offset-1">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Quantidade</th>
+                                        <th class="text-center">Preço</th>
+                                        <th class="text-center">SubTotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%
+                                let total = 0;
+                                if(produtos){
+                                    produtos.map(function(produto){
+                                        %>
+
+                                    <tr>
+                                        <td class="col-sm-8 col-md-6">
+                                            <div class="media">
+                                                <a class="thumbnail pull-left" href="#"> <img class="media-object"
+                                                        src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png"
+                                                        style="width: 72px; height: 72px;"> </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#"><%=produto.nome%></a></h4>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="col-sm-1 col-md-1" style="text-align: center">
+                                            <form id=<%='formUpdate' + produto.codigo%> action="/carrinho/update"
+                                                method="POST">
+                                                <input type="hidden" name="produto" value=<%=produto.codigo%>>
+                                                <p><%=produto.qtd%></p>
+                                            </form>
+                                        </td>
+                                        <td class="col-sm-1 col-md-1 text-center"><strong>$<%=produto.preco%></strong>
+                                        </td>
+                                        <td class="col-sm-1 col-md-1 text-center">
+                                            <strong>$<%=produto.subtotal%></strong></td>
+
+                                    </tr>
+
+                                    <%
+
+                                        total += produto.subtotal;
+                                    })
+                                }%>
+                                    <tr>
+                                        <td>   </td>
+                                        <td> </td>
+                                        <td>
+                                            <h3>Total</h3>
+                                        </td>
+                                        <td class="text-right">
+                                            <h3><strong>$<%=total%></strong></h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3 mb-2 bg-info text-white col-9 text-center">
+                    <h3>Forma de Pagamento</h3>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <section id="tabs" class="project-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav>
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                                    role="tab" aria-controls="nav-home" aria-selected="true">Dinheiro</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                                    role="tab" aria-controls="nav-profile" aria-selected="false">Duplicata</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                aria-labelledby="nav-home-tab">
+                                <p></p>
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col-7 border border-info text-center">
+                                        <p><strong>Para finalizar sua compra com forma de pagamento em dinheiro, basta
+                                                clicar no botão abaixo</strong></p>
+                                        <form action="/checkout/dinheiro" method="POST">
+                                            <button type="submit" class="btn btn-success btn-block">Comprar</button>
+                                        </form>
+                                        <p></p>
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                aria-labelledby="nav-profile-tab">
+                                <p></p>
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col-8 border border-info text-center">
+                                        <p><strong>Para finalizar sua compra com forma de pagamento em duplicata,
+                                                preencha os campos a seguir com as informações do pagamento, e então
+                                                finalize a compra no botão "Comprar"</strong></p>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="parcelas"><strong>Quantidade de
+                                                        Parcelas</strong></label>
+                                                <select class="form-control text-center" onchange="alertar()"
+                                                    id="parcelas" required>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="intervalo"><strong>Intervalo de
+                                                        Pagamento</strong></label>
+                                                <select class="form-control text-center" id="intervalo" required>
+                                                    <option>15</option>
+                                                    <option>30</option>
+                                                    <option>45</option>
+                                                    <option>60</option>
+                                                    <option>90</option>
+                                                    <option>100</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-success btn-block">Comprar</button>
+                                        </form>
+                                        <p></p>
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+
+    </main>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function alertar() {
+            let parcelas = document.getElementById('parcelas');
+            const parcela = parcelas.options[parcelas.selectedIndex].text;
+
+            let intervalo = document.getElementById('intervalo');
+            intervalo.innerHTML = "";
+            let option1 = document.createElement("option");
+
+            switch (parcela) {
+                case "1":
+                    option1 = document.createElement("option");
+                    option1.text = "15";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "100";
+                    intervalo.add(option1);
+
+                    break;
+
+                case "2":
+                    option1 = document.createElement("option");
+                    option1.text = "15x30";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x45";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x60";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "90x120";
+                    intervalo.add(option1);
+
+                    break;
+
+                case "3":
+                    option1 = document.createElement("option");
+                    option1.text = "30x60x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x45x60";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x75x105";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x80x100";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "90x105x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x60x75";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x90x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x60x75";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x75x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x75x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "90x120x150";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "25x35x45";
+                    intervalo.add(option1);
+
+                    break;
+                case "4":
+                    option1 = document.createElement("option");
+                    option1.text = "30x60x90x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x40x50x60";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x60x90x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x65x75x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x90x120x150";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "15x30x45x60";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x80x100x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x70x80x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x60x75x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "75x90x105x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x75x90x105";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x50x90x120";
+                    intervalo.add(option1);
+
+                    break;
+
+                case "5":
+                    option1 = document.createElement("option");
+                    option1.text = "15x30x45x60x75";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x60x90x120x150";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x75x90x105x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x65x75x75x80";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "60x75x90x105x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x45x60x75x90";
+                    intervalo.add(option1);
+
+
+                    break;
+
+                case "6":
+                    option1 = document.createElement("option");
+                    option1.text = "15x30x45x60x75x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x45x60x75x90x105";
+                    intervalo.add(option1);
+
+                    break;
+
+                case "7":
+                    option1 = document.createElement("option");
+                    option1.text = "30x45x60x75x90x105x120";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "30x40x50x60x70x80x90";
+                    intervalo.add(option1);
+
+                    option1 = document.createElement("option");
+                    option1.text = "45x55x65x75x85x95x105";
+                    intervalo.add(option1);
+
+                    break;
+                
+                case "8":
+                    option1 = document.createElement("option");
+                    option1.text = "15x30x45x60x75x90x105x120";
+                    intervalo.add(option1);
+
+                    break;
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+const Carrinho = require('../model/Carrinho');
+const Categoria = require('../model/Categoria');
+
+module.exports = {
+    async showProducts(req, res) {
+        const categorias = await Categoria.categorias();
+        const produtosCarrinho = await Carrinho.getProdutos(req.user.id);
+        if (!produtosCarrinho) {
+            res.render('carrinhoVazio', {
+                categories: categorias
+            });
+        } else {
+            const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
+            res.render('carrinho', {
+                produtos: produtosFinais,
+                categories: categorias
+            });
+        }
+
+    },
+
+    async adicionarAoCarrinho(req, res) {
+        const result = await Carrinho.adicionarNoCarrinho(req.user.id, req.body.produto, req.body.qtd);
+
+        res.redirect('/produto/' + req.body.produto);
+
+    },
+
+    async removerDoCarrinho(req,res){
+        const result = await Carrinho.removerDoCarrinho(req.user.id, req.body.produto);
+
+        if(result){
+            res.redirect('/carrinho');
+        }else{
+            res.redirect('/carrinho')
+        }
+    },
+
+    async atualizarCarrinho(req,res){
+        const result = await Carrinho.atualizarQuantidade(req.user.id, req.body.produto, req.body.qtd);
+
+        if(result){
+            res.redirect('/carrinho');
+        }else{
+            res.redirect('/carrinho')
+        }
+
+    },
+
+    async checkout(req, res) {
+        const categorias = await Categoria.categorias();
+        const produtosCarrinho = await Carrinho.getProdutos(req.user.id);
+        if (!produtosCarrinho) {
+            res.render('carrinhoVazio', {
+                categories: categorias
+            });
+        } else {
+            const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
+            res.render('checkout', {
+                produtos: produtosFinais,
+                categories: categorias
+            });
+        }
+
+    }
+}
