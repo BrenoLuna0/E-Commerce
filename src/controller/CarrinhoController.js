@@ -62,5 +62,15 @@ module.exports = {
             });
         }
 
+    },
+
+    async limparCarrinho(req,res){
+        const result = await Carrinho.limparCarrinho(req.user.id);
+        if(result){
+            res.redirect('/confirmacao');
+        }else{
+            res.redirect('/confirmacao');
+        }
+
     }
 }

@@ -149,10 +149,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     <%
                                 let total = 0;
+                                let produtoObj = [];
                                 if(produtos){
                                     produtos.map(function(produto){
+                                        produtoObj.push([
+                                            '[' + produto.codigo,
+                                            produto.nome,
+                                            produto.preco,
+                                            produto.qtd,
+                                            produto.subtotal + ']'
+                                        ])
                                         %>
 
                                     <tr>
@@ -217,9 +226,11 @@
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                                    role="tab" aria-controls="nav-home" aria-selected="true">Dinheiro</a>
+                                    role="tab" aria-controls="nav-home"
+                                    aria-selected="true"><strong>Dinheiro</strong></a>
                                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                    role="tab" aria-controls="nav-profile" aria-selected="false">Duplicata</a>
+                                    role="tab" aria-controls="nav-profile"
+                                    aria-selected="false"><strong>Duplicata</strong></a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -232,8 +243,12 @@
                                     <div class="col-7 border border-info text-center">
                                         <p><strong>Para finalizar sua compra com forma de pagamento em dinheiro, basta
                                                 clicar no botão abaixo</strong></p>
-                                        <form action="/checkout/dinheiro" method="POST">
-                                            <button type="submit" class="btn btn-success btn-block">Comprar</button>
+                                        <form id="formDinheiro" action="/checkout" method="POST">
+                                            <input id="objProduto" type="hidden" name="objProduto">
+                                            <input type="hidden" name="total" value=<%=total%>>
+                                            <input type="hidden" name="formPagt" value="11">
+                                            <button type="button" class="btn btn-success btn-block"
+                                                onclick="enviarDinheiro()">Comprar</button>
                                         </form>
                                         <p></p>
                                     </div>
@@ -252,12 +267,12 @@
                                         <p><strong>Para finalizar sua compra com forma de pagamento em duplicata,
                                                 preencha os campos a seguir com as informações do pagamento, e então
                                                 finalize a compra no botão "Comprar"</strong></p>
-                                        <form>
+                                        <form id="formDuplicata" action="/checkout" method="POST">
                                             <div class="form-group">
                                                 <label for="parcelas"><strong>Quantidade de
                                                         Parcelas</strong></label>
                                                 <select class="form-control text-center" onchange="alertar()"
-                                                    id="parcelas" required>
+                                                    id="parcelas" name="parcelas" required>
                                                     <option>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -271,7 +286,8 @@
                                             <div class="form-group">
                                                 <label for="intervalo"><strong>Intervalo de
                                                         Pagamento</strong></label>
-                                                <select class="form-control text-center" id="intervalo" required>
+                                                <select class="form-control text-center" id="intervalo" name="intervalo"
+                                                    required>
                                                     <option>15</option>
                                                     <option>30</option>
                                                     <option>45</option>
@@ -280,7 +296,11 @@
                                                     <option>100</option>
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-success btn-block">Comprar</button>
+                                            <input id="objProdutoDuplicata" type="hidden" name="objProduto">
+                                            <input type="hidden" name="total" value=<%=total%>>
+                                            <input type="hidden" name="formPagt" value="18">
+                                            <button type="button" class="btn btn-success btn-block"
+                                                onclick="enviarDuplicata()">Comprar</button>
                                         </form>
                                         <p></p>
                                     </div>
@@ -312,6 +332,17 @@
         crossorigin="anonymous"></script>
 
     <script>
+        function enviarDinheiro() {
+            $('#objProduto').val(JSON.stringify('[' + '<%-produtoObj%>' + ']'));
+            $('#formDinheiro').submit();
+        }
+
+        function enviarDuplicata() {
+            $('#objProdutoDuplicata').val(JSON.stringify('[' + '<%-produtoObj%>' + ']'));
+            $('#formDuplicata').submit();
+        }
+
+
         function alertar() {
             let parcelas = document.getElementById('parcelas');
             const parcela = parcelas.options[parcelas.selectedIndex].text;
@@ -525,7 +556,7 @@
                     intervalo.add(option1);
 
                     break;
-                
+
                 case "8":
                     option1 = document.createElement("option");
                     option1.text = "15x30x45x60x75x90x105x120";
@@ -535,6 +566,7 @@
             }
 
         }
+
     </script>
 
 </body>

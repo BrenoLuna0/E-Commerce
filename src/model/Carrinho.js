@@ -47,6 +47,19 @@ class Carrinho {
     }
 
     static async limparCarrinho(userId) {
+        const conexao = await connection;
+        const sql = `DELETE FROM CARRINHO WHERE USUARIO_CODIGO = ${userId}`;
+
+        return new Promise(async function(resolve){
+            conexao.execute(sql,[],{autoCommit : true}, function(err){
+                if(err){
+                    console.log('Erro no Oracle 52: ' + err.message);
+                    resolve(false);
+                }else{
+                    resolve(true);
+                }
+            });
+        });
 
     }
 

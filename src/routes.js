@@ -6,6 +6,7 @@ require('./auth')(passport);
 
 const ProdutoController = require('./controller/ProdutoController');
 const CarrinhoController = require('./controller/CarrinhoController');
+const VendaController = require('./controller/VendaController');
 
 function authenticationMiddleware() {
     return function (req, res, next) {
@@ -49,6 +50,7 @@ routes.post('/carrinho/add', CarrinhoController.adicionarAoCarrinho);
 routes.post('/carrinho/remove',authenticationMiddleware(), CarrinhoController.removerDoCarrinho);
 routes.post('/carrinho/update',authenticationMiddleware(), CarrinhoController.atualizarCarrinho);
 routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
+routes.post('/checkout', authenticationMiddleware(), VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
 
 
