@@ -22,7 +22,12 @@ module.exports = {
     async adicionarAoCarrinho(req, res) {
         const result = await Carrinho.adicionarNoCarrinho(req.user.id, req.body.produto, req.body.qtd);
 
-        res.redirect('/produto/' + req.body.produto +'?msg=true');
+        if(req.body.dif){
+            res.send(result);
+        }else{
+            res.redirect('/produto/' + req.body.produto +'?msg=true');
+        }
+        
 
     },
 
