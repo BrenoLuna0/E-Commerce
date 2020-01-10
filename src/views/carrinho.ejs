@@ -170,7 +170,7 @@
                     <td class="col-sm-1 col-md-1" style="text-align: center">
                       <form id=<%='formUpdate' + produto.codigo%> action="/carrinho/update" method="POST">
                         <input type="hidden" name="produto" value=<%=produto.codigo%>>
-                        <input type="number" class="form-control" name="qtd" id="exampleInputEmail1" value=<%=produto.qtd%>>
+                        <input type="number" class="form-control" name="qtd" id="exampleInputEmail1" min="1" value=<%=produto.qtd%>>
                       </form>
                     </td>
                     <td class="col-sm-1 col-md-1 text-center"><strong>$<%=produto.preco%></strong></td>

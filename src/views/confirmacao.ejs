@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Carrinho</title>
+</head>
+
+<body>
+
+    <main role="main">
+        <div class="container">
+          <div class="row">
+            <div class="col-md">
+              <p>
+                <figure>
+                  <img src="" alt="Minha Figura">	
+                </figure>
+              </p>
+            </div>
+            <div class="col-6">
+              <form action="/descricao/" method="GET">
+                <div class="form-row">
+                  <div class="col">
+                    <input type="text" id="descricao" name="descricao" class="form-control" placeholder="Pesquise Seus Produtos">
+                  </div>
+                  <div class="col">
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md">
+              <p>
+                <a href="/carrinho">Carrinho</a>
+              </p>
+            </div>
+          </div>
+        </div>      
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active ">
+                  <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>    
+              </li>
+              <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Computador
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+              <li class="nav-item active dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Acessórios
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item active dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Impressoras
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item active dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Telefonia
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item active dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Notebooks
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item active dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Televisão
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="row">
+          <div class="col-2 bg-light">
+              <ul>
+                  <%
+                  categories.map(function(categoria){
+                      %>
+                      <li><a href=<%='/categorias/' + categoria.descricao + '?page=1' %>><%= categoria.descricao%></a></li>
+                      <%
+                  });
+                  %>
+              </ul>
+  
+          </div>
+          <div class="col-10 bg-light">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-10 col-md-offset-1">
+                      <h2 class="text-center"><p>Compra realizada com Sucesso. Entre em contato com o fornecedor ou espere o contato do mesmo para confirmar a sua compra</p></h2>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="text-center"></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>   </td>
+                                    <td> </td>
+                                    <td></td>
+                                    <td>  </td>
+                                    <td>
+                                      <button type="button" class="btn btn-default text-white bg-primary" onclick="location.href='http://localhost:3000/main';">
+                                          <span class="glyphicon glyphicon-shopping-cart"></span> Continue Comprando
+                                      </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+          
+        </div>
+        
+  
+      </main>
+  
+      <footer class="text-muted">
+        <div class="container">
+          <p class="float-right">
+            <a href="#">Back to top</a>
+          </p>
+          <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+          <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+        </div>
+      </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

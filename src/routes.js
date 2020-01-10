@@ -18,11 +18,7 @@ function authenticationMiddleware() {
 }
 
 
-/*routes.get('/',(req,res)=>{
-    res.render('front',{
-        image : "https://a-static.mlcdn.com.br/618x463/cadeira-gamer-inclinavel-ate-150kg-preta-e-vermelha-tgc12-thunderx3/estrela10/167036/59b0aff3005282b8dde866e4fa4ff294.jpg"
-    });
-});*/
+
 routes.get('/', authenticationMiddleware());
 routes.get('/login', function (req, res, next) {
     if (req.query.fail) {
@@ -37,7 +33,9 @@ routes.get('/logout', authenticationMiddleware(), function(req,res,next){
     res.redirect('/login');
 
 });
-
+routes.get('/', authenticationMiddleware(), (req,res)=>{
+    res.redirect('/main');
+});
 routes.get('/main',authenticationMiddleware(), ProdutoController.show);
 routes.get('/produto',authenticationMiddleware(), ProdutoController.paginate);
 routes.get('/categorias/:catDescricao',authenticationMiddleware(), ProdutoController.getCategorias);
@@ -49,9 +47,11 @@ routes.get('/carrinho/', authenticationMiddleware(), CarrinhoController.showProd
 routes.post('/carrinho/add', CarrinhoController.adicionarAoCarrinho);
 routes.post('/carrinho/remove',authenticationMiddleware(), CarrinhoController.removerDoCarrinho);
 routes.post('/carrinho/update',authenticationMiddleware(), CarrinhoController.atualizarCarrinho);
+
 routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
 routes.post('/checkout', authenticationMiddleware(), VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
+routes.get('/confirmacao', VendaController.confirmarVenda);
 
 
 module.exports = routes;

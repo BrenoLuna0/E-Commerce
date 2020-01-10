@@ -56,15 +56,21 @@ module.exports = {
 
     async detail(req,res){
         let produto = await Produto.findById(req.params.id);
+        let alert;
         
         if(!produto.PROD_IMAG_DESCRICAO){
             produto.PROD_IMAG_DESCRICAO = 'Não há Descrição Para esse Produto'
         }
         const produtosRelacionados = await Produto.produtosRelacionados(produto[0].PROD_CATEGORIA);
-
+        if(req.query.msg){
+            alert = true;
+        }else{
+            alert = false;
+        }
         res.render('produtoDetalhe', {
             product : produto,
-            produtosRelacionados : produtosRelacionados
+            produtosRelacionados : produtosRelacionados,
+            alerta : alert
         });
     }
 }

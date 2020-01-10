@@ -1,4 +1,5 @@
 const Venda = require('../model/Venda');
+const Categoria = require('../model/Categoria');
 
 module.exports = {
     async realizarDav(req, res,next) {
@@ -32,5 +33,12 @@ module.exports = {
 
             return next();
         }
+    },
+
+    async confirmarVenda(req,res){
+        const categorias = await Categoria.categorias();
+        res.render('confirmacao', {
+            categories : categorias
+        });
     }
 }

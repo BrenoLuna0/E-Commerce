@@ -118,6 +118,10 @@
       </ul>
     </div>
   </nav>
+  <div class="alert alert-success alert-dismissible text-center" role="alert">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver seu carrinho</a>.
+  </div>
   <!-- Navbar -->
 
   <!--Main layout-->
@@ -151,11 +155,11 @@
               <p><%=produto.PROD_IMAG_DESCRICAO%></p>
               
 
-            <form class="d-flex justify-content-left" action="/carrinho/add" method="POST">
+            <form id="addCarinho" class="d-flex justify-content-left" action="/carrinho/add" method="POST">
               <!-- Default input -->
               <input type="number" name ="qtd" value="1" aria-label="Search" class="form-control" style="width: 100px">
               <input type="hidden" name="produto" value = <%=produto.PROD_CODIGO%>>
-              <button class="btn btn-primary btn-md my-0 p" type="submit">Adicionar no Carrinho
+              <button class="btn btn-primary btn-md my-0 p" onclick="alertar()" type="submit">Adicionar no Carrinho
                 <i class="fas fa-shopping-cart ml-1"></i>
               </button>
 
@@ -300,6 +304,21 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <!-- MDB core JavaScript -->
   <!-- Initializations -->
+  <%if(alerta){
+    %>
+    <script>
+      $('.alert').alert();
+    </script>
+    <%
+  }else{
+    %>
+    <script>
+      $('.alert').alert('close');
+    </script>
+    <%
+  }
+  %>
+  
  
 </body>
 
