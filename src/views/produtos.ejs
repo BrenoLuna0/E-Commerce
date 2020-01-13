@@ -27,6 +27,7 @@
               <div class="col">
                 <input type="text" id="descricao" name="descricao" class="form-control"
                   placeholder="Pesquise Seus Produtos">
+                <input type="hidden" name="page" value="1">
               </div>
               <div class="col">
                 <button type="submit" class="btn btn-primary">Pesquisar</button>
@@ -190,8 +191,8 @@
                           previousPage = parseInt(page) - 1;
                       }
                       %>
-              <li class="page-item"><a class="page-link" href=<%='?page=' + previousPage %>>Anterior</a></li>
-              <li class="page-item"><a class="page-link" href=<%='?page=' + (parseInt(page)+1)%>>Próximo</a></li>
+              <li class="page-item"><button id="prev" class="page-link" onclick="window.location.href =  updateURLParameter(window.location.href,'page','<%=previousPage%>')">Anterior</button></li>
+              <li class="page-item"><button id="prox" class="page-link" onclick="window.location.href = updateURLParameter(window.location.href,'page','<%=parseInt(page) + 1%>')">Próximo</button></li>
             </ul>
           </nav>
         </div>
@@ -259,12 +260,36 @@
         if (data) {
           console.log('Deu Certo');
           $(alertName).show();
-        }else{
+        } else {
           console.log('Deu Errado');
         }
       });
     }
+
+    function replaceUrlParam(url, paramName, paramValue) {
+      
+      if (paramValue == null) {
+        paramValue = '';
+      }
+      var pattern = new RegExp('\\b(' + paramName + '=).*?(&|#|$)');
+      if (url.search(pattern) >= 0) {
+        return url.replace(pattern, '$1' + paramValue + '$2');
+      }
+      url = url.replace(/[?#]$/, '');
+      console.log(url);
+      return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue;
+    }
   </script>
+
+  <%
+  if(products.length < 30){
+    %>
+    <script>
+      $('#prox').prop("disabled",true);;
+    </script>
+    <%
+  }
+  %>
 
 </body>
 
