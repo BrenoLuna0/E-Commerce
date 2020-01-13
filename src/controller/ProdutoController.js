@@ -38,8 +38,9 @@ module.exports = {
     },
 
     async getByDescricao(req,res){
+        let descricao = req.query.descricao.replace(/-/g, ' ').toUpperCase();
         let pagina;
-        const produtos = await Produto.findByDescricao(req.query.page, req.query.descricao.replace(/-/g, ' '));
+        const produtos = await Produto.findByDescricao(req.query.page, descricao);
         const categorias = await Categoria.categorias();
         if(!req.query.page){
             pagina = 1
