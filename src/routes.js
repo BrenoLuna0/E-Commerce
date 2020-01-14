@@ -17,10 +17,19 @@ function authenticationMiddleware() {
     }
 }
 
+function authenticationMiddleware2() {
+    return function (req, res, next) {
+        if (!req.isAuthenticated()) {
+            return next()
+        }
+        res.redirect('/main')
+    }
+}
+
 
 
 routes.get('/', authenticationMiddleware());
-routes.get('/login', function (req, res, next) {
+routes.get('/login', authenticationMiddleware2(),function (req, res, next) {
     if (req.query.fail) {
         res.render('login', { message: 'Usuário e/ou senha incorretos' });
     } else {

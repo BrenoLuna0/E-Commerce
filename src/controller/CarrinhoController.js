@@ -77,5 +77,6 @@ module.exports = {
             res.redirect('/confirmacao');
         }
 
-    }
+    },
+
 }

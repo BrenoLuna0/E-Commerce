@@ -116,7 +116,7 @@ class Carrinho {
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
                     if (err) {
-                        console.log('Erro no oracle: ' + err.message);
+                        console.log('Erro no oracle 007: ' + err.message);
                         resolve([]);
                     } else {
                         if (typeof (result.rows[0]) === 'undefined') {
@@ -170,6 +170,15 @@ class Carrinho {
                 }
             });
         });
+    }
+
+    static async getCartTotal(produtos){
+        const total = produtos.map(function(produto){
+            return total += parseInt(produto.subtotal);
+        });
+
+        return total;
+
     }
 
 }
