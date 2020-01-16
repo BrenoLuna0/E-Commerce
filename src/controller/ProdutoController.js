@@ -1,11 +1,13 @@
 const Produto = require('../model/Produto');
 const Categoria = require('../model/Categoria');
+const getCartTotal = require('../utils/getCartTotal');
 
 module.exports = {
     async show(req,res){
         const produtos = await Produto.find9();
         res.render('front', {
-            products : produtos
+            products : produtos,
+            cartTotal : await getCartTotal(req.user.id)
         });
     },
 
@@ -22,18 +24,20 @@ module.exports = {
         res.render('produtos', {
             products : produtos,
             page : req.query.page,
-            categories : categorias
+            categories : categorias,
+            cartTotal : await getCartTotal(req.user.id)
         });
     },
 
     async getCategorias(req,res){
         const produtos = await Produto.findAll(req.query.page, req.params.catDescricao.replace(/-/g, ' '));
-        const categorias = await Categoria.categorias();
+        const categorias = await Categoria.categorias(req.user.id);
 
         res.render('produtos',{
             products : produtos,
             page : req.query.page,
-            categories : categorias
+            categories : categorias,
+            cartTotal : await getCartTotal(req.user.id)
         });
     },
 
@@ -53,7 +57,8 @@ module.exports = {
         res.render('produtos', {
             products : produtos,
             page : pagina,
-            categories : categorias
+            categories : categorias,
+            cartTotal : await getCartTotal(req.user.id)
         });
     },
 
@@ -73,7 +78,8 @@ module.exports = {
         res.render('produtoDetalhe', {
             product : produto,
             produtosRelacionados : produtosRelacionados,
-            alerta : alert
+            alerta : alert,
+            cartTotal : await getCartTotal(req.user.id)
         });
     }
 }

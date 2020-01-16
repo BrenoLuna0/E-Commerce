@@ -1,5 +1,6 @@
 const Venda = require('../model/Venda');
 const Categoria = require('../model/Categoria');
+const getCartTotal = require('../utils/getCartTotal');
 
 module.exports = {
     async realizarDav(req, res,next) {
@@ -38,7 +39,8 @@ module.exports = {
     async confirmarVenda(req,res){
         const categorias = await Categoria.categorias();
         res.render('confirmacao', {
-            categories : categorias
+            categories : categorias,
+            cartTotal : await getCartTotal()
         });
     }
 }

@@ -1,5 +1,6 @@
 const Carrinho = require('../model/Carrinho');
 const Categoria = require('../model/Categoria');
+const getCartTotal = require('../utils/getCartTotal');
 
 module.exports = {
     async showProducts(req, res) {
@@ -7,13 +8,15 @@ module.exports = {
         const produtosCarrinho = await Carrinho.getProdutos(req.user.id);
         if (!produtosCarrinho) {
             res.render('carrinhoVazio', {
-                categories: categorias
+                categories: categorias,
+                cartTotal : await getCartTotal()
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
             res.render('carrinho', {
                 produtos: produtosFinais,
-                categories: categorias
+                categories: categorias,
+                cartTotal : await getCartTotal()
             });
         }
 
@@ -57,13 +60,15 @@ module.exports = {
         const produtosCarrinho = await Carrinho.getProdutos(req.user.id);
         if (!produtosCarrinho) {
             res.render('carrinhoVazio', {
-                categories: categorias
+                categories: categorias,
+                cartTotal : await getCartTotal()
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
             res.render('checkout', {
                 produtos: produtosFinais,
-                categories: categorias
+                categories: categorias,
+                cartTotal : await getCartTotal()
             });
         }
 

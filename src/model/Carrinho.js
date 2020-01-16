@@ -172,14 +172,7 @@ class Carrinho {
         });
     }
 
-    static async getCartTotal(produtos){
-        const total = produtos.map(function(produto){
-            return total += parseInt(produto.subtotal);
-        });
-
-        return total;
-
-    }
+    
 
 }
 
