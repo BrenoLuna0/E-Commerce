@@ -9,14 +9,14 @@ module.exports = {
         if (!produtosCarrinho) {
             res.render('carrinhoVazio', {
                 categories: categorias,
-                cartTotal : await getCartTotal()
+                cartTotal : await getCartTotal(req.user.id)
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
             res.render('carrinho', {
                 produtos: produtosFinais,
                 categories: categorias,
-                cartTotal : await getCartTotal()
+                cartTotal : await getCartTotal(req.user.id)
             });
         }
 
@@ -61,14 +61,14 @@ module.exports = {
         if (!produtosCarrinho) {
             res.render('carrinhoVazio', {
                 categories: categorias,
-                cartTotal : await getCartTotal()
+                cartTotal : await getCartTotal(req.user.id)
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
             res.render('checkout', {
                 produtos: produtosFinais,
                 categories: categorias,
-                cartTotal : await getCartTotal()
+                cartTotal : await getCartTotal(req.user.id)
             });
         }
 

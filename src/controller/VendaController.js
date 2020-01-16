@@ -40,7 +40,7 @@ module.exports = {
         const categorias = await Categoria.categorias();
         res.render('confirmacao', {
             categories : categorias,
-            cartTotal : await getCartTotal()
+            cartTotal : await getCartTotal(req.user.id)
         });
     }
 }
