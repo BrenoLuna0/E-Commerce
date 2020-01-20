@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html,
+  body {
+    height: 100vh;
+  }
+  
+  body {
+    background-color: #efeff5;
+    font-family: Roboto, Arial, sans-serif;
+  }
+
+  nav {
+      background-color: #29293d;
+  }
+
+  button {
+      width : 120px;
+      height: 39px;
+      background-color: #29293d;
+      color : white;
+      border-radius: 7px;
+  }
+
+  .card-body {
+      position: relative;
+      height: 400px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      transition: 0.3s;
+  }
+
+  .card-body button {
+      position: absolute;
+      bottom: 10px;
+      width: 90%;
+  }
+
+  .card-body a {
+      color: #29293d;
+  }
+
+  .dropdown-menu {
+      background-color: #efeff5;
+  }
+
+  .alert {
+      position: relative;
+      float: left;
+      position: absolute;
+  }
+
+  .card-body:hover {
+      background-color: #d0d0e2;
+  }

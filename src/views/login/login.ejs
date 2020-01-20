@@ -1,19 +1,29 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login Sistema</title>
+    <link rel="stylesheet" href="/css/login.css" />
+  </head>
   <body>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-      <input name="username" type="text" /><br />
-      <input name="password" type="password" /><br />
-      <input type="submit" value="Login" />
-    </form>
-    <% if(message) { %>
-      <p>
-        <label style="color:Red"><%= message %></label>
-      </p>
-    <%}%>
-    <p>
-      <a href="/users/forgot">Esqueceu sua senha?</a> | <a href="/users/signup">Não possui cadastro?</a>
-    </p>
+    <section class="form-section">
+      <h1></h1>
+
+      <div class="form-wrapper">
+        <form action="/login" method="POST">
+          <div class="input-block">
+            <label for="login-email">Login</label>
+            <input type="text" id="login-username" name="username" />
+          </div>
+          <div class="input-block">
+            <label for="login-password">Senha</label>
+            <input type="password" id="login-password" name="password" />
+          </div>
+          <button type="submit" class="btn-login">Login</button>
+        </form>
+      </div>
+    </section>
   </body>
 </html>
