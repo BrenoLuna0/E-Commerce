@@ -31,9 +31,9 @@ function authenticationMiddleware2() {
 routes.get('/', authenticationMiddleware());
 routes.get('/login', authenticationMiddleware2(),function (req, res, next) {
     if (req.query.fail) {
-        res.render('login', { message: 'Usuário e/ou senha incorretos' });
+        res.render('login/login', { message: 'Usuário e/ou senha incorretos' });
     } else {
-        res.render('login', { message: null });
+        res.render('login/login', { message: null });
     }
 });
 routes.post('/login', passport.authenticate('local', { successRedirect: '/main', failureRedirect: '/login?fail=true' }));

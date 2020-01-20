@@ -7,13 +7,13 @@ module.exports = {
         const categorias = await Categoria.categorias();
         const produtosCarrinho = await Carrinho.getProdutos(req.user.id);
         if (!produtosCarrinho) {
-            res.render('carrinhoVazio', {
+            res.render('carrinhoVazio/carrinhoVazio', {
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id)
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
-            res.render('carrinho', {
+            res.render('carrinho/carrinho', {
                 produtos: produtosFinais,
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id)
@@ -59,13 +59,13 @@ module.exports = {
         const categorias = await Categoria.categorias();
         const produtosCarrinho = await Carrinho.getProdutos(req.user.id);
         if (!produtosCarrinho) {
-            res.render('carrinhoVazio', {
+            res.render('carrinhoVazio/carrinhoVazio', {
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id)
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
-            res.render('checkout', {
+            res.render('checkout/checkout', {
                 produtos: produtosFinais,
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id)

@@ -5,7 +5,7 @@ const getCartTotal = require('../utils/getCartTotal');
 module.exports = {
     async show(req,res){
         const produtos = await Produto.find9();
-        res.render('front', {
+        res.render('front/front', {
             products : produtos,
             cartTotal : await getCartTotal(req.user.id)
         });
@@ -21,7 +21,7 @@ module.exports = {
         }
         const produtos = await Produto.findAll(req.query.page, categoria);
         const categorias = await Categoria.categorias();
-        res.render('produtos', {
+        res.render('produtos/produtos', {
             products : produtos,
             page : req.query.page,
             categories : categorias,
@@ -33,7 +33,7 @@ module.exports = {
         const produtos = await Produto.findAll(req.query.page, req.params.catDescricao.replace(/-/g, ' '));
         const categorias = await Categoria.categorias(req.user.id);
 
-        res.render('produtos',{
+        res.render('produtos/produtos',{
             products : produtos,
             page : req.query.page,
             categories : categorias,
@@ -54,7 +54,7 @@ module.exports = {
         const categorias = await Categoria.categorias();
         
 
-        res.render('produtos', {
+        res.render('produtos/produtos', {
             products : produtos,
             page : pagina,
             categories : categorias,
@@ -75,7 +75,7 @@ module.exports = {
         }else{
             alert = false;
         }
-        res.render('produtoDetalhe', {
+        res.render('produtoDetalhe/produtoDetalhe', {
             product : produto,
             produtosRelacionados : produtosRelacionados,
             alerta : alert,
