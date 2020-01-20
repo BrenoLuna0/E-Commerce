@@ -28,7 +28,6 @@ function authenticationMiddleware2() {
 
 
 
-routes.get('/', authenticationMiddleware());
 routes.get('/login', authenticationMiddleware2(),function (req, res, next) {
     if (req.query.fail) {
         res.render('login/login', { message: 'Usuário e/ou senha incorretos' });
@@ -54,13 +53,13 @@ routes.get('/produto/:id',authenticationMiddleware(), ProdutoController.detail);
 
 routes.get('/carrinho/', authenticationMiddleware(), CarrinhoController.showProducts);
 routes.post('/carrinho/add', CarrinhoController.adicionarAoCarrinho);
-routes.post('/carrinho/remove',authenticationMiddleware(), CarrinhoController.removerDoCarrinho);
-routes.post('/carrinho/update',authenticationMiddleware(), CarrinhoController.atualizarCarrinho);
+routes.delete('/carrinho/remove',authenticationMiddleware(), CarrinhoController.removerDoCarrinho);
+routes.put('/carrinho/update', CarrinhoController.atualizarCarrinho);
 
 routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
 routes.post('/checkout', authenticationMiddleware(), VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
-routes.get('/confirmacao', VendaController.confirmarVenda);
+routes.get('/confirmacao',authenticationMiddleware(), VendaController.confirmarVenda);
 
 
 module.exports = routes;

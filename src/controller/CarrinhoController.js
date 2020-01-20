@@ -38,19 +38,19 @@ module.exports = {
         const result = await Carrinho.removerDoCarrinho(req.user.id, req.body.produto);
 
         if(result){
-            res.redirect('/carrinho');
+            res.send(true);
         }else{
-            res.redirect('/carrinho')
+            res.send(false)
         }
     },
 
     async atualizarCarrinho(req,res){
-        const result = await Carrinho.atualizarQuantidade(req.user.id, req.body.produto, req.body.qtd);
+        const result = await Carrinho.atualizarQuantidade(1, req.body.produto, req.body.qtd);
 
         if(result){
-            res.redirect('/carrinho');
+            res.send(true);
         }else{
-            res.redirect('/carrinho')
+            res.redirect(false)
         }
 
     },

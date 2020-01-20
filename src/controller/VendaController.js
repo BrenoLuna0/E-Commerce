@@ -38,7 +38,7 @@ module.exports = {
 
     async confirmarVenda(req,res){
         const categorias = await Categoria.categorias();
-        res.render('confirmacao', {
+        res.render('confirmacao/confirmacao', {
             categories : categorias,
             cartTotal : await getCartTotal(req.user.id)
         });
