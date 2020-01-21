@@ -1,140 +1,140 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/produtos.css">
-    <title>Album example for Bootstrap</title>
-    <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
-  
-  </head>
-  
-  <body>
-  
-    <main role="main">
-      <div class="container">
-        <div class="row">
-          <div class="col-md">
-            <p>
-              <figure>
-                <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
-              </figure>
-            </p>
-          </div>
-          <div class="col-6 center">
-            <form action="/descricao/?page=1" method="GET">
-              <div class="form-row">
-                <div class="col">
-                  <input type="text" id="descricao" name="descricao" class="form-control"
-                    placeholder="Pesquise Seus Produtos">
-                </div>
-                <div class="col">
-                  <button type="submit" class="">Pesquisar</button>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="col-md center">
-            <div class="row">
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/produtos.css">
+  <title>Album example for Bootstrap</title>
+  <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <main role="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md">
+          <p>
+            <figure>
+              <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+            </figure>
+          </p>
+        </div>
+        <div class="col-6 center">
+          <form action="/descricao/?page=1" method="GET">
+            <div class="form-row">
               <div class="col">
-                <p>
-                  <a class="color" href="/carrinho"><i class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
-                </p>
+                <input type="text" id="descricao" name="descricao" class="form-control"
+                  placeholder="Pesquise Seus Produtos">
               </div>
               <div class="col">
-                <p class="text-right">
-                  <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
-                </p>
+                <button type="submit" class="">Pesquisar</button>
               </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md center">
+          <div class="row">
+            <div class="col">
+              <p>
+                <a class="color" href="/carrinho"><i class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
+              </p>
+            </div>
+            <div class="col">
+              <p class="text-right">
+                <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
+              </p>
             </div>
           </div>
         </div>
       </div>
-  
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active ">
-              <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Computador
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item active dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Acessórios
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item active dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Impressoras
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item active dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Telefonia
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item active dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Notebooks
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item active dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Televisão
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div class="row">
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active ">
+            <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Computador
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Acessórios
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Impressoras
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Telefonia
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Notebooks
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Televisão
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="row">
       <div class="col-2 centerHorizontal sidebar">
         <h3>Categorias</h3>
         <ul>
@@ -167,15 +167,13 @@
                         Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver seu
                           carrinho</a>.
                       </div>
-                      <img
-                        src=<%=produto.PROD_IMAG_PATH%>
-                        width="310" height="240">
+                      <img src=<%=produto.PROD_IMAG_PATH%> width="310" height="240">
                       <a href=<%='/produto/' + produto.PROD_CODIGO%>>
                         <p><strong><%=produto.PROD_DESCRICAO%></strong></p>
                       </a>
                       <div>
-                        <button onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>')"
-                          class="" id=<%='button'+produto.PROD_CODIGO %>>Adicionar
+                        <button onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>')" class=""
+                          id=<%='button'+produto.PROD_CODIGO %>>Adicionar
                           ao Carrinho</button>
                       </div>
                     </div>
@@ -200,8 +198,12 @@
                           previousPage = parseInt(page) - 1;
                       }
                       %>
-              <li class="page-item"><button id="prev" class="" onclick="window.location.href =  updateURLParameter(window.location.href,'page','<%=previousPage%>')">Anterior</button></li>
-              <li class="page-item"><button id="prox" class="" onclick="window.location.href = updateURLParameter(window.location.href,'page','<%=parseInt(page) + 1%>')">Próximo</button></li>
+              <li class="page-item"><button id="prev" class=""
+                  onclick="window.location.href =  updateURLParameter(window.location.href,'page','<%=previousPage%>')">Anterior</button>
+              </li>
+              <li class="page-item"><button id="prox" class=""
+                  onclick="window.location.href = updateURLParameter(window.location.href,'page','<%=parseInt(page) + 1%>')">Próximo</button>
+              </li>
             </ul>
           </nav>
         </div>
@@ -225,9 +227,6 @@
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script>
-    
-  </script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
@@ -235,58 +234,16 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
+  <script src="/js/scripts.js"></script>
 
-  <script>
-    $('.alert').hide();
-    function adicionarNoCarrinho(idProduto) {
-      let alertName = '#alert' + idProduto;
-      console.log(alertName);
-      let postObject = {
-        produto: idProduto,
-        qtd: 1,
-        dif: true
-      };
-
-      $.post("/carrinho/add", postObject, function (data) {
-        if (data) {
-          console.log('Deu Certo');
-          $(alertName).show();
-        } else {
-          console.log('Deu Errado');
-        }
-      });
-
-    }
-
-    function updateURLParameter(url, param, paramVal) {
-      var newAdditionalURL = "";
-      var tempArray = url.split("?");
-      var baseURL = tempArray[0];
-      var additionalURL = tempArray[1];
-      var temp = "";
-      if (additionalURL) {
-        tempArray = additionalURL.split("&");
-        for (var i = 0; i < tempArray.length; i++) {
-          if (tempArray[i].split('=')[0] != param) {
-            newAdditionalURL += temp + tempArray[i];
-            temp = "&";
-          }
-        }
-      }
-
-      var rows_txt = temp + "" + param + "=" + paramVal;
-      return baseURL + "?" + newAdditionalURL + rows_txt;
-    }
-    
-  </script>
 
   <%
   if(products.length < 30){
     %>
-    <script>
-      $('#prox').prop("disabled",true);;
-    </script>
-    <%
+  <script>
+    $('#prox').prop("disabled", true);;
+  </script>
+  <%
   }
   %>
 

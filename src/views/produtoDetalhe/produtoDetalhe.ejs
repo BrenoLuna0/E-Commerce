@@ -361,30 +361,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
+    <script src="/js/scripts.js"></script>
     <!-- MDB core JavaScript -->
     <!-- Initializations -->
-
-    <script>
-      $('.alert').hide();
-      function adicionarNoCarrinho(idProduto, qtd) {
-        let alertName = '#alert' + idProduto;
-        console.log(alertName);
-        let postObject = {
-          produto: idProduto,
-          qtd: qtd,
-          dif: true
-        };
-
-        $.post("/carrinho/add", postObject, function (data) {
-          if (data) {
-            console.log('Deu Certo');
-            $(alertName).show();
-          } else {
-            console.log('Deu Errado');
-          }
-        });
-      }
-    </script>
 
 
 </body>
