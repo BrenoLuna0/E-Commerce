@@ -5,6 +5,11 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <title>Carrinho</title>
+  <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/produtos.css">
+  <link rel="stylesheet" href="/css/carrinho.css">
+
 </head>
 
 <body>
@@ -15,34 +20,41 @@
         <div class="col-md">
           <p>
             <figure>
-              <img src="" alt="Minha Figura">
+              <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
             </figure>
           </p>
         </div>
-        <div class="col-6">
-          <form action="/descricao/" method="GET">
+        <div class="col-6 center">
+          <form action="/descricao/?page=1" method="GET">
             <div class="form-row">
               <div class="col">
                 <input type="text" id="descricao" name="descricao" class="form-control"
                   placeholder="Pesquise Seus Produtos">
               </div>
               <div class="col">
-                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                <button type="submit" class="">Pesquisar</button>
               </div>
             </div>
           </form>
         </div>
-        <div class="col-md">
-          <p>
-            <a href="/carrinho"><%='Carrinho' + cartTotal%></a>
-          </p> 
-          <p class="text-right">
-            <a href="/logout">Logout</a>
-          </p>
+        <div class="col-md center">
+          <div class="row">
+            <div class="col">
+              <p>
+                <a class="color" href="/carrinho"><i class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
+              </p>
+            </div>
+            <div class="col">
+              <p class="text-right">
+                <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active ">
@@ -124,7 +136,7 @@
       </div>
     </nav>
     <div class="row">
-      <div class="col-2 bg-light">
+      <div class="col-2 centerHorizontal sidebar">
         <ul>
           <%
                   categories.map(function(categoria){
@@ -136,7 +148,7 @@
         </ul>
 
       </div>
-      <div class="col-10 bg-light">
+      <div class="col-10">
 
         <div class="container">
           <div class="row">
@@ -157,23 +169,25 @@
                                 let total = 0;
                                 if(produtos){
                                     produtos.map(function(produto){
+
                                         %>
 
                   <tr>
                     <td class="col-sm-8 col-md-6">
                       <div class="media">
-                        <a class="thumbnail pull-left" href="#"> <img class="media-object"
+                        <a class="thumbnail pull-left" href=<%='/produto/' + produto.codigo%>> <img class="media-object"
                             src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png"
                             style="width: 72px; height: 72px;"> </a>
                         <div class="media-body">
-                          <h4 class="media-heading"><a href="#"><%=produto.nome%></a></h4>
+                          <h4 class="media-heading"><a href=<%='/produto/' + produto.codigo%>><%=produto.nome%></a></h4>
                         </div>
                       </div>
                     </td>
                     <td class="col-sm-1 col-md-1" style="text-align: center">
                       <form>
                         <input type="hidden" name="produto" value=<%=produto.codigo%>>
-                        <input type="number" class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1" value=<%=produto.qtd%>>
+                        <input type="number" class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1"
+                          value=<%=produto.qtd%>>
                       </form>
                     </td>
                     <td class="col-sm-1 col-md-1 text-center"><strong>$<%=produto.preco%></strong></td>
@@ -181,13 +195,13 @@
                     <td class="col-sm-1 col-md-1">
                       <form>
                         <input type="hidden" name="produto" value=<%=produto.codigo%>>
-                        <button type="button" onclick="removerDoCarrinho('<%=produto.codigo%>')" class="btn btn-danger">
+                        <button type="button" style="background-color: #333333;" onclick="removerDoCarrinho('<%=produto.codigo%>')" class="">
                           <span class="glyphicon glyphicon-remove"></span> Remover
                         </button>
                       </form>
                     </td>
                     <td class="col-sm-1 col-md-1">
-                      <button type="button" onclick="atualizarCarrinho('<%=produto.codigo%>')" class="btn btn-primary">
+                      <button type="button" style="background-color: #0f0f57;" onclick="atualizarCarrinho('<%=produto.codigo%>')" class="">
                         <span class="glyphicon glyphicon-remove"></span> Atualizar
                       </button>
                     </td>
@@ -202,7 +216,7 @@
                     <td>   </td>
                     <td>   </td>
                     <td>   </td>
-                    <td>   </td>
+                    <td> </td>
                     <td>
                       <h3>Total</h3>
                     </td>
@@ -214,13 +228,13 @@
                     <td>   </td>
                     <td>   </td>
                     <td>   </td>
-                    <td>   </td>
+                    <td> </td>
                     <td>
                       <button type="button" class="btn btn-default bg-light" onclick="location.href='/main';">
                         <span class="glyphicon glyphicon-shopping-cart"></span> Continue Comprando
                       </button></td>
                     <td>
-                      <button type="button" class="btn btn-success" onclick="location.href='/checkout';">
+                      <button type="button" class="" onclick="location.href='/checkout';">
                         Finalizar Compra <span class="glyphicon glyphicon-play"></span>
                       </button></td>
                   </tr>
@@ -258,20 +272,20 @@
     crossorigin="anonymous"></script>
 
   <script>
-  
-    function removerDoCarrinho(idProduto){
+
+    function removerDoCarrinho(idProduto) {
 
       $.ajax({
         url: '/carrinho/remove',
-        type : 'DELETE',
-        data: { produto : idProduto },
-        success: function(response){
-          if(response){
+        type: 'DELETE',
+        data: { produto: idProduto },
+        success: function (response) {
+          if (response) {
             console.log('Deu certo');
-          }else{
+          } else {
             console.log('Deu Errado');
           }
-          
+
         }
       });
 
@@ -279,28 +293,28 @@
 
     }
 
-    function atualizarCarrinho(idProduto){
+    function atualizarCarrinho(idProduto) {
       const qtd = $('#qtd' + idProduto).val();
       const qtdNumber = parseInt(qtd);
 
       $.ajax({
         url: '/carrinho/update',
-        type : 'PUT',
-        data: { produto : idProduto, qtd : qtdNumber },
-        success: function(response){
-          if(response){
+        type: 'PUT',
+        data: { produto: idProduto, qtd: qtdNumber },
+        success: function (response) {
+          if (response) {
             console.log('Deu certo');
-          }else{
+          } else {
             console.log('Deu Errado');
           }
-          
+
         }
       });
 
       location.reload();
 
     }
-  
+
   </script>
 </body>
 

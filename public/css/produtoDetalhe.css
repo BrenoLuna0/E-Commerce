@@ -1,0 +1,12 @@
+.alert {
+    padding-left: 40px;
+}
+
+.centralizar {
+    text-align: center;
+}
+h2 {
+    color: #29293d;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}

@@ -1,0 +1,25 @@
+.tab-content, tab-pane {
+    width: 1050px;
+    height: 300px;
+    margin-left: -135px;
+}
+
+.nav-tabs{
+    margin-left: -150px;
+}
+
+.background {
+    background-color: #29293d;
+}
+
+.new-nav {
+    width: 900px;
+}
+
+.tab-pane form select {
+    outline-color: #29293d;
+}
+
+.new-nav a {
+    color: #efeff5;
+}

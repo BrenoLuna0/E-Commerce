@@ -24,6 +24,7 @@
       background-color: #29293d;
       color : white;
       border-radius: 7px;
+      transition: 0.2s;
   }
 
   .card-body {
@@ -37,6 +38,7 @@
       position: absolute;
       bottom: 10px;
       width: 90%;
+      background-color: #29293d
   }
 
   .card-body a {
@@ -55,4 +57,29 @@
 
   .card-body:hover {
       background-color: #d0d0e2;
+  }
+
+  .center {
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+
+  .push-bottom {
+      margin-top: 70px;
+  }
+
+  .color {
+      color: #29293d;
+  }
+
+  .ground {
+      background-color: #efeff5;
+  }
+
+  .centerHorizontal {
+    text-align: center;
+  }
+
+  button:hover {
+      background-color: #32324e;
   }

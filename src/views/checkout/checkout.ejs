@@ -5,6 +5,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Carrinho</title>
+    <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/produtos.css">
+    <link rel="stylesheet" href="/css/carrinho.css">
+    <link rel="stylesheet" href="/css/checkout.css">
+
 </head>
 
 <body>
@@ -15,34 +21,42 @@
                 <div class="col-md">
                     <p>
                         <figure>
-                            <img src="" alt="Minha Figura">
+                            <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
                         </figure>
                     </p>
                 </div>
-                <div class="col-6">
-                    <form action="/descricao/" method="GET">
+                <div class="col-6 center">
+                    <form action="/descricao/?page=1" method="GET">
                         <div class="form-row">
                             <div class="col">
                                 <input type="text" id="descricao" name="descricao" class="form-control"
                                     placeholder="Pesquise Seus Produtos">
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-primary">Pesquisar</button>
+                                <button type="submit" class="">Pesquisar</button>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-md">
-                    <p>
-                        <a href="/carrinho"><%='Carrinho' + cartTotal%></a>
-                    </p>
-                    <p class="text-right">
-                        <a href="/logout">Logout</a>
-                    </p>
+                <div class="col-md center">
+                    <div class="row">
+                        <div class="col">
+                            <p>
+                                <a class="color" href="/carrinho"><i
+                                        class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-right">
+                                <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active ">
@@ -124,7 +138,7 @@
             </div>
         </nav>
         <div class="row">
-            <div class="col-2 bg-light">
+            <div class="col-2 centerHorizontal sidebar">
                 <ul>
                     <%
                   categories.map(function(categoria){
@@ -137,7 +151,7 @@
                 </ul>
 
             </div>
-            <div class="col-10 bg-light">
+            <div class="col-10 ">
 
                 <div class="container">
                     <div class="row">
@@ -209,12 +223,104 @@
                                     </tr>
                                 </tbody>
                             </table>
+
+                            
                         </div>
                     </div>
                 </div>
-                <div class="p-3 mb-2 bg-info text-white col-9 text-center">
+                <div class="p-3 mb-2 text-white col-9 text-center background">
                     <h3>Forma de Pagamento</h3>
+
                 </div>
+
+                <section id="tabs" class="project-tab">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md">
+                                <nav class="new-nav">
+                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+                                            href="#nav-home" role="tab" aria-controls="nav-home"
+                                            aria-selected="true"><strong>Dinheiro</strong></a>
+                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+                                            href="#nav-profile" role="tab" aria-controls="nav-profile"
+                                            aria-selected="false"><strong>Duplicata</strong></a>
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                        aria-labelledby="nav-home-tab">
+                                        <p></p>
+                                        <div class="row">
+                                            <div class="col border border-info text-center">
+                                                <p><strong>Para finalizar sua compra com forma de pagamento em dinheiro,
+                                                        basta
+                                                        clicar no botão abaixo</strong></p>
+                                                <form id="formDinheiro" action="/checkout" method="POST">
+                                                    <input id="objProduto" type="hidden" name="objProduto">
+                                                    <input type="hidden" name="total" value=<%=total%>>
+                                                    <input type="hidden" name="formPagt" value="11">
+                                                    <button type="button" class="btn-block"
+                                                        onclick="enviarDinheiro()">Comprar</button>
+                                                </form>
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                        aria-labelledby="nav-profile-tab">
+                                        <p></p>
+                                        <div class="row">
+                                            <div class="col border border-info text-center">
+                                                <p><strong>Para finalizar sua compra com forma de pagamento em
+                                                        duplicata,
+                                                        preencha os campos a seguir com as informações do pagamento, e
+                                                        então
+                                                        finalize a compra no botão "Comprar"</strong></p>
+                                                <form id="formDuplicata" action="/checkout" method="POST">
+                                                    <div class="form-group">
+                                                        <label for="parcelas"><strong>Quantidade de
+                                                                Parcelas</strong></label>
+                                                        <select class="form-control text-center" onchange="alertar()"
+                                                            id="parcelas" name="parcelas" required>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                            <option>4</option>
+                                                            <option>5</option>
+                                                            <option>6</option>
+                                                            <option>7</option>
+                                                            <option>8</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="intervalo"><strong>Intervalo de
+                                                                Pagamento</strong></label>
+                                                        <select class="form-control text-center" id="intervalo"
+                                                            name="intervalo" required>
+                                                            <option>15</option>
+                                                            <option>30</option>
+                                                            <option>45</option>
+                                                            <option>60</option>
+                                                            <option>90</option>
+                                                            <option>100</option>
+                                                        </select>
+                                                    </div>
+                                                    <input id="objProdutoDuplicata" type="hidden" name="objProduto">
+                                                    <input type="hidden" name="total" value=<%=total%>>
+                                                    <input type="hidden" name="formPagt" value="18">
+                                                    <button type="button" class="btn-block"
+                                                        onclick="enviarDuplicata()">Comprar</button>
+                                                </form>
+                                                <p></p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </section>
 
             </div>
 
@@ -222,101 +328,7 @@
         </div>
 
 
-        <section id="tabs" class="project-tab">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <nav>
-                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                                    role="tab" aria-controls="nav-home"
-                                    aria-selected="true"><strong>Dinheiro</strong></a>
-                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-                                    role="tab" aria-controls="nav-profile"
-                                    aria-selected="false"><strong>Duplicata</strong></a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                                aria-labelledby="nav-home-tab">
-                                <p></p>
-                                <div class="row">
-                                    <div class="col">
-                                    </div>
-                                    <div class="col-7 border border-info text-center">
-                                        <p><strong>Para finalizar sua compra com forma de pagamento em dinheiro, basta
-                                                clicar no botão abaixo</strong></p>
-                                        <form id="formDinheiro" action="/checkout" method="POST">
-                                            <input id="objProduto" type="hidden" name="objProduto">
-                                            <input type="hidden" name="total" value=<%=total%>>
-                                            <input type="hidden" name="formPagt" value="11">
-                                            <button type="button" class="btn btn-success btn-block"
-                                                onclick="enviarDinheiro()">Comprar</button>
-                                        </form>
-                                        <p></p>
-                                    </div>
-                                    <div class="col">
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel"
-                                aria-labelledby="nav-profile-tab">
-                                <p></p>
-                                <div class="row">
-                                    <div class="col">
-                                    </div>
-                                    <div class="col-8 border border-info text-center">
-                                        <p><strong>Para finalizar sua compra com forma de pagamento em duplicata,
-                                                preencha os campos a seguir com as informações do pagamento, e então
-                                                finalize a compra no botão "Comprar"</strong></p>
-                                        <form id="formDuplicata" action="/checkout" method="POST">
-                                            <div class="form-group">
-                                                <label for="parcelas"><strong>Quantidade de
-                                                        Parcelas</strong></label>
-                                                <select class="form-control text-center" onchange="alertar()"
-                                                    id="parcelas" name="parcelas" required>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                    <option>8</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="intervalo"><strong>Intervalo de
-                                                        Pagamento</strong></label>
-                                                <select class="form-control text-center" id="intervalo" name="intervalo"
-                                                    required>
-                                                    <option>15</option>
-                                                    <option>30</option>
-                                                    <option>45</option>
-                                                    <option>60</option>
-                                                    <option>90</option>
-                                                    <option>100</option>
-                                                </select>
-                                            </div>
-                                            <input id="objProdutoDuplicata" type="hidden" name="objProduto">
-                                            <input type="hidden" name="total" value=<%=total%>>
-                                            <input type="hidden" name="formPagt" value="18">
-                                            <button type="button" class="btn btn-success btn-block"
-                                                onclick="enviarDuplicata()">Comprar</button>
-                                        </form>
-                                        <p></p>
-                                    </div>
-                                    <div class="col">
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </section>
 
 
     </main>

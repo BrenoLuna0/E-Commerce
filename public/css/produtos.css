@@ -1,0 +1,37 @@
+.centerHorizontal ul li {
+    margin-top: 10px;
+    background-color: #dfdfec;
+    transition: 0.2s;
+    border-radius: 25px;
+
+}
+
+.centerHorizontal ul li a {
+    font-weight: bold;
+    color : #29293d;
+    transition: 0.2s;
+}
+
+.centerHorizontal ul {
+    margin-top: 47px;
+}
+
+.sidebar {
+    background-color: #29293d;
+}
+
+.centerHorizontal h3 {
+    font-weight: bold;
+    margin-top: 48px;
+    color: #efeff5;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.centerHorizontal ul li a:hover {
+    color : #000000;
+}
+
+.centerHorizontal ul li:hover {
+    background-color: #7272a7;
+
+}
