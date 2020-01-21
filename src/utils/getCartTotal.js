@@ -7,11 +7,11 @@ module.exports = async function getCartTotal(id) {
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
             let parcial = 0;
-            const total = produtosFinais.map(function (produto) {
-                return parcial += parseInt(produto.subtotal);
+            produtosFinais.map(function (produto) {
+                parcial += parseFloat(produto.subtotal);
             });
 
-            return `(R$${total})`;
+            return `(R$${parcial})`;
         }
 
 }
