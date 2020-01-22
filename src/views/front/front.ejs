@@ -14,15 +14,15 @@
 
   <main role="main">
     <div class="container">
-      <div class="row">
-        <div class="col-md">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md col-md-12 mb-4">
           <p>
             <figure>
               <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
             </figure>
           </p>
         </div>
-        <div class="col-6 center">
+        <div class="col-6 col-md-12 mb-4 center">
           <form action="/descricao/?page=1" method="GET">
             <div class="form-row">
               <div class="col">
@@ -35,7 +35,7 @@
             </div>
           </form>
         </div>
-        <div class="col-md center">
+        <div class="col-md col-md-12 mb-4 center">
           <div class="row">
             <div class="col">
               <p>
@@ -142,7 +142,7 @@
             products.map(function(produto){
               %>
 
-          <div class="col-md-4">
+          <div class="col-lg-4 col-md-12 mb-4">
             <div>
               <div class="card mb-4 shadow-sm">
                 <div class="card-body">
@@ -152,9 +152,7 @@
                     Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver seu
                       carrinho</a>.
                   </div>
-                  <img
-                    src=<%=produto.PROD_IMAG_PATH%>
-                    width="310" height="240">
+                  <img src=<%=produto.PROD_IMAG_PATH%>>
                   <a href=<%='/produto/' + produto.PROD_CODIGO%>>
                     <p><strong><%=produto.PROD_DESCRICAO%></strong></p>
                   </a>
