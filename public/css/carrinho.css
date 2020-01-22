@@ -5,3 +5,7 @@ h5 a {
 table tr td button {
     height: 55px;
 }
+
+table tr td a img {
+    border-radius: 50%;
+}

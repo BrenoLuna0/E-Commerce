@@ -7,7 +7,7 @@ async function connect(){
         connection = await oracledb.getConnection({
              user : 'csm_web',
              password : 'csm_web',
-             connectString : '192.168.15.10/bdaqua01'
+             connectString : '179.185.33.232:1521/bdaqua01'
         });
         console.log("Successfully connected to Oracle!")
         return connection;
