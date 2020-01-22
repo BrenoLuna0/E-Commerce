@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const md5 = require('md5');
 const LocalStrategy = require('passport-local').Strategy;
 const connection = require('./connectionUser');
 
@@ -65,13 +66,12 @@ module.exports = function (passport) {
                 if (!user) { return done(null, false) }
                 
                 // comparando as senhas
-                bcrypt.compare(password, user.password, (err, isMatch) => {
-                    
-                    if (err) { return done(err) }
-                    if (!isMatch) { return done(null, false) }
-                    
-                    return done(null, user)
-                })
+                if(md5(password) === user.password){
+                    return done(null,user);
+                }else{
+                    return done(null, false)
+                }
+                
             })
         }
     ));
