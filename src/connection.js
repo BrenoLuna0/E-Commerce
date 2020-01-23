@@ -9,11 +9,10 @@ async function connect(){
              password : 'mobile',
              connectString : '179.185.33.232:1521/bdaqua01'
         });
-        console.log("Successfully connected to Oracle!")
+        console.log("Successfully connected to Oracle!");
         return connection;
      } catch(err) {
          console.log("Error: ", err);
-         alert('Deu erro na conexao do oracle');
        }
 }
 

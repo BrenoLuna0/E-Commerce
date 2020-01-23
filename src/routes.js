@@ -60,6 +60,9 @@ routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
 routes.post('/checkout', authenticationMiddleware(), VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
 routes.get('/confirmacao',authenticationMiddleware(), VendaController.confirmarVenda);
+routes.get('/teste', (req,res)=>{
+    res.send('Nao estou conseguindo acessar o oracle');
+});
 
 
 module.exports = routes;
