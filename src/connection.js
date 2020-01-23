@@ -13,6 +13,7 @@ async function connect(){
         return connection;
      } catch(err) {
          console.log("Error: ", err);
+         alert('Deu erro na conexao do oracle');
        }
 }
 
