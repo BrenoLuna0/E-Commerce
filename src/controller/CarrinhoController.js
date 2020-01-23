@@ -36,7 +36,7 @@ module.exports = {
 
     async removerDoCarrinho(req,res){
         const result = await Carrinho.removerDoCarrinho(req.user.id, req.body.produto);
-
+        console.log('remove');
         if(result){
             res.send(true);
         }else{
