@@ -28,7 +28,7 @@ function authenticationMiddleware2() {
 
 
 
-routes.get('/login', function (req, res, next) {
+routes.get('/login', authenticationMiddleware2(), function (req, res, next) {
     if (req.query.fail) {
         res.render('login/login', { message: 'Usuário e/ou senha incorretos' });
     } else {
@@ -44,7 +44,7 @@ routes.get('/logout', authenticationMiddleware(), function(req,res,next){
 routes.get('/', authenticationMiddleware(), (req,res)=>{
     res.redirect('/main');
 });
-routes.get('/main', ProdutoController.show);
+routes.get('/main',authenticationMiddleware(), ProdutoController.show);
 routes.get('/produto',authenticationMiddleware(), ProdutoController.paginate);
 routes.get('/categorias/:catDescricao',authenticationMiddleware(), ProdutoController.getCategorias);
 routes.get('/descricao',authenticationMiddleware(), ProdutoController.getByDescricao);

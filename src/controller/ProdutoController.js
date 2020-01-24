@@ -5,32 +5,12 @@ const oracledb = require('oracledb');
 
 module.exports = {
     async show(req, res) {
-        try {
-            connection = await oracledb.getConnection({
-                user: 'csm_mobile',
-                password: 'mobile',
-                connectString: '(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 179.185.33.232)(PORT = 1521))(CONNECT_DATA =(SID= bdaqua01)))'
-            });
-            await connection.execute('SELECT * FROM PRODUTO', [],{autoCommit : true}, function(err,result){
-                if(err){
-                    return res.send(err.message);
-                }else{
-                    return res.send(result.rows);
-                }
-            });
-            console.log('lalalay');
-            //return res.send('Conectou com o oracle');
-        } catch (err) {
-            return res.send(err.message);
-        }
-
-        
-        /*const produtos = await Produto.find9();
+        const produtos = await Produto.find9();
         res.send(produtos);
         res.render('front/front', {
             products : produtos,
             cartTotal : await getCartTotal(req.user.id)
-        });*/
+        });
     },
 
     async paginate(req, res) {
