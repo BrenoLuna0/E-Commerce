@@ -18,6 +18,7 @@ module.exports = {
                     return res.send(result.rows);
                 }
             });
+            console.log('lalalay');
             //return res.send('Conectou com o oracle');
         } catch (err) {
             return res.send(err.message);
