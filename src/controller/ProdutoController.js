@@ -1,12 +1,10 @@
 const Produto = require('../model/Produto');
 const Categoria = require('../model/Categoria');
 const getCartTotal = require('../utils/getCartTotal');
-const oracledb = require('oracledb');
 
 module.exports = {
     async show(req, res) {
         const produtos = await Produto.find9();
-        res.send(produtos);
         res.render('front/front', {
             products : produtos,
             cartTotal : await getCartTotal(req.user.id)
