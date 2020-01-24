@@ -9,7 +9,7 @@ module.exports = {
             connection = await oracledb.getConnection({
                 user: 'csm_mobile',
                 password: 'mobile',
-                connectString: 'csmti-aquarius.no-ip.org:1521/bdaqua01'
+                connectString: '(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 179.185.33.232)(PORT = 1521))(CONNECT_DATA =(SID= bdaqua01)))'
             });
             await connection.execute('SELECT * FROM PRODUTO', [],{autoCommit : true}, function(err,result){
                 if(err){
