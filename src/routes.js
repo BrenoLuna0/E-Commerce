@@ -44,7 +44,7 @@ routes.get('/logout', authenticationMiddleware(), function(req,res,next){
 routes.get('/', authenticationMiddleware(), (req,res)=>{
     res.redirect('/main');
 });
-routes.get('/main',authenticationMiddleware(), ProdutoController.show);
+routes.get('/main', ProdutoController.show);
 routes.get('/produto',authenticationMiddleware(), ProdutoController.paginate);
 routes.get('/categorias/:catDescricao',authenticationMiddleware(), ProdutoController.getCategorias);
 routes.get('/descricao',authenticationMiddleware(), ProdutoController.getByDescricao);
