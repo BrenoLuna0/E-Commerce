@@ -11,10 +11,19 @@ module.exports = {
                 password: 'mobile',
                 connectString: 'csmti-aquarius.no-ip.org:1521/bdaqua01'
             });
-            return res.send('Conectou com o oracle');
+            await connection.execute('SELECT * FROM PRODUTO', [],{autoCommit : true}, function(err,result){
+                if(err){
+                    return res.send(err.message);
+                }else{
+                    return res.send(result.rows);
+                }
+            });
+            //return res.send('Conectou com o oracle');
         } catch (err) {
             return res.send(err);
         }
+
+        
         /*const produtos = await Produto.find9();
         res.send(produtos);
         res.render('front/front', {
