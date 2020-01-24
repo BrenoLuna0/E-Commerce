@@ -20,7 +20,7 @@ module.exports = {
             });
             //return res.send('Conectou com o oracle');
         } catch (err) {
-            return res.send(err);
+            return res.send(err.message);
         }
 
         
