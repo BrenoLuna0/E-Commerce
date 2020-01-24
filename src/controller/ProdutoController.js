@@ -5,10 +5,11 @@ const getCartTotal = require('../utils/getCartTotal');
 module.exports = {
     async show(req,res){
         const produtos = await Produto.find9();
-        res.render('front/front', {
+        res.send(produtos);
+        /*res.render('front/front', {
             products : produtos,
             cartTotal : await getCartTotal(req.user.id)
-        });
+        });*/
     },
 
     async paginate(req,res){

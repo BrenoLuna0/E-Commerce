@@ -61,6 +61,7 @@ routes.post('/checkout', authenticationMiddleware(), VendaController.realizarDav
 
 routes.get('/confirmacao',authenticationMiddleware(), VendaController.confirmarVenda);
 routes.get('/teste', (req,res)=>{
+    console.log('TESTANI');
     res.send('Nao estou conseguindo acessar o oracle');
 });
 
