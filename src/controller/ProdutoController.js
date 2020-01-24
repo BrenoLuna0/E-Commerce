@@ -7,7 +7,7 @@ module.exports = {
         const produtos = await Produto.find9();
         res.render('front/front', {
             products : produtos,
-            cartTotal : await getCartTotal(req.user.id)
+            cartTotal :  ''//await getCartTotal(req.user.id)
         });
     },
 
