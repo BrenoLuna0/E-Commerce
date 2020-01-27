@@ -24,6 +24,10 @@ function adicionarNoCarrinho(idProduto, qtd = 1) {
 }
 
 function updateURLParameter(url, param, paramVal = 1) {
+    if(paramVal === 'NaN'){
+        paramVal = 2
+    }
+    console.log(paramVal);
     var newAdditionalURL = "";
     var tempArray = url.split("?");
     var baseURL = tempArray[0];
