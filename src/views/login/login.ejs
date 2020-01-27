@@ -7,6 +7,8 @@
     <title>Login Sistema</title>
     <link rel="icon" href="/assets/favicon.ico">
     <link rel="stylesheet" href="/css/login.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" type="text/javascript"></script>
   </head>
   <body>
     <section class="form-section">
@@ -26,5 +28,11 @@
         </form>
       </div>
     </section>
+
+    <script type="text/javascript">
+      $(document).ready(function(){	
+        $("#login-username").mask("00.000.000/0000-00");
+      });
+    </script>
   </body>
 </html>
