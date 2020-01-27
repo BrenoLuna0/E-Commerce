@@ -23,7 +23,7 @@ function adicionarNoCarrinho(idProduto, qtd = 1) {
     });
 }
 
-function updateURLParameter(url, param, paramVal) {
+function updateURLParameter(url, param, paramVal = 1) {
     var newAdditionalURL = "";
     var tempArray = url.split("?");
     var baseURL = tempArray[0];
