@@ -136,73 +136,50 @@
         </ul>
       </div>
     </nav>
-    <div class="row">
-      <div class="col-2 centerHorizontal sidebar">
-        <ul>
-          <%
-                  categories.map(function(categoria){
-                      %>
-          <li><a href=<%='/categorias/' + categoria.descricao + '?page=1' %>><%= categoria.descricao%></a></li>
-          <%
-                  });
-                  %>
-        </ul>
 
-      </div>
-      <div class="col-10">
-
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 col-md-10 col-md-offset-1">
-              <h2 class="text-center">
-                <p>Compra realizada com Sucesso. Entre em contato com o fornecedor ou espere o contato do mesmo para
-                  confirmar a sua compra</p>
-              </h2>
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th class="text-center"></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>   </td>
-                    <td> </td>
-                    <td></td>
-                    <td> </td>
-                    <td>
-                      <button type="button" class="text-white"
-                        onclick="location.href='/main';">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> Continue Comprando
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+          <h2 class="text-center">
+            <p>Compra realizada com Sucesso. Entre em contato com o fornecedor ou espere o contato do mesmo para
+              confirmar a sua compra</p>
+          </h2>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th class="text-center"></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>   </td>
+                <td> </td>
+                <td></td>
+                <td> </td>
+                <td>
+                  <button type="button" class="text-white" onclick="location.href='/main';">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Continue Comprando
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
       </div>
-
     </div>
-
-
   </main>
 
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-      <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting
-          started guide</a>.</p>
+  <footer class="page-footer font-small blue pt-4">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center text-light">© 2020 Copyright:
+      <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
     </div>
+    <!-- Copyright -->
+
   </footer>
 
 

@@ -1,6 +1,6 @@
 .centerHorizontal ul li {
     margin-top: 10px;
-    background-color: #dfdfec;
+    background-color: #efeff5;
     transition: 0.2s;
     border-radius: 25px;
 
@@ -14,16 +14,21 @@
 
 .centerHorizontal ul {
     margin-top: 47px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #29293d;
+    height: auto;
 }
 
 .sidebar {
-    background-color: #29293d;
+    background-color: #efeff5;
+    height: auto;
 }
 
 .centerHorizontal h3 {
     font-weight: bold;
     margin-top: 48px;
-    color: #efeff5;
+    color: #29293d;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 

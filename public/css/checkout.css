@@ -27,3 +27,23 @@
 .borda {
     border: 1px solid #29293d;
 }
+
+.mb-2{
+    width: 100%;
+}
+
+.new-nav {
+    width : 100%;
+}
+
+.tab-content , tab-pane {
+    width : 110%;
+}
+
+footer {
+    position: relative;
+}
+
+table tr td a {
+    color : #29293d;
+}
