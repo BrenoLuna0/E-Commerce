@@ -59,8 +59,6 @@ routes.put('/carrinho/update', CarrinhoController.atualizarCarrinho);
 routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
 routes.post('/checkout', authenticationMiddleware(), VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
-routes.get('/confirmacao',authenticationMiddleware(), VendaController.confirmarVenda);
-
 
 
 module.exports = routes;

@@ -83,9 +83,13 @@ module.exports = {
     async limparCarrinho(req,res){
         const result = await Carrinho.limparCarrinho(req.user.id);
         if(result){
-            res.redirect('/confirmacao');
+            res.render('confirmacao/confirmacao', {
+                cartTotal : await getCartTotal(req.user.id)
+            });
         }else{
-            res.redirect('/confirmacao');
+            res.render('confirmacao/confirmacao', {
+                cartTotal : await getCartTotal(req.user.id)
+            });
         }
 
     },
