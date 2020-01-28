@@ -231,6 +231,63 @@
         </div>
       </div>
     </div>
+    <hr>
+
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center wow fadeIn">
+
+      <!--Grid column-->
+      <div class="col-md-6 text-center">
+
+        <h4 class="my-4 h4">Produtos Relacionados</h4>
+
+        <p>Consumidores geralmente levam os seguintes itens também</p>
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+    <!--Grid row-->
+    <div class="row wow fadeIn">
+
+      <!--Grid column-->
+      <%
+        produtosRelacionados.map(function(produto){
+          %>
+
+      <div class="col-md-4">
+        <div>
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+              <div id=<%='alert'+produto.PROD_CODIGO%> class="alert alert-success alert-dismissible text-center"
+                role="alert">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver seu
+                  carrinho</a>.
+              </div>
+              <img src=<%=produto.PROD_IMAG_PATH%>>
+              <a href=<%='/produto/' + produto.PROD_CODIGO%>>
+                <p><strong><%=produto.PROD_DESCRICAO%></strong></p>
+              </a>
+              <div>
+                <button onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>')" class=""
+                  id=<%='button'+produto.PROD_CODIGO %>>Adicionar
+                  ao Carrinho</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%
+        })
+        %>
+
+
+
+    </div>
   </main>
 
   <footer class="page-footer font-small blue pt-4">
@@ -296,6 +353,8 @@
     }
 
   </script>
+  <script src="/js/scripts.js"></script>
+
 </body>
 
 </html>

@@ -12,7 +12,6 @@ module.exports = {
     },
 
     async paginate(req, res) {
-        console.log(req.url);
         let categoria;
         if (req.query.cat) {
             categoria = req.query.cat
@@ -69,7 +68,7 @@ module.exports = {
         if (!produto.PROD_IMAG_DESCRICAO) {
             produto.PROD_IMAG_DESCRICAO = 'Não há Descrição Para esse Produto'
         }
-        const produtosRelacionados = await Produto.produtosRelacionados(produto[0].PROD_CATEGORIA);
+        const produtosRelacionados = await Produto.produtosRelacionados([produto[0].PROD_CATEGORIA]);
         if (req.query.msg) {
             alert = true;
         } else {

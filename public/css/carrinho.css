@@ -10,9 +10,6 @@ table tr td a img {
     border-radius: 50%;
 }
 
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+.card {
+    width : 400px;
 }

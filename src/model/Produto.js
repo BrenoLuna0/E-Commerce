@@ -20,7 +20,7 @@ class Produto {
         const produtosSemImagem = await getNineProdutos();
         const produtosImagem = await getProdutosImagem(produtosSemImagem);
         return produtosImagem;
-        
+
     }
 
     static async findAll(pageNumber, categoria) {
@@ -30,7 +30,7 @@ class Produto {
 
     }
 
-    
+
 
     static async findByDescricao(pageNumber = 1, descricao) {
         const produtosSemImagem = await getProdutosByDescricao(pageNumber, descricao);
@@ -55,10 +55,10 @@ async function getProdutos(pageNumber = 1, categoria = '%') {
             SELECT a.*, rownum r__
             FROM
             (
-                SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.mobi_sub_grp_descricao
-                FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_mobile_subgrupo_produto S
-                WHERE p.sub_grp_codigo = s.mobi_sub_grp_codigo
-                AND s.mobi_sub_grp_descricao LIKE '${categoria}'
+                SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
+                FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
+                WHERE p.sub_grp_codigo = s.sub_grp_codigo
+                AND s.sub_grp_descricao LIKE '${categoria}'
                 ORDER BY P.PROD_CODIGO DESC 
             ) a
             WHERE rownum < ((${pageNumber} * 30) + 1 )
@@ -90,9 +90,9 @@ async function getProdutos(pageNumber = 1, categoria = '%') {
 async function getNineProdutos() {
     const conexao = await connection;
     const sql = `SELECT * FROM (
-        SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.mobi_sub_grp_descricao 
-        FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_mobile_subgrupo_produto S
-        WHERE p.sub_grp_codigo = s.mobi_sub_grp_codigo
+        SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao 
+        FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
+        WHERE p.sub_grp_codigo = s.sub_grp_codigo
         ORDER BY dbms_random.value
     )
     where ROWNUM <= 9`;
@@ -119,17 +119,17 @@ async function getNineProdutos() {
 
 }
 
-async function getProdutosByDescricao(pageNumber , descricao) {
-    
+async function getProdutosByDescricao(pageNumber, descricao) {
+
     const conexao = await connection;
     const sql = `SELECT * FROM
     (
         SELECT a.*, rownum r__
         FROM
         (
-            SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.mobi_sub_grp_descricao
-            FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_mobile_subgrupo_produto S
-            WHERE p.sub_grp_codigo = s.mobi_sub_grp_codigo
+            SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
+            FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
+            WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.PROD_DESCRICAO LIKE '%${descricao}%'
             ORDER BY P.PROD_CODIGO DESC
         ) a
@@ -159,16 +159,21 @@ async function getProdutosByDescricao(pageNumber , descricao) {
 
 }
 
-async function getProdutosRelacionados(categoria) {
+async function getProdutosRelacionados(categorias) {
     const conexao = await connection;
-    const sql = `SELECT * FROM (
-        SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.mobi_sub_grp_descricao 
-        FROM siac_ts.VW_PRODUTO P, SIAC_TS.vw_mobile_subgrupo_produto S
-        WHERE p.sub_grp_codigo = s.mobi_sub_grp_codigo
-        AND s.mobi_sub_grp_descricao = '${categoria}'
-        ORDER BY dbms_random.value
-    )
-    where ROWNUM <= 3`;
+    let sql = `SELECT * FROM (
+        SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao 
+        FROM siac_ts.VW_PRODUTO P, SIAC_TS.vw_subgrupo S
+        WHERE p.sub_grp_codigo = s.sub_grp_codigo `;
+
+    categorias.map(function (categoria) {
+        sql += `OR s.sub_grp_descricao = '${categoria}' `
+    });
+
+    sql += `ORDER BY dbms_random.value
+        )
+        where ROWNUM <= 6`;
+
 
     return new Promise(async function (resolve) {
         conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
@@ -193,9 +198,9 @@ async function getProdutosRelacionados(categoria) {
 
 async function getProdutoById(id) {
     const conexao = await connection;
-    const sql = `SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.mobi_sub_grp_descricao
-    FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_mobile_subgrupo_produto S
-    WHERE p.sub_grp_codigo = s.mobi_sub_grp_codigo
+    const sql = `SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
+    FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
+    WHERE p.sub_grp_codigo = s.sub_grp_codigo
     AND P.PROD_CODIGO = ${id}`;
 
     return new Promise(async function (resolve) {

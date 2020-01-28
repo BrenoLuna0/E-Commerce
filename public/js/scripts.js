@@ -5,6 +5,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 $('.alert').hide();
 function adicionarNoCarrinho(idProduto, qtd = 1) {
+    console.log('track 1' + qtd);
     let alertName = '#alert' + idProduto;
     console.log(alertName);
     let postObject = {

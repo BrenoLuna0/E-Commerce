@@ -3,9 +3,9 @@ const connection = require('../connection');
 class Categoria{
     static async categorias(){
         const conexao = await connection;
-        const sql = `SELECT distinct mobi_sub_grp_descricao 
-        FROM SIAC_TS.vw_mobile_subgrupo S, siac_ts.vw_produto P
-        where s.mobi_sub_grp_codigo = p.sub_grp_codigo`;
+        const sql = `SELECT distinct sub_grp_descricao 
+        FROM SIAC_TS.vw_subgrupo S, siac_ts.vw_produto P
+        where s.sub_grp_codigo = p.sub_grp_codigo`;
 
         return new Promise(async function(resolve){
             await conexao.execute(sql,[],{autoCommit : true}, function(err, result){
