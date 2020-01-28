@@ -13,3 +13,7 @@ table tr td a img {
 .card {
     width : 400px;
 }
+.fadeIn {
+    width: 80%;
+    margin: auto;
+}
