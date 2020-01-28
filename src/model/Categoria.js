@@ -10,7 +10,7 @@ class Categoria{
         return new Promise(async function(resolve){
             await conexao.execute(sql,[],{autoCommit : true}, function(err, result){
                 if(err){
-                    console.log('erro na requisição das categorias de produtos');
+                    console.log('Erro Oracle ao requisitar Categorias 101');
                     resolve(err.message);
                 }else{
                     if(typeof(result.rows[0]) === 'undefined'){

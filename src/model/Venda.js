@@ -9,7 +9,7 @@ class Venda {
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
                 if (err) {
-                    console.log('Erro no sql 37: ' + err.message);
+                    console.log('Erro oracle ao pegar o numero do DAV 301: ' + err.message);
                     resolve(false);
                 } else {
                     resolve(result.rows[0][0]);
@@ -46,7 +46,7 @@ class Venda {
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
-                    console.log('Erro no sql 38: ' + err.message);
+                    console.log('Erro oracle ao inserir DAV 302: ' + err.message);
                     resolve(false);
                 } else {
                     resolve(true);
@@ -73,7 +73,7 @@ class Venda {
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err) {
                     if (err) {
-                        console.log('Erro no Oracle 256: ' + err.message);
+                        console.log('Erro no Oracle ao inserir DavItens 303: ' + err.message);
                         resolve(false);
                     } else {
                         resolve(true);
@@ -112,7 +112,7 @@ class Venda {
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
-                    console.log('Erro no oracle 257: ' + err.message);
+                    console.log('Erro no oracle ao inserir DavFormadePagamento 304: ' + err.message);
                     resolve(false);
                 } else {
                     resolve(true);

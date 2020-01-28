@@ -19,7 +19,7 @@ class Carrinho {
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
-                    console.log('Erro no oracle: ' + err.message);
+                    console.log('Erro no oracle para adicionar produto no Carrinho 001: ' + err.message);
                     resolve(false);
                 } else {
                     resolve(true);
@@ -36,7 +36,7 @@ class Carrinho {
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
-                    console.log('Erro no Oracle: ' + err.message);
+                    console.log('Erro no Oracle ao deletar produto do carrinho 002: ' + err.message);
                     resolve(false);
                 } else {
                     resolve(true);
@@ -53,7 +53,7 @@ class Carrinho {
         return new Promise(async function(resolve){
             conexao.execute(sql,[],{autoCommit : true}, function(err){
                 if(err){
-                    console.log('Erro no Oracle 52: ' + err.message);
+                    console.log('Erro no Oracle ao limpar carrinho 003: ' + err.message);
                     resolve(false);
                 }else{
                     resolve(true);
@@ -70,7 +70,7 @@ class Carrinho {
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
-                    console.log('Erro no Oracle: ' + err.message);
+                    console.log('Erro no Oracle ao atualizar quantidade de item no carrinho 004: ' + err.message);
                     resolve(false);
                 } else {
                     resolve(true);
@@ -85,11 +85,10 @@ class Carrinho {
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, async function (err, result) {
                 if (err) {
-                    console.log('Deu erro ao requisitar produtos do carrinho: ' + err.message);
+                    console.log('Erro no Oracle ao requisitar produtos do carrinho 005: ' + err.message);
                     resolve([]);
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
-                        console.log('Carrinho vazio');
                         resolve(false);
                     } else {
                         const produtosCarrinho = result.rows.map(function (produto) {
@@ -119,7 +118,7 @@ class Carrinho {
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
                     if (err) {
-                        console.log('Erro no oracle 007: ' + err.message);
+                        console.log('Erro no Oracle ao requisitar produtos do carrinho 006: ' + err.message);
                         resolve([]);
                     } else {
                         if (typeof (result.rows[0]) === 'undefined') {
@@ -160,7 +159,7 @@ class Carrinho {
             return new Promise(async function(resolve){
                 await conexao.execute(sql,[], {autoCommit : true}, function(err,result){
                     if(err){
-                        console.log('Erro do sql 45: ' + err.message);
+                        console.log('Erro no Oracle ao requisitar produtos do carrinho 007: ' + err.message);
                         resolve([]);
                     }else{
                         if(typeof (result.rows[0]) === 'undefined'){
@@ -206,7 +205,7 @@ class Carrinho {
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
                 if (err) {
-                    console.log('Erro Oracle 25: ' + err.message);
+                    console.log('Erro Oracle ao verificar produto 008: ' + err.message);
                     resolve(false);
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {

@@ -68,8 +68,8 @@ async function getProdutos(pageNumber = 1, categoria = '%') {
     return new Promise(async function (resolve) {
         await conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
             if (err) {
-                console.log('erro na paginação');
-                resolve(err.message);
+                console.log('Erro na paginação de produtos 201: ' + err.message);
+                resolve([]);
             } else {
                 if (typeof (result.rows[0]) === 'undefined') {
                     resolve([]);
@@ -100,8 +100,8 @@ async function getNineProdutos() {
     return new Promise(async function (resolve) {
         await conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
             if (err) {
-                console.log('erro na captura dos produtos 23');
-                resolve(err.message);
+                console.log('Erro oracle na captura dos produtos main 202: ' + err.message);
+                resolve([]);
             } else {
                 if (typeof (result.rows[0]) === 'undefined') {
                     resolve([]);
@@ -140,11 +140,10 @@ async function getProdutosByDescricao(pageNumber, descricao) {
     return new Promise(async function (resolve) {
         await conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
             if (err) {
-                console.log('Erro na conexão' + err.message);
+                console.log('Erro oracle ao pegar produtos pela descrição 203: ' + err.message);
                 resolve([]);
             } else {
                 if (typeof (result.rows[0]) === 'undefined') {
-                    console.log('Não há Produtos');
                     resolve([]);
                 } else {
                     const objectArray = result.rows.map(function (produto) {
@@ -178,11 +177,10 @@ async function getProdutosRelacionados(categorias) {
     return new Promise(async function (resolve) {
         conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
             if (err) {
-                console.log('Erro na conexão com o banco de dados: ' + err.message);
+                console.log('Erro Oracle ao pegar produtos relacionados 204: ' + err.message);
                 resolve([]);
             } else {
                 if (typeof (result.rows[0]) === 'undefined') {
-                    console.log('Nenhum produto Relacionado');
                     resolve([]);
                 } else {
                     const objectArray = result.rows.map(function (produto) {
@@ -206,7 +204,7 @@ async function getProdutoById(id) {
     return new Promise(async function (resolve) {
         await conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
             if (err) {
-                console.log(err.message);
+                console.log('Erro oracle ao pegar produto pelo codigo 205: ' + err.message);
                 resolve([]);
             } else {
                 if (typeof (result.rows[0]) === 'undefined') {
@@ -233,7 +231,7 @@ async function getProdutosImagem(produtos) {
             WHERE prod_codigo = ${produto.codigo}`;
             await conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
                 if (err) {
-                    console.log('Erro na requisicao das imagens no oracle: ' + err.message);
+                    console.log('Erro oracle na requisicao das imagens 206: ' + err.message);
                     resolve([]);
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
