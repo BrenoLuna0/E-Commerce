@@ -60,6 +60,7 @@ routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
 routes.post('/checkout', authenticationMiddleware(), CarrinhoController.isEmpty, VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
 routes.get('/historico', authenticationMiddleware(), VendaController.getHistorico);
+routes.get('/historico/:id', authenticationMiddleware(), VendaController.getDavDetalhe);
 
 
 module.exports = routes;

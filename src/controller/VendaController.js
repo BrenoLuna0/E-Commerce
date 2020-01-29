@@ -69,5 +69,23 @@ module.exports = {
             vendas : vendas,
             cartTotal: await getCartTotal(req.user.id)
         })
+    },
+
+    async getDavDetalhe(req,res){
+        const dav = await Venda.getVendaById(req.params.id);
+        const produtos = await Venda.getVendaItens(req.params.id);
+
+        console.log(dav);
+        console.log(produtos);
+
+        res.render('vendaDetalhe/vendaDetalhe', {
+            nDav : dav.nDav,
+            data : dav.data,
+            totals : dav.total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
+            formPagt : dav.formPagt,
+            produtos : produtos,
+            cartTotal: await getCartTotal(req.user.id)
+
+        });
     }
 }

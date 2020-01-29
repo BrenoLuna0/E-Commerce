@@ -21,7 +21,7 @@ class Venda {
     static async inserirDAV(nDAV, userId, vendaTotal, cnpj, intervaloDeParcelas) {
         const conexao = await connection;
         var today = new Date();
-        var date = today.getDate() + '/' + (today.getMonth()+1) + '/' + today.getFullYear();
+        var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
         console.log(date);
         const sql = `INSERT INTO DAV 
          (FIL_CODIGO,
@@ -122,34 +122,102 @@ class Venda {
 
     }
 
-    static async getVendas(id){
+    static async getVendas(id) {
         const conexao = await connection;
         const sql = `SELECT DAV_CODIGO, DAV_DATA_ABERTURA, DAV_SUB_TOTAL FROM DAV
         WHERE CLIE_CODIGO = ${id}
         ORDER BY DAV_CODIGO DESC`;
 
-        return new Promise(async function(resolve){
-            conexao.execute(sql,[], {autoCommit : true}, function(err,result){
-                if(err){
+        return new Promise(async function (resolve) {
+            conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
+                if (err) {
                     console.log('Erro no oracle ao pegar os davs para o historico 305: ' + err.message);
                     resolve([]);
-                }else{
-                    if(typeof(result.rows[0])==='undefined'){
+                } else {
+                    if (typeof (result.rows[0]) === 'undefined') {
                         console.log('Vc ainda nao fez nenhuma compra');
                         resolve([]);
-                    }else{
-                        const vendas = result.rows.map(function(venda){
+                    } else {
+                        const vendas = result.rows.map(function (venda) {
                             const date = new Date(venda[1]);
                             const mes = date.getMonth() + 1;
                             const dia = date.getDate();
                             return {
-                                codigo : venda[0],
-                                data : `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
-                                total : venda[2].toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+                                codigo: venda[0],
+                                data: `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
+                                total: venda[2].toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
                             }
                         });
                         //console.log(vendas);
                         return resolve(vendas);
+                    }
+                }
+            });
+        });
+    }
+
+    static async getVendaById(id) {
+        const conexao = await connection;
+        const sql = `SELECT D.DAV_CODIGO, D.DAV_DATA_ABERTURA, D.DAV_SUB_TOTAL, F.FORM_PAGT_DESCRICAO 
+        FROM DAV D, dav_forma_pagamento DF, SIAC_TS.vw_forma_pagamento F
+        WHERE D.DAV_CODIGO = df.dav_codigo
+        AND df.form_pagt_codigo = f.form_pagt_codigo
+        AND D.DAV_CODIGO = ${id}`;
+
+        return new Promise(async function (resolve) {
+            conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
+                if (err) {
+                    console.log('Erro Oracle ao pegar a venda pelo codigo 306: ' + err.message);
+                    resolve([]);
+                } else {
+                    if (typeof (result.rows[0]) === 'undefined') {
+                        console.log('Venda inexistente');
+                        resolve([]);
+                    } else {
+                        const venda = result.rows[0];
+                        const date = new Date(venda[1]);
+                        const mes = date.getMonth() + 1;
+                        const dia = date.getDate();
+                        return resolve({
+                            nDav: venda[0],
+                            data: `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
+                            total: venda[2],
+                            formPagt: venda[3]
+                        });
+                    }
+                }
+            });
+        });
+    }
+
+    static async getVendaItens(id) {
+        const conexao = await connection;
+        const sql = `SELECT d.prod_codigo, p.prod_descricao, d.dav_iten_preco_unit, d.dav_iten_qtd, d.dav_iten_total 
+        FROM dav_itens D, SIAC_TS.vw_produto P
+        WHERE d.prod_codigo = p.prod_codigo
+        AND p.fil_codigo = 2
+        AND DAV_CODIGO = ${id}`;
+
+        return new Promise(async function (resolve) {
+            conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
+                if (err) {
+                    console.log('Erro oracle ao pegar os itens do dav 307: ' + err.message);
+                    resolve([]);
+                } else {
+                    if (typeof (result.rows[0]) === 'undefined') {
+                        console.log('Nao existe itens para esse Dav');
+                        resolve([]);
+                    } else {
+                        const itensArray = result.rows.map(function (produto) {
+                            return {
+                                codigo: produto[0],
+                                nome: produto[1],
+                                preco: produto[2],
+                                qtd: produto[3],
+                                subtotal: produto[4]
+                            }
+                        });
+                        return resolve(itensArray);
                     }
                 }
             });

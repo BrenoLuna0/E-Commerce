@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Confirmação de Compra</title>
+    <link rel="icon" href="/assets/favicon.ico">
+    <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/produtos.css">
+    <link rel="stylesheet" href="/css/carrinho.css">
+    <link rel="stylesheet" href="/css/vendaDetalhe.css">
+
+</head>
+
+<body>
+
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <p>
+                        <figure>
+                            <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+                        </figure>
+                    </p>
+                </div>
+                <div class="col-6 center">
+                    <form action="/descricao/?page=1" method="GET">
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="text" id="descricao" name="descricao" class="form-control"
+                                    placeholder="Pesquise Seus Produtos">
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="">Pesquisar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md center">
+                    <div class="row">
+                        <div class="col">
+                            <p>
+                                <a class="color" href="/historico"><i class="fas fa-user">Historico</i></a>
+                                <a class="color" href="/carrinho"><i
+                                        class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="text-right">
+                                <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active ">
+                        <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Computador
+                        </a>
+                        <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Acessórios
+                        </a>
+                        <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Impressoras
+                        </a>
+                        <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Telefonia
+                        </a>
+                        <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Notebooks
+                        </a>
+                        <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Televisão
+                        </a>
+                        <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container center">
+            <ul>
+                <li>
+                    <p>Número do Pedido</p>
+                    <p><strong><%=nDav%></strong></p>
+                </li>
+                <li>
+                    <p>Data</p>
+                    <p><strong><%=data%></strong></p>
+                </li>
+                <li>
+                    <p>Total</p>
+                    <p><strong><%=totals%></strong></p>
+                </li>
+                <li>
+                    <p>Método de Pagamento</p>
+                    <p><strong><%=formPagt%></strong></p>
+                </li>
+            </ul>
+        </div>
+        <div class="container center">
+            <div class="row container center">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th class="text-center">Preço</th>
+                                <th class="text-center">SubTotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <%
+                            let total = 0;
+                            let produtoObj = [];
+                            if(produtos){
+                                produtos.map(function(produto){
+                                    produtoObj.push([
+                                        '[' + produto.codigo,
+                                        produto.nome,
+                                        produto.preco,
+                                        produto.qtd,
+                                        produto.subtotal + ']'
+                                    ])
+                                    %>
+
+                            <tr>
+                                <td class="col-sm-8 col-md-6">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="#"> <img class="media-object"
+                                                src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png"
+                                                style="width: 72px; height: 72px;"> </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="#"><%=produto.nome%></a></h4>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-sm-1 col-md-1" style="text-align: center">
+                                    <form id=<%='formUpdate' + produto.codigo%> action="/carrinho/update" method="POST">
+                                        <input type="hidden" name="produto" value=<%=produto.codigo%>>
+                                        <p><%=produto.qtd%></p>
+                                    </form>
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>$<%=produto.preco%></strong>
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center">
+                                    <strong>$<%=produto.subtotal%></strong></td>
+
+                            </tr>
+
+                            <%
+
+                                    total += produto.subtotal;
+                                })
+                            }%>
+                            <tr>
+                                <td>   </td>
+                                <td> </td>
+                                <td>
+                                    <h3>Total</h3>
+                                </td>
+                                <td class="text-right">
+                                    <h3><strong>$<%=total%></strong></h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer font-small blue pt-4">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center text-light">© 2020 Copyright:
+            <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
