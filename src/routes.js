@@ -44,7 +44,7 @@ routes.get('/logout', authenticationMiddleware(), function(req,res,next){
 routes.get('/', authenticationMiddleware(), (req,res)=>{
     res.redirect('/main');
 });
-routes.get('/main', ProdutoController.show);
+routes.get('/main', authenticationMiddleware(), ProdutoController.show);
 routes.get('/produto',authenticationMiddleware(), ProdutoController.paginate);
 routes.get('/categorias/:catDescricao',authenticationMiddleware(), ProdutoController.getCategorias);
 routes.get('/descricao',authenticationMiddleware(), ProdutoController.getByDescricao);
@@ -57,7 +57,7 @@ routes.delete('/carrinho/remove',authenticationMiddleware(), CarrinhoController.
 routes.put('/carrinho/update', CarrinhoController.atualizarCarrinho);
 
 routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
-routes.post('/checkout', authenticationMiddleware(), VendaController.realizarDav, CarrinhoController.limparCarrinho);
+routes.post('/checkout', authenticationMiddleware(), CarrinhoController.isEmpty, VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
 routes.get('/confim', VendaController.confirmarVenda);
 

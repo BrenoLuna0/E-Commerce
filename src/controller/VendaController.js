@@ -3,7 +3,7 @@ const Categoria = require('../model/Categoria');
 const getCartTotal = require('../utils/getCartTotal');
 
 module.exports = {
-    async realizarDav(req, res,next) {
+    async realizarDav(req, res, next) {
 
         let obj = JSON.parse(req.body.objProduto)
         let arr = obj.replace('[[', '').replace(']]', '').split('],[').map(substring => substring.split(','));
@@ -24,21 +24,41 @@ module.exports = {
             const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject);
             const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 11, 0, req.body.total);
 
+            if (confirmacaoDav && confirmacaoDavItens && confirmacaoDaVFormPagt) {
+                res.locals.nDAV = nDAV;
+                res.locals.formPagt = 'Dinheiro';
+                let date = new Date();
+                let mes = date.getMonth() + 1;
+                let dia = date.getDay();
+                res.locals.data = `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`;
+                res.locals.total = await getCartTotal(req.user.id);
+            }
+
             return next();
-        }else{
+        } else {
             const nDAV = await Venda.getNDav();
             console.log(nDAV);
             const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', req.body.intervalo);
             const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject);
-            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV,18,req.body.parcelas,req.body.total);
+            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 18, req.body.parcelas, req.body.total);
+
+            if (confirmacaoDav && confirmacaoDavItens && confirmacaoDaVFormPagt) {
+                res.locals.nDAV = nDAV;
+                res.locals.formPagt = 'Duplicata';
+                let date = new Date();
+                let mes = date.getMonth() + 1;
+                let dia = date.getDay();
+                res.locals.data = `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`;
+                res.locals.total = await getCartTotal(req.user.id);
+            }
 
             return next();
         }
     },
 
-    async confirmarVenda(req,res){
+    async confirmarVenda(req, res) {
         res.render('confirmacao/confirmacao', {
-            cartTotal : await getCartTotal(req.user.id)
+            cartTotal: await getCartTotal(req.user.id)
         });
     }
 }

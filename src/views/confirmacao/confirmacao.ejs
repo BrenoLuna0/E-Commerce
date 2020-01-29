@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/produtos.css">
   <link rel="stylesheet" href="/css/carrinho.css">
+  <link rel="stylesheet" href="/css/confirmacao.css">
 
 </head>
 
@@ -138,38 +139,27 @@
     </nav>
 
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-          <h2 class="text-center">
-            <p>Compra realizada com Sucesso. Entre em contato com o fornecedor ou espere o contato do mesmo para
-              confirmar a sua compra</p>
-          </h2>
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th class="text-center"></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>   </td>
-                <td> </td>
-                <td></td>
-                <td> </td>
-                <td>
-                  <button type="button" class="text-white" onclick="location.href='/main';">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> Continue Comprando
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <ul>
+        <li>
+          <p>Número do Pedido</p>
+          <p><strong><%=nDav%></strong></p>
+        </li>
+        <li>
+          <p>Data</p>
+          <p><strong><%=data%></strong></p>
+        </li>
+        <li>
+          <p>Total</p>
+          <p><strong><%=total%></strong></p>
+        </li>
+        <li>
+          <p>Método de Pagamento</p>
+          <p><strong><%=formPagt%></strong></p>
+        </li>
+      </ul>
+    </div>
+    <div class="container">
+      <button class="button" onclick="window.location.href='/main'" type="button">Continue Comprando</button>
     </div>
   </main>
 

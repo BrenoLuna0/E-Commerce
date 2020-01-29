@@ -11,7 +11,7 @@ module.exports = async function getCartTotal(id) {
                 parcial += parseFloat(produto.subtotal);
             });
 
-            return `(R$${parcial})`;
+            return parcial.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
         }
 
 }

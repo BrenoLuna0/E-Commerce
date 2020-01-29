@@ -84,14 +84,32 @@ module.exports = {
         const result = await Carrinho.limparCarrinho(req.user.id);
         if(result){
             res.render('confirmacao/confirmacao', {
-                cartTotal : await getCartTotal(req.user.id)
+                nDav : res.locals.nDAV,
+                formPagt : res.locals.formPagt,
+                data : res.locals.data,
+                cartTotal : '',
+                total : res.locals.total
             });
         }else{
             res.render('confirmacao/confirmacao', {
-                cartTotal : await getCartTotal(req.user.id)
+                nDav : res.locals.nDAV,
+                formPagt : res.locals.formPagt,
+                data : res.locals.data,
+                cartTotal : '',
+                total : res.locals.total
             });
         }
 
     },
+
+    async isEmpty(req,res, next){
+        const total = await getCartTotal(req.user.id);
+        if(total != ''){
+            return next();
+        }else{
+            return res.redirect('/main');
+        }
+
+    }
 
 }
