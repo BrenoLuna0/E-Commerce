@@ -29,7 +29,7 @@ module.exports = {
                 res.locals.formPagt = 'Dinheiro';
                 let date = new Date();
                 let mes = date.getMonth() + 1;
-                let dia = date.getDay();
+                let dia = date.getDate();
                 res.locals.data = `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`;
                 res.locals.total = await getCartTotal(req.user.id);
             }
@@ -47,7 +47,7 @@ module.exports = {
                 res.locals.formPagt = 'Duplicata';
                 let date = new Date();
                 let mes = date.getMonth() + 1;
-                let dia = date.getDay();
+                let dia = date.getDate();
                 res.locals.data = `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`;
                 res.locals.total = await getCartTotal(req.user.id);
             }
@@ -60,5 +60,14 @@ module.exports = {
         res.render('confirmacao/confirmacao', {
             cartTotal: await getCartTotal(req.user.id)
         });
+    },
+
+    async getHistorico(req,res){
+        const vendas = await Venda.getVendas(req.user.id);
+        //console.log(vendas);
+        res.render('historico/historico', {
+            vendas : vendas,
+            cartTotal: await getCartTotal(req.user.id)
+        })
     }
 }

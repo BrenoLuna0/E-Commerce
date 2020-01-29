@@ -59,7 +59,7 @@ routes.put('/carrinho/update', CarrinhoController.atualizarCarrinho);
 routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
 routes.post('/checkout', authenticationMiddleware(), CarrinhoController.isEmpty, VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
-routes.get('/confim', VendaController.confirmarVenda);
+routes.get('/historico', authenticationMiddleware(), VendaController.getHistorico);
 
 
 module.exports = routes;

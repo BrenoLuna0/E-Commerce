@@ -122,6 +122,40 @@ class Venda {
 
     }
 
+    static async getVendas(id){
+        const conexao = await connection;
+        const sql = `SELECT DAV_CODIGO, DAV_DATA_ABERTURA, DAV_SUB_TOTAL FROM DAV
+        WHERE CLIE_CODIGO = ${id}
+        ORDER BY DAV_CODIGO DESC`;
+
+        return new Promise(async function(resolve){
+            conexao.execute(sql,[], {autoCommit : true}, function(err,result){
+                if(err){
+                    console.log('Erro no oracle ao pegar os davs para o historico 305: ' + err.message);
+                    resolve([]);
+                }else{
+                    if(typeof(result.rows[0])==='undefined'){
+                        console.log('Vc ainda nao fez nenhuma compra');
+                        resolve([]);
+                    }else{
+                        const vendas = result.rows.map(function(venda){
+                            const date = new Date(venda[1]);
+                            const mes = date.getMonth() + 1;
+                            const dia = date.getDate();
+                            return {
+                                codigo : venda[0],
+                                data : `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
+                                total : venda[2].toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+                            }
+                        });
+                        //console.log(vendas);
+                        return resolve(vendas);
+                    }
+                }
+            });
+        });
+    }
+
 }
 
 module.exports = Venda;

@@ -4,13 +4,14 @@
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Carrinho Vazio</title>
+  <title>Histórico</title>
   <link rel="icon" href="/assets/favicon.ico">
+  <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/produtos.css">
   <link rel="stylesheet" href="/css/carrinho.css">
-  <link rel="stylesheet" href="/css/carrinhoVazio.css">
-  <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/historico.css">
+
 </head>
 
 <body>
@@ -63,8 +64,8 @@
             <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item active dropdown">
-            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Computador
             </a>
             <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
@@ -75,8 +76,8 @@
             </div>
           </li>
           <li class="nav-item active dropdown">
-            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Acessórios
             </a>
             <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
@@ -87,8 +88,8 @@
             </div>
           </li>
           <li class="nav-item active dropdown">
-            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Impressoras
             </a>
             <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
@@ -99,8 +100,8 @@
             </div>
           </li>
           <li class="nav-item active dropdown">
-            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Telefonia
             </a>
             <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
@@ -111,8 +112,8 @@
             </div>
           </li>
           <li class="nav-item active dropdown">
-            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Notebooks
             </a>
             <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
@@ -123,8 +124,8 @@
             </div>
           </li>
           <li class="nav-item active dropdown">
-            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle dropbtn" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Televisão
             </a>
             <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
@@ -139,34 +140,32 @@
     </nav>
 
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-          <table class="table table-hover">
+        <table>
             <thead>
-              <tr>
-                <th>Produto</th>
-                <th>Quantidade</th>
-                <th class="text-center">Preço</th>
-                <th class="text-center">Total</th>
-                <th> </th>
-              </tr>
+                <tr>
+                    <th>Código da Venda</th>
+                    <th>Data</th>
+                    <th>Total</th>
+                    <th>Ação</th>
+                </tr>
             </thead>
             <tbody>
-              <tr>
-                <td> Carrinho Vazio  </td>
-                <td>   </td>
-                <td>   </td>
-                <td>
-                  <button type="button" class="" onclick="location.href='/main';">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> Continue Comprando
-                  </button></td>
-                <td>
-                </td>
-              </tr>
+                <%
+                vendas.map(function(venda){
+                    %>
+                    <tr>
+                        <td class="destaque"><%=venda.codigo%></td>
+                        <td><%=venda.data%></td>
+                        <td><%=venda.total%></td>
+                        <td><button onclick="window.location.href='/historico/<%=venda.codigo%>'" type="button">Visualizar</button></td>
+                    </tr>
+                    
+                    <%
+                });
+                
+                %>
             </tbody>
-          </table>
-        </div>
-      </div>
+        </table>
     </div>
   </main>
 

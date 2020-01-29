@@ -1,0 +1,30 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 45px;
+    margin-bottom: 45px;
+  }
+  
+  td, th {
+    border: 1px solid #29293d;
+    text-align: center;
+    padding: 8px;
+
+  }
+
+  th {
+      font-size: 20px;
+  }
+
+  td {
+      font-size: 18px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #efeff5;
+  }
+
+  .destaque {
+      color: #0a0a0f;
+  }
