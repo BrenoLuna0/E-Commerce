@@ -33,3 +33,7 @@ ul li p strong {
 .center ul li:hover {
     background-color: #d0d0e2;
 }
+
+h5 a {
+    color: #29293d;
+}
