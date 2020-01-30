@@ -163,13 +163,20 @@ async function getProdutosRelacionados(categorias) {
     let sql = `SELECT * FROM (
         SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao 
         FROM siac_ts.VW_PRODUTO P, SIAC_TS.vw_subgrupo S
-        WHERE p.sub_grp_codigo = s.sub_grp_codigo `;
+        WHERE p.sub_grp_codigo = s.sub_grp_codigo AND (`;
+    let control = 1;
 
     categorias.map(function (categoria) {
-        sql += `OR s.sub_grp_descricao = '${categoria}' `
+        if(control === 1){
+            sql += `s.sub_grp_descricao = '${categoria}' `
+        }else {
+            sql += `OR s.sub_grp_descricao = '${categoria}' `
+        }
+
+        control++;
     });
 
-    sql += `ORDER BY dbms_random.value
+    sql += `)ORDER BY dbms_random.value
         )
         where ROWNUM <= 6`;
 
