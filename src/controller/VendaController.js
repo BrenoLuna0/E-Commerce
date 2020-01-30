@@ -75,9 +75,6 @@ module.exports = {
         const dav = await Venda.getVendaById(req.params.id);
         const produtos = await Venda.getVendaItens(req.params.id);
 
-        console.log(dav);
-        console.log(produtos);
-
         res.render('vendaDetalhe/vendaDetalhe', {
             nDav : dav.nDav,
             data : dav.data,

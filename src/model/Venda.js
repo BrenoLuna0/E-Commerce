@@ -22,7 +22,6 @@ class Venda {
         const conexao = await connection;
         var today = new Date();
         var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-        console.log(date);
         const sql = `INSERT INTO DAV 
          (FIL_CODIGO,
           DAV_CODIGO,
@@ -135,7 +134,6 @@ class Venda {
                     resolve([]);
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
-                        console.log('Vc ainda nao fez nenhuma compra');
                         resolve([]);
                     } else {
                         const vendas = result.rows.map(function (venda) {

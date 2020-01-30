@@ -163,7 +163,6 @@ class Carrinho {
                         resolve([]);
                     }else{
                         if(typeof (result.rows[0]) === 'undefined'){
-                            console.log('Produto Sem imagem');
                             resolve({
                                 codigo: produto.codigo,
                                 nome: produto.nome,
@@ -209,7 +208,6 @@ class Carrinho {
                     resolve(false);
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
-                        console.log('Produto Inexistente no carrinho');
                         resolve(false);
                     } else {
                         resolve(result.rows[0][0]);

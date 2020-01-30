@@ -14,7 +14,6 @@ class Categoria{
                     resolve(err.message);
                 }else{
                     if(typeof(result.rows[0]) === 'undefined'){
-                        console.log('Não há categorias para serem capturadas');
                         resolve([]);
                     }else{
                         const objectArray = result.rows.map(function(categorias){
