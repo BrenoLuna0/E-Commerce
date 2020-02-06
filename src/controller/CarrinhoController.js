@@ -13,11 +13,11 @@ module.exports = {
                 cartTotal : await getCartTotal(req.user.id)
             });
         } else {
-            const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
+            const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho,req.session.filial);
             const categoriasRelacionadas = produtosFinais.map(function(produto){
                 return produto.categoria;
             });
-            const produtosRelacionados = await Produto.produtosRelacionados(categoriasRelacionadas);
+            const produtosRelacionados = await Produto.produtosRelacionados(categoriasRelacionadas, req.session.filial);
             res.render('carrinho/carrinho', {
                 produtos: produtosFinais,
                 categories: categorias,

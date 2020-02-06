@@ -18,7 +18,7 @@ module.exports = function (passport) {
                     id: result.rows[0][0],
                     username: result.rows[0][1],
                     password: result.rows[0][2],
-                    email: result.rows[0][3]
+                    email: result.rows[0][3],
                 };
                 callback(err, user);
             }
@@ -56,7 +56,8 @@ module.exports = function (passport) {
 
     passport.use(new LocalStrategy({
         usernameField: 'username',
-        passwordField: 'password'
+        passwordField: 'password',
+        filial : 'filial'
     },
         (username, password, done) => {
             findUser(username, (err, user) => {

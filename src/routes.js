@@ -7,6 +7,7 @@ require('./auth')(passport);
 const ProdutoController = require('./controller/ProdutoController');
 const CarrinhoController = require('./controller/CarrinhoController');
 const VendaController = require('./controller/VendaController');
+const FilialController = require('./controller/FilialController');
 
 function authenticationMiddleware() {
     return function (req, res, next) {
@@ -28,35 +29,41 @@ function authenticationMiddleware2() {
 
 
 
-routes.get('/login', authenticationMiddleware2(), function (req, res, next) {
-    if (req.query.fail) {
-        res.render('login/login', { message: 'Usuário e/ou senha incorretos' });
-    } else {
-        res.render('login/login', { message: null });
-    }
+routes.get('/login', authenticationMiddleware2(), FilialController.show);
+
+routes.post('/login', function (req, res, next) {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { return res.redirect('/login'); }
+        req.logIn(user, function (err) {
+            if (err) { return next(err); }
+            req.session.filial = req.body.filial;
+            return res.redirect('/main');
+        });
+    })(req, res, next);
 });
-routes.post('/login', passport.authenticate('local', { successRedirect: '/main', failureRedirect: '/login?fail=true' }));
-routes.get('/logout', authenticationMiddleware(), function(req,res,next){
+
+routes.get('/logout', authenticationMiddleware(), function (req, res, next) {
     req.logout();
     res.redirect('/login');
 
 });
-routes.get('/', authenticationMiddleware(), (req,res)=>{
+routes.get('/', authenticationMiddleware(), (req, res) => {
     res.redirect('/main');
 });
 routes.get('/main', authenticationMiddleware(), ProdutoController.show);
-routes.get('/produto',authenticationMiddleware(), ProdutoController.paginate);
-routes.get('/categorias/:catDescricao',authenticationMiddleware(), ProdutoController.getCategorias);
-routes.get('/descricao',authenticationMiddleware(), ProdutoController.getByDescricao);
-routes.get('/produto/:id',authenticationMiddleware(), ProdutoController.detail);
+routes.get('/produto', authenticationMiddleware(), ProdutoController.paginate);
+routes.get('/categorias/:catDescricao', authenticationMiddleware(), ProdutoController.getCategorias);
+routes.get('/descricao', authenticationMiddleware(), ProdutoController.getByDescricao);
+routes.get('/produto/:id', authenticationMiddleware(), ProdutoController.detail);
 //routes.get('/produto', ProdutoController.show);
 
 routes.get('/carrinho/', authenticationMiddleware(), CarrinhoController.showProducts);
 routes.post('/carrinho/add', CarrinhoController.adicionarAoCarrinho);
-routes.delete('/carrinho/remove',authenticationMiddleware(), CarrinhoController.removerDoCarrinho);
+routes.delete('/carrinho/remove', authenticationMiddleware(), CarrinhoController.removerDoCarrinho);
 routes.put('/carrinho/update', CarrinhoController.atualizarCarrinho);
 
-routes.get('/checkout',authenticationMiddleware(), CarrinhoController.checkout);
+routes.get('/checkout', authenticationMiddleware(), CarrinhoController.checkout);
 routes.post('/checkout', authenticationMiddleware(), CarrinhoController.isEmpty, VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
 routes.get('/historico', authenticationMiddleware(), VendaController.getHistorico);

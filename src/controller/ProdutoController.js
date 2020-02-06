@@ -4,7 +4,7 @@ const getCartTotal = require('../utils/getCartTotal');
 
 module.exports = {
     async show(req, res) {
-        const produtos = await Produto.find9();
+        const produtos = await Produto.find9(req.session.filial);
         res.render('front/front', {
             products : produtos,
             cartTotal :  await getCartTotal(req.user.id)
@@ -18,8 +18,8 @@ module.exports = {
         } else {
             categoria = '%';
         }
-        const produtos = await Produto.findAll(req.query.page, categoria);
-        const categorias = await Categoria.categorias();
+        const produtos = await Produto.findAll(req.query.page, categoria, req.session.filial);
+        const categorias = await Categoria.categorias(req.session.filial);
         res.render('produtos/produtos', {
             products: produtos,
             page: req.query.page,
@@ -29,8 +29,8 @@ module.exports = {
     },
 
     async getCategorias(req, res) {
-        const produtos = await Produto.findAll(req.query.page, req.params.catDescricao.replace(/-/g, ' '));
-        const categorias = await Categoria.categorias(req.user.id);
+        const produtos = await Produto.findAll(req.query.page, req.params.catDescricao.replace(/-/g, ' '), req.session.filial);
+        const categorias = await Categoria.categorias(req.session.filial);
 
         res.render('produtos/produtos', {
             products: produtos,
@@ -49,8 +49,8 @@ module.exports = {
             pagina = req.query.page;
         }
 
-        const produtos = await Produto.findByDescricao(pagina, descricao);
-        const categorias = await Categoria.categorias();
+        const produtos = await Produto.findByDescricao(pagina, descricao, req.session.filial);
+        const categorias = await Categoria.categorias(req.session.filial);
 
 
         res.render('produtos/produtos', {
@@ -62,13 +62,13 @@ module.exports = {
     },
 
     async detail(req, res) {
-        let produto = await Produto.findById(req.params.id);
+        let produto = await Produto.findById(req.params.id, req.session.filial);
         let alert;
 
         if (!produto.PROD_IMAG_DESCRICAO) {
             produto.PROD_IMAG_DESCRICAO = 'Não há Descrição Para esse Produto'
         }
-        const produtosRelacionados = await Produto.produtosRelacionados([produto[0].PROD_CATEGORIA]);
+        const produtosRelacionados = await Produto.produtosRelacionados([produto[0].PROD_CATEGORIA], req.session.filial);
         if (req.query.msg) {
             alert = true;
         } else {

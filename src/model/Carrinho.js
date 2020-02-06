@@ -106,7 +106,7 @@ class Carrinho {
 
     }
 
-    static async getProdutosDetalhe(produtos) {
+    static async getProdutosDetalhe(produtos, filial) {
         const conexao = await connection2;
 
 
@@ -114,6 +114,7 @@ class Carrinho {
             let sql = `SELECT DISTINCT P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
             FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
+            AND P.FIL_CODIGO = ${filial}
             AND P.PROD_CODIGO = ${produto.codigo}`;
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {

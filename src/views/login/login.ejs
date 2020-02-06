@@ -21,11 +21,23 @@
       <form action="/login" method="POST">
         <div class="input-block">
           <label for="login-email">Login</label>
-          <input type="text" id="login-username" name="username" />
+          <input type="text" id="login-username" name="username"  required/>
         </div>
         <div class="input-block">
           <label for="login-password">Senha</label>
-          <input type="password" id="login-password" name="password" />
+          <input type="password" id="login-password" name="password" required/>
+        </div>
+        <div class="input-block">
+          <label for="filial">Filial</label>
+          <select id="filial" name="filial">
+            <%
+            filiais.map(function(filial){
+              %>
+              <option value=<%=filial.codigo%>><%=filial.descricao%></option>
+              <%
+            });
+            %>
+          </select>
         </div>
         <button type="submit" class="btn-login">Login</button>
       </form>

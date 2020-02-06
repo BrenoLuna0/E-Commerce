@@ -10,37 +10,37 @@ class Produto {
         this.PROD_IMAG_PATH = PROD_IMAG_PATH;
     }
 
-    static async findById(id) {
-        const produtosSemImagem = await getProdutoById(id);
+    static async findById(id, filial) {
+        const produtosSemImagem = await getProdutoById(id, filial);
         const produtosImagem = await getProdutosImagem(produtosSemImagem);
         return produtosImagem;
     }
 
-    static async find9() {
-        const produtosSemImagem = await getNineProdutos();
-        const produtosImagem = await getProdutosImagem(produtosSemImagem);
-        return produtosImagem;
-
-    }
-
-    static async findAll(pageNumber, categoria) {
-        const produtosSemImagem = await getProdutos(pageNumber, categoria);
+    static async find9(filial) {
+        const produtosSemImagem = await getNineProdutos(filial);
         const produtosImagem = await getProdutosImagem(produtosSemImagem);
         return produtosImagem;
 
     }
 
-
-
-    static async findByDescricao(pageNumber = 1, descricao) {
-        const produtosSemImagem = await getProdutosByDescricao(pageNumber, descricao);
+    static async findAll(pageNumber, categoria, filial) {
+        const produtosSemImagem = await getProdutos(pageNumber, categoria, filial);
         const produtosImagem = await getProdutosImagem(produtosSemImagem);
         return produtosImagem;
 
     }
 
-    static async produtosRelacionados(categoria) {
-        const produtosSemImagem = await getProdutosRelacionados(categoria);
+
+
+    static async findByDescricao(pageNumber = 1, descricao, filial) {
+        const produtosSemImagem = await getProdutosByDescricao(pageNumber, descricao, filial);
+        const produtosImagem = await getProdutosImagem(produtosSemImagem);
+        return produtosImagem;
+
+    }
+
+    static async produtosRelacionados(categoria, filial) {
+        const produtosSemImagem = await getProdutosRelacionados(categoria, filial);
         const produtosImagem = await getProdutosImagem(produtosSemImagem);
         return produtosImagem;
 
@@ -48,7 +48,7 @@ class Produto {
 
 }
 
-async function getProdutos(pageNumber = 1, categoria = '%') {
+async function getProdutos(pageNumber = 1, categoria = '%', filial) {
     const conexao = await connection;
     const sql = `SELECT * FROM
         (
@@ -58,6 +58,7 @@ async function getProdutos(pageNumber = 1, categoria = '%') {
                 SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
                 FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
                 WHERE p.sub_grp_codigo = s.sub_grp_codigo
+                AND P.FIL_CODIGO = ${filial}
                 AND s.sub_grp_descricao LIKE '${categoria}'
                 ORDER BY P.PROD_CODIGO DESC 
             ) a
@@ -87,12 +88,13 @@ async function getProdutos(pageNumber = 1, categoria = '%') {
 
 }
 
-async function getNineProdutos() {
+async function getNineProdutos(filial) {
     const conexao = await connection;
     const sql = `SELECT * FROM (
         SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao 
         FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
+        AND P.FIL_CODIGO = ${filial}
         ORDER BY dbms_random.value
     )
     where ROWNUM <= 9`;
@@ -119,7 +121,7 @@ async function getNineProdutos() {
 
 }
 
-async function getProdutosByDescricao(pageNumber, descricao) {
+async function getProdutosByDescricao(pageNumber, descricao, filial) {
 
     const conexao = await connection;
     const sql = `SELECT * FROM
@@ -130,6 +132,7 @@ async function getProdutosByDescricao(pageNumber, descricao) {
             SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
             FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
+            AND P.FIL_CODIGO = ${filial}
             AND P.PROD_DESCRICAO LIKE '%${descricao}%'
             ORDER BY P.PROD_CODIGO DESC
         ) a
@@ -158,12 +161,13 @@ async function getProdutosByDescricao(pageNumber, descricao) {
 
 }
 
-async function getProdutosRelacionados(categorias) {
+async function getProdutosRelacionados(categorias, filial) {
     const conexao = await connection;
     let sql = `SELECT * FROM (
         SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao 
         FROM siac_ts.VW_PRODUTO P, SIAC_TS.vw_subgrupo S
-        WHERE p.sub_grp_codigo = s.sub_grp_codigo AND (`;
+        WHERE p.sub_grp_codigo = s.sub_grp_codigo
+        AND P.FIL_CODIGO = ${filial} AND (`;
     let control = 1;
 
     categorias.map(function (categoria) {
@@ -201,11 +205,12 @@ async function getProdutosRelacionados(categorias) {
 
 }
 
-async function getProdutoById(id) {
+async function getProdutoById(id, filial) {
     const conexao = await connection;
     const sql = `SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
     FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
     WHERE p.sub_grp_codigo = s.sub_grp_codigo
+    AND P.FIL_CODIGO = ${filial}
     AND P.PROD_CODIGO = ${id}`;
 
     return new Promise(async function (resolve) {
