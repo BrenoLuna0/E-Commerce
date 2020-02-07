@@ -4,7 +4,6 @@ const getCartTotal = require('../utils/getCartTotal');
 
 module.exports = {
     async show(req, res) {
-        console.log(req.session.filial);
         const produtos = await Produto.find9(req.session.filial);
         res.render('front/front', {
             products : produtos,

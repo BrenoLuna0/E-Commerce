@@ -5,7 +5,7 @@ const Produto = require('../model/Produto');
 
 module.exports = {
     async showProducts(req, res) {
-        const categorias = await Categoria.categorias();
+        const categorias = await Categoria.categorias(req.session.filial);
         const produtosCarrinho = await Carrinho.getProdutos(req.user.id, req.session.filial);
         if (!produtosCarrinho) {
             res.render('carrinhoVazio/carrinhoVazio', {
@@ -62,7 +62,7 @@ module.exports = {
     },
 
     async checkout(req, res) {
-        const categorias = await Categoria.categorias();
+        const categorias = await Categoria.categorias(req.session.filial);
         const produtosCarrinho = await Carrinho.getProdutos(req.user.id, req.session.filial);
         if (!produtosCarrinho) {
             res.render('carrinhoVazio/carrinhoVazio', {

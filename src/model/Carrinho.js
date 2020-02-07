@@ -82,7 +82,6 @@ class Carrinho {
     static async getProdutos(userId, filial) {
         const conexao = await connection;
         const sql = `SELECT PROD_CODIGO, PROD_QTD FROM CARRINHO WHERE USUARIO_CODIGO = ${userId} AND FILIAL = ${filial}`;
-        console.log(sql);
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, async function (err, result) {
                 if (err) {

@@ -32,13 +32,15 @@
       height: 400px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       transition: 0.3s;
+      text-align: center;
   }
 
   .card-body button {
       position: absolute;
       bottom: 10px;
       width: 90%;
-      background-color: #29293d
+      background-color: #29293d;
+      left: 5%;
   }
 
   .card-body a {
