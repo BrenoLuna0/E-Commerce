@@ -54,6 +54,7 @@
             <div class="col">
               <p class="text-right">
                 <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
+                <p class="color text-right"><strong>Filial: <%=filial%></strong></p>
               </p>
             </div>
           </div>
@@ -265,6 +266,7 @@
                   <a href=<%='/produto/' + produto.PROD_CODIGO%>>
                     <p><strong><%=produto.PROD_DESCRICAO%></strong></p>
                   </a>
+                  <p><strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong></p>
                   <div>
                     <button class="" onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>',1)"
                       id=<%='button'+produto.PROD_CODIGO %>>Adicionar ao

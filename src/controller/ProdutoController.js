@@ -7,7 +7,8 @@ module.exports = {
         const produtos = await Produto.find9(req.session.filial);
         res.render('front/front', {
             products : produtos,
-            cartTotal :  await getCartTotal(req.user.id, req.session.filial)
+            cartTotal :  await getCartTotal(req.user.id, req.session.filial),
+            filial : req.session.filial
         });
     },
 
@@ -24,7 +25,8 @@ module.exports = {
             products: produtos,
             page: req.query.page,
             categories: categorias,
-            cartTotal: await getCartTotal(req.user.id, req.session.filial)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial),
+            filial : req.session.filial
         });
     },
 
@@ -36,7 +38,8 @@ module.exports = {
             products: produtos,
             page: req.query.page,
             categories: categorias,
-            cartTotal: await getCartTotal(req.user.id, req.session.filial)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial),
+            filial : req.session.filial
         });
     },
 
@@ -57,7 +60,8 @@ module.exports = {
             products: produtos,
             page: pagina,
             categories: categorias,
-            cartTotal: await getCartTotal(req.user.id, req.session.filial)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial),
+            filial : req.session.filial
         });
     },
 
@@ -78,7 +82,8 @@ module.exports = {
             product: produto,
             produtosRelacionados: produtosRelacionados,
             alerta: alert,
-            cartTotal: await getCartTotal(req.user.id, req.session.filial)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial),
+            filial : req.session.filial
         });
     }
 }

@@ -58,7 +58,8 @@ module.exports = {
 
     async confirmarVenda(req, res) {
         res.render('confirmacao/confirmacao', {
-            cartTotal: await getCartTotal(req.user.id, req.session.filial)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial),
+            filial : req.session.filial
         });
     },
 
@@ -67,7 +68,8 @@ module.exports = {
         //console.log(vendas);
         res.render('historico/historico', {
             vendas : vendas,
-            cartTotal: await getCartTotal(req.user.id, req.session.filial)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial),
+            filial : req.session.filial
         })
     },
 
@@ -81,7 +83,8 @@ module.exports = {
             totals : dav.total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
             formPagt : dav.formPagt,
             produtos : produtos,
-            cartTotal: await getCartTotal(req.user.id, req.session.filial)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial),
+            filial : req.session.filial
 
         });
     }

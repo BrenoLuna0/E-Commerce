@@ -10,7 +10,8 @@ module.exports = {
         if (!produtosCarrinho) {
             res.render('carrinhoVazio/carrinhoVazio', {
                 categories: categorias,
-                cartTotal : await getCartTotal(req.user.id, req.session.filial)
+                cartTotal : await getCartTotal(req.user.id, req.session.filial),
+                filial : req.session.filial
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho,req.session.filial);
@@ -22,7 +23,8 @@ module.exports = {
                 produtos: produtosFinais,
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id, req.session.filial),
-                produtosRelacionados : produtosRelacionados
+                produtosRelacionados : produtosRelacionados,
+                filial : req.session.filial
             });
         }
 
@@ -67,14 +69,16 @@ module.exports = {
         if (!produtosCarrinho) {
             res.render('carrinhoVazio/carrinhoVazio', {
                 categories: categorias,
-                cartTotal : await getCartTotal(req.user.id, req.session.filial)
+                cartTotal : await getCartTotal(req.user.id, req.session.filial),
+                filial : req.session.filial
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho,req.session.filial);
             res.render('checkout/checkout', {
                 produtos: produtosFinais,
                 categories: categorias,
-                cartTotal : await getCartTotal(req.user.id, req.session.filial)
+                cartTotal : await getCartTotal(req.user.id, req.session.filial),
+                filial : req.session.filial
             });
         }
 
@@ -88,7 +92,8 @@ module.exports = {
                 formPagt : res.locals.formPagt,
                 data : res.locals.data,
                 cartTotal : '',
-                total : res.locals.total
+                total : res.locals.total,
+                filial : req.session.filial
             });
         }else{
             res.render('confirmacao/confirmacao', {
@@ -96,7 +101,8 @@ module.exports = {
                 formPagt : res.locals.formPagt,
                 data : res.locals.data,
                 cartTotal : '',
-                total : res.locals.total
+                total : res.locals.total,
+                filial : req.session.filial
             });
         }
 
