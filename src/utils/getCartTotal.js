@@ -1,11 +1,11 @@
 const Carrinho = require('../model/Carrinho');
 
-module.exports = async function getCartTotal(id) {
-    const produtosCarrinho = await Carrinho.getProdutos(id);
+module.exports = async function getCartTotal(id, filial) {
+    const produtosCarrinho = await Carrinho.getProdutos(id, filial);
         if (!produtosCarrinho) {
             return '';
         } else {
-            const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho);
+            const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho, filial);
             let parcial = 0;
             produtosFinais.map(function (produto) {
                 parcial += parseFloat(produto.subtotal);

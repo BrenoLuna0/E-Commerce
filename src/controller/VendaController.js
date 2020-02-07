@@ -31,7 +31,7 @@ module.exports = {
                 let mes = date.getMonth() + 1;
                 let dia = date.getDate();
                 res.locals.data = `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`;
-                res.locals.total = await getCartTotal(req.user.id);
+                res.locals.total = await getCartTotal(req.user.id, req.session.filial);
             }
 
             return next();
@@ -49,7 +49,7 @@ module.exports = {
                 let mes = date.getMonth() + 1;
                 let dia = date.getDate();
                 res.locals.data = `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`;
-                res.locals.total = await getCartTotal(req.user.id);
+                res.locals.total = await getCartTotal(req.user.id, req.session.filial);
             }
 
             return next();
@@ -58,7 +58,7 @@ module.exports = {
 
     async confirmarVenda(req, res) {
         res.render('confirmacao/confirmacao', {
-            cartTotal: await getCartTotal(req.user.id)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial)
         });
     },
 
@@ -67,7 +67,7 @@ module.exports = {
         //console.log(vendas);
         res.render('historico/historico', {
             vendas : vendas,
-            cartTotal: await getCartTotal(req.user.id)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial)
         })
     },
 
@@ -81,7 +81,7 @@ module.exports = {
             totals : dav.total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
             formPagt : dav.formPagt,
             produtos : produtos,
-            cartTotal: await getCartTotal(req.user.id)
+            cartTotal: await getCartTotal(req.user.id, req.session.filial)
 
         });
     }
