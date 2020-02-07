@@ -107,6 +107,7 @@ footer {
   .dropdown {
     position: relative;
     display: inline-block;
+    z-index: 99;
   }
   
   /* Dropdown Content (Hidden by Default) */
@@ -120,3 +121,28 @@ footer {
   }
 
   .dropdown:hover .dropdown-content {display: block;}
+
+  .carousel {
+    position: relative;
+    margin-top: 50px;
+    height: 150px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .carousel-inner {
+    height: 150px;
+  }
+
+  .bg-img {
+    position: absolute;
+    background-color: #47476b;
+    height: 150px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+  }
