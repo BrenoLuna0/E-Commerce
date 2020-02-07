@@ -20,9 +20,9 @@ module.exports = {
         if (req.body.formPagt === '11') {
             const nDAV = await Venda.getNDav();
             console.log(nDAV);
-            const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', '');
-            const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject);
-            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 11, 0, req.body.total);
+            const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', '', req.session.filial);
+            const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
+            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 11, 0, req.body.total, req.session.filial);
 
             if (confirmacaoDav && confirmacaoDavItens && confirmacaoDaVFormPagt) {
                 res.locals.nDAV = nDAV;
@@ -38,9 +38,9 @@ module.exports = {
         } else {
             const nDAV = await Venda.getNDav();
             console.log(nDAV);
-            const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', req.body.intervalo);
-            const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject);
-            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 18, req.body.parcelas, req.body.total);
+            const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', req.body.intervalo, req.session.filial);
+            const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
+            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 18, req.body.parcelas, req.body.total, req.session.filial);
 
             if (confirmacaoDav && confirmacaoDavItens && confirmacaoDaVFormPagt) {
                 res.locals.nDAV = nDAV;
@@ -63,7 +63,7 @@ module.exports = {
     },
 
     async getHistorico(req,res){
-        const vendas = await Venda.getVendas(req.user.id);
+        const vendas = await Venda.getVendas(req.user.id, req.session.filial);
         //console.log(vendas);
         res.render('historico/historico', {
             vendas : vendas,

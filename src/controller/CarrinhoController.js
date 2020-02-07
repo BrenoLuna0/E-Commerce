@@ -81,7 +81,7 @@ module.exports = {
     },
 
     async limparCarrinho(req,res){
-        const result = await Carrinho.limparCarrinho(req.user.id);
+        const result = await Carrinho.limparCarrinho(req.user.id, req.session.filial);
         if(result){
             res.render('confirmacao/confirmacao', {
                 nDav : res.locals.nDAV,

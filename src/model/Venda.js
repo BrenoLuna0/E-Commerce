@@ -18,7 +18,7 @@ class Venda {
         });
     }
 
-    static async inserirDAV(nDAV, userId, vendaTotal, cnpj, intervaloDeParcelas) {
+    static async inserirDAV(nDAV, userId, vendaTotal, cnpj, intervaloDeParcelas, filial) {
         const conexao = await connection;
         var today = new Date();
         var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
@@ -39,7 +39,7 @@ class Venda {
          DAV_OBSERVACAO,
          DAV_INTRANET,
          DAV_INTRANET_ATUALIZADO)
-          VALUES(2, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${intervaloDeParcelas}' , 'S' , 'N')`;
+          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${intervaloDeParcelas}' , 'S' , 'N')`;
 
 
         return new Promise(async function (resolve) {
@@ -54,7 +54,7 @@ class Venda {
         });
     }
 
-    static async inserirDAVItens(nDAV, davItens) {
+    static async inserirDAVItens(nDAV, davItens, filial) {
         const conexao = await connection;
         let i = 0;
         const resultados = davItens.map(function (davItem) {
@@ -68,7 +68,7 @@ class Venda {
             DAV_ITEN_QTD, 
             DAV_ITEN_PRECO_UNIT, 
             DAV_ITEN_TOTAL)  
-            VALUES (2 , ${nDAV} , '010264103000112' , ${i} , ${davItem.codigo} , ${davItem.qtd} , ${davItem.preco} , ${davItem.subtotal})`;
+            VALUES (${filial} , ${nDAV} , '010264103000112' , ${i} , ${davItem.codigo} , ${davItem.qtd} , ${davItem.preco} , ${davItem.subtotal})`;
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err) {
                     if (err) {
@@ -89,7 +89,7 @@ class Venda {
 
     }
 
-    static async inserirDAVFormaDePagamento(nDAV, formPagtCodigo, parcelas, vendaTotal) {
+    static async inserirDAVFormaDePagamento(nDAV, formPagtCodigo, parcelas, vendaTotal, filial) {
         const conexao = await connection;
         const sql = `INSERT INTO DAV_FORMA_PAGAMENTO
          (FIL_CODIGO,
@@ -106,7 +106,7 @@ class Venda {
          DAV_FORM_PAGT_VALOR_ACRESCIMO,
          DAV_FORM_PAGT_VALOR,
          DAV_FORM_PAGT_TOTAL)
-         VALUES (2, ${nDAV}, '010264103000112', 1, ${formPagtCodigo}, '', 0, ${parcelas}, 0, 0, 0, 0, ${vendaTotal}, ${vendaTotal})`;
+         VALUES (${filial}, ${nDAV}, '010264103000112', 1, ${formPagtCodigo}, '', 0, ${parcelas}, 0, 0, 0, 0, ${vendaTotal}, ${vendaTotal})`;
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
@@ -121,10 +121,11 @@ class Venda {
 
     }
 
-    static async getVendas(id) {
+    static async getVendas(id, filial) {
         const conexao = await connection;
         const sql = `SELECT DAV_CODIGO, DAV_DATA_ABERTURA, DAV_SUB_TOTAL FROM DAV
         WHERE CLIE_CODIGO = ${id}
+        AND FIL_CODIGO = ${filial}
         ORDER BY DAV_CODIGO DESC`;
 
         return new Promise(async function (resolve) {
