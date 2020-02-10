@@ -190,7 +190,7 @@
             <div class="p-4">
 
               <p class="lead">
-                <span>$<%=produto.PROD_PRECO%></span>
+                <strong><span><%=produto.PROD_PRECO.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></span></strong>
               </p>
 
               <p class="lead font-weight-bold">Descrição</p>
