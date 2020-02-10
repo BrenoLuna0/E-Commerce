@@ -54,7 +54,6 @@
             <div class="col">
               <p class="text-right">
                 <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
-                <p class="color text-right"><strong>Filial: <%=filial%></strong></p>
               </p>
             </div>
           </div>
@@ -255,7 +254,7 @@
 
             <div>
               <div class="card mb-4 shadow-sm">
-                <div class="card-body">
+                <div class="card-body" onclick="showProduct('<%=produto.PROD_CODIGO%>')">
                   <div id=<%='alert'+produto.PROD_CODIGO%>
                     class="alert alert-success detail alert-dismissible text-center" role="alert">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -263,12 +262,10 @@
                       carrinho</a>.
                   </div>
                   <img class="image-zoom" src=<%=produto.PROD_IMAG_PATH%>>
-                  <a href=<%='/produto/' + produto.PROD_CODIGO%>>
-                    <p><strong><%=produto.PROD_DESCRICAO%></strong></p>
-                  </a>
-                  <p><strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong></p>
+                  <p onclick="event.stopPropagation()"><strong><%=produto.PROD_DESCRICAO%></strong></p>
+                  <p onclick="event.stopPropagation()"><strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong></p>
                   <div>
-                    <button class="" onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>',1)"
+                    <button class="" onclick="event.stopPropagation();adicionarNoCarrinho('<%=produto.PROD_CODIGO%>',1)"
                       id=<%='button'+produto.PROD_CODIGO %>>Adicionar ao
                       Carrinho</button>
                   </div>
@@ -292,13 +289,14 @@
     <!--Main layout-->
 
     <!--Footer-->
-    <footer class="page-footer font-small blue pt-4">
+    <footer class="page-footer font-small blue pt-4 text-center">
       <!-- Copyright -->
+      <p class="text-light"><strong>Filial: <%=filial%></strong></p>
       <div class="footer-copyright text-center text-light">© 2020 Copyright:
         <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
-      </div>
+      </div><br>
       <!-- Copyright -->
-
+  
     </footer>
     <!--/.Footer-->
 

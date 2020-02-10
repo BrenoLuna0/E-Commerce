@@ -1,6 +1,7 @@
 const Produto = require('../model/Produto');
 const Categoria = require('../model/Categoria');
 const getCartTotal = require('../utils/getCartTotal');
+const getFilialName = require('../utils/getFilialName');
 
 module.exports = {
     async show(req, res) {
@@ -8,7 +9,7 @@ module.exports = {
         res.render('front/front', {
             products : produtos,
             cartTotal :  await getCartTotal(req.user.id, req.session.filial),
-            filial : req.session.filial
+            filial :  await getFilialName(req.session.filial)
         });
     },
 
@@ -26,7 +27,7 @@ module.exports = {
             page: req.query.page,
             categories: categorias,
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial : req.session.filial
+            filial :  await getFilialName(req.session.filial)
         });
     },
 
@@ -39,7 +40,7 @@ module.exports = {
             page: req.query.page,
             categories: categorias,
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial : req.session.filial
+            filial :  await getFilialName(req.session.filial)
         });
     },
 
@@ -61,7 +62,7 @@ module.exports = {
             page: pagina,
             categories: categorias,
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial : req.session.filial
+            filial :  await getFilialName(req.session.filial)
         });
     },
 
@@ -83,7 +84,7 @@ module.exports = {
             produtosRelacionados: produtosRelacionados,
             alerta: alert,
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial : req.session.filial
+            filial :  await getFilialName(req.session.filial)
         });
     }
 }

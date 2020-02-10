@@ -7,5 +7,6 @@ module.exports = {
         res.render('login/login', {
             filiais
         })
-    }
+    },
+
 }

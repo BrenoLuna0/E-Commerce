@@ -47,3 +47,7 @@ function updateURLParameter(url, param, paramVal = 1) {
     var rows_txt = temp + "" + param + "=" + paramVal;
     return baseURL + "?" + newAdditionalURL + rows_txt;
 }
+
+function showProduct(id,flag){
+    window.location.href = `/produto/${id}`;
+}

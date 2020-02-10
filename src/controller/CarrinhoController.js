@@ -2,6 +2,7 @@ const Carrinho = require('../model/Carrinho');
 const Categoria = require('../model/Categoria');
 const getCartTotal = require('../utils/getCartTotal');
 const Produto = require('../model/Produto');
+const getFilialName = require('../utils/getFilialName');
 
 module.exports = {
     async showProducts(req, res) {
@@ -11,7 +12,7 @@ module.exports = {
             res.render('carrinhoVazio/carrinhoVazio', {
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id, req.session.filial),
-                filial : req.session.filial
+                filial :  await getFilialName(req.session.filial)
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho,req.session.filial);
@@ -24,7 +25,7 @@ module.exports = {
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id, req.session.filial),
                 produtosRelacionados : produtosRelacionados,
-                filial : req.session.filial
+                filial :  await getFilialName(req.session.filial)
             });
         }
 
@@ -70,7 +71,7 @@ module.exports = {
             res.render('carrinhoVazio/carrinhoVazio', {
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id, req.session.filial),
-                filial : req.session.filial
+                filial :  await getFilialName(req.session.filial)
             });
         } else {
             const produtosFinais = await Carrinho.getProdutosDetalhe(produtosCarrinho,req.session.filial);
@@ -78,7 +79,7 @@ module.exports = {
                 produtos: produtosFinais,
                 categories: categorias,
                 cartTotal : await getCartTotal(req.user.id, req.session.filial),
-                filial : req.session.filial
+                filial :  await getFilialName(req.session.filial)
             });
         }
 
@@ -93,7 +94,7 @@ module.exports = {
                 data : res.locals.data,
                 cartTotal : '',
                 total : res.locals.total,
-                filial : req.session.filial
+                filial :  await getFilialName(req.session.filial)
             });
         }else{
             res.render('confirmacao/confirmacao', {
@@ -102,7 +103,7 @@ module.exports = {
                 data : res.locals.data,
                 cartTotal : '',
                 total : res.locals.total,
-                filial : req.session.filial
+                filial :  await getFilialName(req.session.filial)
             });
         }
 

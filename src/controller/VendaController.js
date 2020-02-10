@@ -1,6 +1,6 @@
 const Venda = require('../model/Venda');
-const Categoria = require('../model/Categoria');
 const getCartTotal = require('../utils/getCartTotal');
+const getFilialName = require('../utils/getFilialName');
 
 module.exports = {
     async realizarDav(req, res, next) {
@@ -59,7 +59,7 @@ module.exports = {
     async confirmarVenda(req, res) {
         res.render('confirmacao/confirmacao', {
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial : req.session.filial
+            filial :  await getFilialName(req.session.filial)
         });
     },
 
@@ -69,7 +69,7 @@ module.exports = {
         res.render('historico/historico', {
             vendas : vendas,
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial : req.session.filial
+            filial :  await getFilialName(req.session.filial)
         })
     },
 
@@ -84,7 +84,7 @@ module.exports = {
             formPagt : dav.formPagt,
             produtos : produtos,
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial : req.session.filial
+            filial :  await getFilialName(req.session.filial)
 
         });
     }
