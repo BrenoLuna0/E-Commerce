@@ -2,20 +2,27 @@
 <html lang="en">
 
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Produto</title>
+
+  <link rel="icon" href="/assets/favicon.ico">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Carrinho</title>
-  <link rel="icon" href="/assets/favicon.ico">
   <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/produtos.css">
   <link rel="stylesheet" href="/css/carrinho.css">
+  <link rel="stylesheet" href="/css/produtoDetalhe.css">
+
 
 </head>
 
 <body>
 
-  <main role="main">
+  <main role="main" class="full">
     <div class="container">
       <div class="row">
         <div class="col-md">
@@ -139,224 +146,248 @@
         </div>
       </div>
     </nav>
+    <!--Main layout-->
+    <main class="">
+      <div class="container dark-grey-text mt-5">
+        <div class="centralizar">
+          <div class="">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Quantidade</th>
+                  <th class="text-center">Preço</th>
+                  <th class="text-center">SubTotal</th>
+                  <th> </th>
+                  <th> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <%
+                                      let total = 0;
+                                      if(produtos){
+                                          produtos.map(function(produto){
+      
+                                              %>
 
-    <div class="container full">
-      <div class="full">
-        <div class="">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>Produto</th>
-                <th>Quantidade</th>
-                <th class="text-center">Preço</th>
-                <th class="text-center">SubTotal</th>
-                <th> </th>
-                <th> </th>
-              </tr>
-            </thead>
-            <tbody>
-              <%
-                                let total = 0;
-                                if(produtos){
-                                    produtos.map(function(produto){
-
-                                        %>
-
-              <tr>
-                <td class="col-sm-8 col-md-6">
-                  <div class="media">
-                    <a class="thumbnail pull-left" href=<%='/produto/' + produto.codigo%>> <img class="media-object"
-                        src=<%=produto.path%> style="width: 72px; height: 72px;"> </a>
-                    <div class="media-body">
-                      <h5 class="media-heading"><a href=<%='/produto/' + produto.codigo%>><%=produto.nome%></a></h5>
+                <tr>
+                  <td class="col-sm-8 col-md-6">
+                    <div class="media">
+                      <a class="thumbnail pull-left" href=<%='/produto/' + produto.codigo%>> <img class="media-object"
+                          src=<%=produto.path%> style="width: 72px; height: 72px;"> </a>
+                      <div class="media-body">
+                        <h5 class="media-heading"><a href=<%='/produto/' + produto.codigo%>><%=produto.nome%></a>
+                        </h5>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td class="col-sm-1 col-md-1" style="text-align: center">
-                  <form>
-                    <input type="hidden" name="produto" value=<%=produto.codigo%>>
-                    <input type="number" class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1"
-                      value=<%=produto.qtd%>>
-                  </form>
-                </td>
-                <td class="col-sm-1 col-md-1 text-center"><strong><%=produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></strong></td>
-                <td class="col-sm-1 col-md-1 text-center"><strong><%=produto.subtotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></strong></td>
-                <td class="col-sm-1 col-md-1">
-                  <form>
-                    <input type="hidden" name="produto" value=<%=produto.codigo%>>
-                    <button type="button" style="background-color: #333333;"
-                      onclick="removerDoCarrinho('<%=produto.codigo%>')" class="">
-                      <span class="glyphicon glyphicon-remove"></span> Remover
+                  </td>
+                  <td class="col-sm-1 col-md-1" style="text-align: center">
+                    <form>
+                      <input type="hidden" name="produto" value=<%=produto.codigo%>>
+                      <input type="number" class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1"
+                        value=<%=produto.qtd%>>
+                    </form>
+                  </td>
+                  <td class="col-sm-1 col-md-1 text-center">
+                    <strong><%=produto.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></strong>
+                  </td>
+                  <td class="col-sm-1 col-md-1 text-center">
+                    <strong><%=produto.subtotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></strong>
+                  </td>
+                  <td class="col-sm-1 col-md-1">
+                    <form>
+                      <input type="hidden" name="produto" value=<%=produto.codigo%>>
+                      <button type="button" style="background-color: #333333;"
+                        onclick="removerDoCarrinho('<%=produto.codigo%>')" class="">
+                        <span class="glyphicon glyphicon-remove"></span> Remover
+                      </button>
+                    </form>
+                  </td>
+                  <td class="col-sm-1 col-md-1">
+                    <button type="button" style="background-color: #0f0f57;"
+                      onclick="atualizarCarrinho('<%=produto.codigo%>')" class="">
+                      <span class="glyphicon glyphicon-remove"></span> Atualizar
                     </button>
-                  </form>
-                </td>
-                <td class="col-sm-1 col-md-1">
-                  <button type="button" style="background-color: #0f0f57;"
-                    onclick="atualizarCarrinho('<%=produto.codigo%>')" class="">
-                    <span class="glyphicon glyphicon-remove"></span> Atualizar
-                  </button>
-                </td>
-              </tr>
+                  </td>
+                </tr>
 
-              <%
-
-                                        total += produto.subtotal;
-                                    })
-                                }%>
-              <tr>
-                <td>   </td>
-                <td>   </td>
-                <td>   </td>
-                <td> </td>
-                <td>
-                  <h3>Total</h3>
-                </td>
-                <td class="text-right">
-                  <h3><strong><%=total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></strong></h3>
-                </td>
-              </tr>
-              <tr>
-                <td>   </td>
-                <td>   </td>
-                <td>   </td>
-                <td> </td>
-                <td>
-                  <button type="button" class="btn btn-default bg-light" onclick="location.href='/main';">
-                    <span class="glyphicon glyphicon-shopping-cart"></span> Continue Comprando
-                  </button></td>
-                <td>
-                  <button type="button" class="" onclick="location.href='/checkout';">
-                    Finalizar Compra <span class="glyphicon glyphicon-play"></span>
-                  </button></td>
-              </tr>
-            </tbody>
-          </table>
+                <%
+      
+                                              total += produto.subtotal;
+                                          })
+                                      }%>
+                <tr>
+                  <td>   </td>
+                  <td>   </td>
+                  <td>   </td>
+                  <td> </td>
+                  <td>
+                    <h3>Total</h3>
+                  </td>
+                  <td class="text-right">
+                    <h3><strong><%=total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></strong>
+                    </h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>   </td>
+                  <td>   </td>
+                  <td>   </td>
+                  <td> </td>
+                  <td>
+                    <button type="button" class="btn btn-default bg-light" onclick="location.href='/main';">
+                      <span class="glyphicon glyphicon-shopping-cart"></span> Continue Comprando
+                    </button></td>
+                  <td>
+                    <button type="button" class="" onclick="location.href='/checkout';">
+                      Finalizar Compra <span class="glyphicon glyphicon-play"></span>
+                    </button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </div>
-    <hr>
+        <!--Grid row-->
 
-    <!--Grid row-->
-    <div class="row d-flex justify-content-center wow fadeIn">
+        <hr>
 
-      <!--Grid column-->
-      <div class="col-md-6 text-center">
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center wow fadeIn">
 
-        <h4 class="my-4 h4">Produtos Relacionados</h4>
+          <!--Grid column-->
+          <div class="col-md-6 text-center">
 
-        <p>Consumidores geralmente levam os seguintes itens também</p>
+            <h4 class="my-4 h4">Produtos Relacionados</h4>
 
-      </div>
-      <!--Grid column-->
+            <p>Consumidores geralmente levam os seguintes itens também</p>
 
-    </div>
-    <!--Grid row-->
+          </div>
+          <!--Grid column-->
 
-    <!--Grid row-->
-    <div class="row wow fadeIn">
+        </div>
+        <!--Grid row-->
 
-      <!--Grid column-->
-      <%
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <%
         produtosRelacionados.map(function(produto){
           %>
 
-      <div class="col-md-4">
-        <div>
-          <div class="card mb-4 shadow-sm">
-            <div class="card-body" onclick="showProduct('<%=produto.PROD_CODIGO%>')">
-              <div id=<%='alert'+produto.PROD_CODIGO%> class="alert alert-success alert-dismissible text-center"
-                role="alert">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver seu
-                  carrinho</a>.
-              </div>
-              <img src=<%=produto.PROD_IMAG_PATH%>>
-              <p onclick="event.stopPropagation()"><strong><%=produto.PROD_DESCRICAO%></strong></p>
-              <p onclick="event.stopPropagation()"><strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong></p>
-              <div>
-                <button onclick="event.stopPropagation();adicionarNoCarrinho('<%=produto.PROD_CODIGO%>')" class=""
-                  id=<%='button'+produto.PROD_CODIGO %>>Adicionar
-                  ao Carrinho</button>
+          <div class="col-lg-4 col-md-12 mb-4">
+
+            <div>
+              <div class="card mb-4 shadow-sm">
+                <div class="card-body" onclick="showProduct('<%=produto.PROD_CODIGO%>')">
+                  <div id=<%='alert'+produto.PROD_CODIGO%>
+                    class="alert alert-success detail alert-dismissible text-center" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique
+                      aqui para ver seu
+                      carrinho</a>.
+                  </div>
+                  <img class="image-zoom" src=<%=produto.PROD_IMAG_PATH%>>
+                  <p onclick="event.stopPropagation()"><strong><%=produto.PROD_DESCRICAO%></strong>
+                  </p>
+                  <p onclick="event.stopPropagation()">
+                    <strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong>
+                  </p>
+                  <div>
+                    <button class="" onclick="event.stopPropagation();adicionarNoCarrinho('<%=produto.PROD_CODIGO%>',1)"
+                      id=<%='button'+produto.PROD_CODIGO %>>Adicionar ao
+                      Carrinho</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <%
+          </div>
+
+          <%
         })
         %>
 
 
 
-    </div>
-  </main>
+        </div>
+        <!--Grid row-->
 
-  <footer class="page-footer font-small blue pt-4 text-center">
-    <!-- Copyright -->
-    <p class="text-light"><strong>Filial: <%=filial%></strong></p>
-    <div class="footer-copyright text-center text-light">© 2020 Copyright:
-      <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
-    </div><br>
-    <!-- Copyright -->
+      </div>
+    </main>
+    <!--Main layout-->
 
-  </footer>
+    <!--Footer-->
+    <footer class="page-footer font-small blue pt-4 text-center">
+      <!-- Copyright -->
+      <p class="text-light"><strong>Filial: <%=filial%></strong></p>
+      <div class="footer-copyright text-center text-light">© 2020 Copyright:
+        <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
+      </div><br>
+      <!-- Copyright -->
 
+    </footer>
+    <!--/.Footer-->
 
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
+    <script>
 
-  <script>
+      function removerDoCarrinho(idProduto) {
 
-    function removerDoCarrinho(idProduto) {
+        $.ajax({
+          url: '/carrinho/remove',
+          type: 'DELETE',
+          data: { produto: idProduto },
+          success: function (response) {
+            if (response) {
+              console.log('Deu certo');
+            } else {
+              console.log('Deu Errado');
+            }
 
-      $.ajax({
-        url: '/carrinho/remove',
-        type: 'DELETE',
-        data: { produto: idProduto },
-        success: function (response) {
-          if (response) {
-            console.log('Deu certo');
-          } else {
-            console.log('Deu Errado');
           }
+        });
 
-        }
-      });
+        location.reload();
 
-      location.reload();
+      }
 
-    }
+      function atualizarCarrinho(idProduto) {
+        const qtd = $('#qtd' + idProduto).val();
+        const qtdNumber = parseInt(qtd);
 
-    function atualizarCarrinho(idProduto) {
-      const qtd = $('#qtd' + idProduto).val();
-      const qtdNumber = parseInt(qtd);
+        $.ajax({
+          url: '/carrinho/update',
+          type: 'PUT',
+          data: { produto: idProduto, qtd: qtdNumber },
+          success: function (response) {
+            if (response) {
+              console.log('Deu certo');
+            } else {
+              console.log('Deu Errado');
+            }
 
-      $.ajax({
-        url: '/carrinho/update',
-        type: 'PUT',
-        data: { produto: idProduto, qtd: qtdNumber },
-        success: function (response) {
-          if (response) {
-            console.log('Deu certo');
-          } else {
-            console.log('Deu Errado');
           }
+        });
 
-        }
-      });
+        location.reload();
 
-      location.reload();
+      }
 
-    }
+    </script>
+    <script src="/js/scripts.js"></script>
 
-  </script>
-  <script src="/js/scripts.js"></script>
+    <!-- MDB core JavaScript -->
+    <!-- Initializations -->
+
 
 </body>
 
