@@ -3,6 +3,8 @@ SELECT DISTINCT pw.PROD_CODIGO,pw.PROD_DESCRICAO,pw.PROD_PRECO_01,sg.SUB_GRP_DES
 FROM PRODUTO_WEB pw,
 siac_ts.vw_subgrupo sg
 WHERE pw.sub_grp_codigo = sg.sub_grp_codigo
+AND pw.FIL_CODIGO = 
+AND sg.SUB_GRP_DESCRICAO LIKE 
 ORDER BY PROD_CODIGO DESC;
 
 --pegar imagem

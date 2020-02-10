@@ -112,7 +112,7 @@ class Carrinho {
 
         const produtosdetalhes = await produtos.map(function (produto) {
             let sql = `SELECT DISTINCT P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
-            FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
+            FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_CODIGO = ${produto.codigo}`;
@@ -153,7 +153,7 @@ class Carrinho {
         });
         
         const produtosImagem = resultado.map(function(produto){
-            let sql = `SELECT  prod_imag_path 
+            let sql = `SELECT  prod_imag_nome 
             FROM SIAC_TS.vw_produto_imagem
             WHERE prod_codigo = ${produto.codigo}`;
 
@@ -181,7 +181,7 @@ class Carrinho {
                                 categoria : produto.categoria,
                                 qtd: produto.qtd,
                                 subtotal: produto.qtd * produto.preco,
-                                path : result.rows[0][0]
+                                path : 'http://187.84.80.162/imagens/' + result.rows[0][0]
                             });
                         }
                     }

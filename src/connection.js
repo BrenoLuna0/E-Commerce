@@ -7,7 +7,7 @@ async function connect(){
         connection = await oracledb.getConnection({
              user : 'csm_mobile',
              password : 'mobile',
-             connectString : 'csmti-aquarius.no-ip.org:1521/bdaqua01'
+             connectString : '187.84.80.162:1521/bdvip01'
         });
         console.log("Successfully connected to Oracle!");
         return connection;

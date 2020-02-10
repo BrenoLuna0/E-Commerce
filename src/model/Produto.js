@@ -55,12 +55,13 @@ async function getProdutos(pageNumber = 1, categoria = '%', filial) {
             SELECT a.*, rownum r__
             FROM
             (
-                SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
-                FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
-                WHERE p.sub_grp_codigo = s.sub_grp_codigo
-                AND P.FIL_CODIGO = ${filial}
-                AND s.sub_grp_descricao LIKE '${categoria}'
-                ORDER BY P.PROD_CODIGO DESC 
+                SELECT DISTINCT pw.PROD_CODIGO,pw.PROD_DESCRICAO,pw.PROD_PRECO_01,sg.SUB_GRP_DESCRICAO
+                FROM SIAC_TS.VW_PRODUTO_WEB pw,
+                siac_ts.vw_subgrupo sg
+                WHERE pw.sub_grp_codigo = sg.sub_grp_codigo
+                AND pw.FIL_CODIGO = ${filial}
+                AND sg.SUB_GRP_DESCRICAO LIKE '${categoria}'
+                ORDER BY PROD_CODIGO DESC
             ) a
             WHERE rownum < ((${pageNumber} * 30) + 1 )
         )
@@ -92,7 +93,7 @@ async function getNineProdutos(filial) {
     const conexao = await connection;
     const sql = `SELECT * FROM (
         SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao 
-        FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
+        FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
         AND P.FIL_CODIGO = ${filial}
         ORDER BY dbms_random.value
@@ -130,7 +131,7 @@ async function getProdutosByDescricao(pageNumber, descricao, filial) {
         FROM
         (
             SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
-            FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
+            FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_DESCRICAO LIKE '%${descricao}%'
@@ -165,7 +166,7 @@ async function getProdutosRelacionados(categorias, filial) {
     const conexao = await connection;
     let sql = `SELECT * FROM (
         SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao 
-        FROM siac_ts.VW_PRODUTO P, SIAC_TS.vw_subgrupo S
+        FROM SIAC_TS.VW_PRODUTO_WEB P, siac_ts.vw_subgrupo S
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
         AND P.FIL_CODIGO = ${filial} AND (`;
     let control = 1;
@@ -208,7 +209,7 @@ async function getProdutosRelacionados(categorias, filial) {
 async function getProdutoById(id, filial) {
     const conexao = await connection;
     const sql = `SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao
-    FROM SIAC_TS.VW_PRODUTO P , SIAC_TS.vw_subgrupo S
+    FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
     WHERE p.sub_grp_codigo = s.sub_grp_codigo
     AND P.FIL_CODIGO = ${filial}
     AND P.PROD_CODIGO = ${id}`;
@@ -238,7 +239,7 @@ async function getProdutosImagem(produtos) {
 
     const produtosArray = produtos.map(async function (produto) {
         return new Promise(async function (resolve) {
-            sql = `SELECT prod_imag_descricao, prod_imag_path 
+            sql = `SELECT prod_imag_descricao, prod_imag_nome 
             FROM SIAC_TS.vw_produto_imagem
             WHERE prod_codigo = ${produto.codigo}`;
             await conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
@@ -261,7 +262,7 @@ async function getProdutosImagem(produtos) {
                             produto.preco,
                             produto.categoria,
                             result.rows[0][0] || 'Produto sem Descricao',
-                            result.rows[0][1]));
+                            'http://187.84.80.162/imagens/'+result.rows[0][1]));
                     }
                 }
             })
