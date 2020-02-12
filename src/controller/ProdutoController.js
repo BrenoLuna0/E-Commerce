@@ -32,7 +32,7 @@ module.exports = {
     },
 
     async getCategorias(req, res) {
-        const produtos = await Produto.findAll(req.query.page, req.params.catDescricao.replace(/-/g, ' '), req.session.filial);
+        const produtos = await Produto.findAll(req.query.page, req.params.catDescricao.replace(/-E-/g, '/').replace(/-/g, ' '), req.session.filial);
         const categorias = await Categoria.categorias(req.session.filial);
 
         res.render('produtos/produtos', {
@@ -45,7 +45,7 @@ module.exports = {
     },
 
     async getByDescricao(req, res) {
-        let descricao = req.query.descricao.replace(/-/g, ' ').toUpperCase();
+        let descricao = req.query.descricao.replace(/-E-/g, '/').replace(/-/g, ' ').toUpperCase();
         let pagina;
         if (!req.query.page) {
             pagina = 1

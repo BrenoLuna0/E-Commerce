@@ -21,5 +21,5 @@ app.set('view engine', 'ejs');
 
 app.use('/', require('./src/routes'));
 app.listen(process.env.PORT || 5000, () => {
-    console.log('Servidor ouvindo na porta 3000');
+    console.log('Servidor ouvindo na porta 5000');
 });
