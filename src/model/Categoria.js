@@ -18,7 +18,7 @@ class Categoria{
                         resolve([]);
                     }else{
                         const objectArray = result.rows.map(function(categorias){
-                            return {descricao : categorias[0].replace(/\s/g , "-").replace(/\//g , "-E-")}
+                            return {descricao : categorias[0]/*.replace(/\s/g , "-").replace(/\//g , "-E-")*/}
                         });
                         resolve(objectArray);
                     }

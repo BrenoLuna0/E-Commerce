@@ -149,7 +149,7 @@
                 <%
                 categories.map(function(categoria){
                     %>
-                <li><a href=<%='/categorias/' + categoria.descricao + '?page=1' %>><%= categoria.descricao%></a></li>
+                <li><a href=<%='/categorias/' + categoria.descricao.replace(/\s/g , "+").replace(/\//g , "*") + '?page=1' %>><%= categoria.descricao%></a></li>
                 <%
                 });
                 %>
