@@ -18,13 +18,13 @@
     border-style: solid;
     border-width: 1px;
     border-color: #29293d;
-    height: auto;
     margin-left: 25px;
+    height: auto;
 }
 
 .sidebar {
     background-color: #efeff5;
-    height: auto;
+    position: relative;
 }
 
 .centerHorizontal h3 {
@@ -32,7 +32,7 @@
     margin-top: 48px;
     color: #29293d;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-left : 25px;
+    margin-left : 35px;
 }
 
 .centerHorizontal ul li a:hover {
@@ -43,3 +43,23 @@
     background-color: #7272a7;
 
 }
+
+.overflow {
+    position: absolute;
+    overflow: scroll;
+    height: 100% - 150px;
+    width: auto;
+    bottom: 0;
+    top: 150px;
+}
+
+.subtitulo{
+    position: absolute;
+    top: 0;
+    height: 150px;
+}
+
+
+
+
+

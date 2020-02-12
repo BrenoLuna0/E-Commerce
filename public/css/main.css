@@ -81,6 +81,7 @@
 
   .centerHorizontal {
     text-align: center;
+    width: auto;
   }
 
   button:hover {
