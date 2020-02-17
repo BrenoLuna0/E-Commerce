@@ -6,14 +6,14 @@ class Carrinho {
     static async adicionarNoCarrinho(userId, productId, qtd, filial) {
         const prvQtd = await Carrinho.verificarProduto(userId,productId, filial);
 
-        const conexao = await connection;
+        const conexao = await connection2;
         let sql;
 
         if (prvQtd) {
             const qtdFinal = parseInt(qtd) + parseInt(prvQtd);
-            sql = `UPDATE CARRINHO SET PROD_QTD = ${qtdFinal} WHERE USUARIO_CODIGO = ${userId} AND PROD_CODIGO = ${productId} AND FILIAL = ${filial}`;
+            sql = `UPDATE SITE_CARRINHO SET PROD_QTD = ${qtdFinal} WHERE CLIE_CODIGO = ${userId} AND PROD_CODIGO = ${productId} AND FIL_CODIGO = ${filial}`;
         } else {
-            sql = `INSERT INTO CARRINHO (USUARIO_CODIGO, PROD_CODIGO, PROD_QTD, FILIAL) VALUES (${userId},${productId},${qtd}, ${filial})`;
+            sql = `INSERT INTO SITE_CARRINHO (CLIE_CODIGO, PROD_CODIGO, PROD_QTD, FIL_CODIGO) VALUES (${userId},${productId},${qtd}, ${filial})`;
         }
 
         return new Promise(async function (resolve) {
@@ -30,8 +30,8 @@ class Carrinho {
     }
 
     static async removerDoCarrinho(userId, productId, filial) {
-        const conexao = await connection;
-        const sql = `DELETE FROM CARRINHO WHERE USUARIO_CODIGO = ${userId} AND PROD_CODIGO = ${productId} AND FILIAL = ${filial}`;
+        const conexao = await connection2;
+        const sql = `DELETE FROM SITE_CARRINHO WHERE CLIE_CODIGO = ${userId} AND PROD_CODIGO = ${productId} AND FIL_CODIGO = ${filial}`;
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
@@ -47,8 +47,8 @@ class Carrinho {
     }
 
     static async limparCarrinho(userId, filial) {
-        const conexao = await connection;
-        const sql = `DELETE FROM CARRINHO WHERE USUARIO_CODIGO = ${userId} AND FILIAL = ${filial}`;
+        const conexao = await connection2;
+        const sql = `DELETE FROM SITE_CARRINHO WHERE CLIE_CODIGO = ${userId} AND FIL_CODIGO = ${filial}`;
 
         return new Promise(async function(resolve){
             conexao.execute(sql,[],{autoCommit : true}, function(err){
@@ -64,8 +64,8 @@ class Carrinho {
     }
 
     static async atualizarQuantidade(userId, productId, qtd, filial) {
-        const conexao = await connection;
-        const sql = `UPDATE CARRINHO SET PROD_QTD = ${qtd} WHERE PROD_CODIGO = ${productId} AND USUARIO_CODIGO = ${userId} AND FILIAL = ${filial}`;
+        const conexao = await connection2;
+        const sql = `UPDATE SITE_CARRINHO SET PROD_QTD = ${qtd} WHERE PROD_CODIGO = ${productId} AND CLIE_CODIGO = ${userId} AND FIL_CODIGO = ${filial}`;
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
@@ -80,8 +80,8 @@ class Carrinho {
     }
 
     static async getProdutos(userId, filial) {
-        const conexao = await connection;
-        const sql = `SELECT PROD_CODIGO, PROD_QTD FROM CARRINHO WHERE USUARIO_CODIGO = ${userId} AND FILIAL = ${filial}`;
+        const conexao = await connection2;
+        const sql = `SELECT PROD_CODIGO, PROD_QTD FROM SITE_CARRINHO WHERE CLIE_CODIGO = ${userId} AND FIL_CODIGO = ${filial}`;
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, async function (err, result) {
                 if (err) {
@@ -203,8 +203,8 @@ class Carrinho {
     }
 
     static async verificarProduto(userId, productId, filial) {
-        const conexao = await connection;
-        const sql = `SELECT PROD_QTD FROM CARRINHO WHERE USUARIO_CODIGO = ${userId} AND PROD_CODIGO = ${productId} AND FILIAL = ${filial}`;
+        const conexao = await connection2;
+        const sql = `SELECT PROD_QTD FROM SITE_CARRINHO WHERE CLIE_CODIGO = ${userId} AND PROD_CODIGO = ${productId} AND FIL_CODIGO = ${filial}`;
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
