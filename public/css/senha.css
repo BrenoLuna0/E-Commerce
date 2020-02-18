@@ -1,0 +1,77 @@
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+.form-wrapper form {
+    margin: 20px 0;
+    background-color: white;
+    padding: 30px 25px;
+    border-radius: 5px;
+    height: 410px;
+    width: 330px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .form-wrapper form .input-block {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .form-wrapper form .input-block label {
+    font-size: 14px;
+    color: darkslateblue;
+  }
+  
+  .form-wrapper form .input-block input {
+    width: 100%;
+    display: block;
+    margin-top: 8px;
+    padding: 7px;
+    font-size: 16px;
+    color: #29293d;
+    border-radius: 2px;
+    border: 1px solid #ccddef;
+    outline-color: #29293d;
+  }
+
+  .form-wrapper form .input-block select {
+    width: 100%;
+    display: block;
+    margin-top: 8px;
+    padding: 7px;
+    font-size: 16px;
+    color: #29293d;
+    border-radius: 2px;
+    border: 1px solid #ccddef;
+    outline-color: #29293d;
+  }
+  
+  .form-wrapper form .btn-login {
+    display: block;
+    min-width: 120px;
+    border: none;
+    background-color: #29293d;
+    color: white;
+    border-radius: 25px;
+    margin: auto;
+    padding: 7px;
+    margin-top: 80px;
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .form-wrapper form .btn-login:hover {
+    background-color: #32324e;
+}

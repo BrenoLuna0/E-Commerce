@@ -8,6 +8,7 @@ const ProdutoController = require('./controller/ProdutoController');
 const CarrinhoController = require('./controller/CarrinhoController');
 const VendaController = require('./controller/VendaController');
 const FilialController = require('./controller/FilialController');
+const ClienteController = require('./controller/ClienteController');
 
 function authenticationMiddleware() {
     return function (req, res, next) {
@@ -68,6 +69,9 @@ routes.post('/checkout', authenticationMiddleware(), CarrinhoController.isEmpty,
 
 routes.get('/historico', authenticationMiddleware(), VendaController.getHistorico);
 routes.get('/historico/:id', authenticationMiddleware(), VendaController.getDavDetalhe);
+
+routes.get('/alterarSenha', authenticationMiddleware(), ClienteController.carregarFormulario);
+routes.post('/alterarSenha', authenticationMiddleware(), ClienteController.alterarSenha);
 
 
 module.exports = routes;
