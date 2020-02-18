@@ -1,13 +1,12 @@
-const bcrypt = require('bcryptjs');
 const md5 = require('md5');
 const LocalStrategy = require('passport-local').Strategy;
-const connection = require('./connectionUser');
+const connection = require('./connection');
 
 module.exports = function (passport) {
     async function findUser(username, callback) {
         
         const conexao = await connection;
-        const sql = `SELECT * FROM USERS WHERE USERNAME = '${username}'`;
+        const sql = `SELECT CLIE_CODIGO, CLIE_CPFCNPJ, SENHA_MD5 FROM CLIENTE_SENHA WHERE CLIE_CPFCNPJ = '${username}'`;
 
         await conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
             if (typeof(result.rows[0]) === 'undefined') {
@@ -18,7 +17,6 @@ module.exports = function (passport) {
                     id: result.rows[0][0],
                     username: result.rows[0][1],
                     password: result.rows[0][2],
-                    email: result.rows[0][3],
                 };
                 callback(err, user);
             }
@@ -27,7 +25,7 @@ module.exports = function (passport) {
 
     async function findUserById(id, callback) {
         const conexao = await connection;
-        const sql = `SELECT * FROM users WHERE ID = ${id}`;
+        const sql = `SELECT CLIE_CODIGO, CLIE_CPFCNPJ, SENHA_MD5 FROM CLIENTE_SENHA WHERE CLIE_CODIGO = ${id}`;
 
         conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
             if (typeof (result.rows[0]) === 'undefined') {
@@ -37,7 +35,6 @@ module.exports = function (passport) {
                     id: result.rows[0][0],
                     username: result.rows[0][1],
                     password: result.rows[0][2],
-                    email: result.rows[0][3]
                 };
                 callback(err, user);
             }

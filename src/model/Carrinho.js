@@ -1,4 +1,3 @@
-const connection = require('../connectionUser');
 const connection2 = require('../connection');
 
 class Carrinho {
