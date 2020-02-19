@@ -1,13 +1,9 @@
 const oracledb = require('oracledb');
 const CronJob = require('cron').CronJob;
 let connection;
-let conexao;
+let conexao = connect();
 
 const job = new CronJob('*/7 * * * *',async function(){
-    console.log(conexao);
-    /*if(conexao !== undefined){
-        await conexao.close();
-    }*/
     conexao = connect();
 });
 job.start();
