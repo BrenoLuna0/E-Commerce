@@ -4,7 +4,11 @@ let connection;
 let conexao = connect();
 
 const job = new CronJob('*/7 * * * *',async function(){
-    conexao = connect();
+    (await conexao).execute('SELECT COUNT(*) FROM DUAL',[], {autoCommit : true}, function(err, result){
+        if(err){
+            console.log('Erro na tarefa cron job');
+        }
+    });
 });
 job.start();
 
