@@ -39,7 +39,7 @@ class Venda {
          DAV_OBSERVACAO,
          DAV_INTRANET,
          DAV_INTRANET_ATUALIZADO)
-          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${intervaloDeParcelas}' , 'S' , 'N')`;
+          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${'DAV TESTE' + intervaloDeParcelas}' , 'S' , 'N')`;
 
 
         return new Promise(async function (resolve) {
