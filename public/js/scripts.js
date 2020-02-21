@@ -19,7 +19,7 @@ function adicionarNoCarrinho(idProduto, qtd = 1) {
             console.log('Deu Certo');
             $(alertName).show();
         } else {
-            console.log('Deu Errado');
+            alert('Erro na Inserção deste Produto no Carrinho. Tente Novamente Mais Tarde');
         }
     });
 }

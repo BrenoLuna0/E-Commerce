@@ -32,9 +32,20 @@ module.exports = {
                 let dia = date.getDate();
                 res.locals.data = `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`;
                 res.locals.total = await getCartTotal(req.user.id, req.session.filial);
+
+                return next();
+            } else {
+                res.render('errors/manipuladorErro', {
+                    err: {
+                        tit: 'Erro na Compra',
+                        msg: 'Erro Oracle no Processamento da sua Compra. Entre em contato conosco para solucionar esse caso',
+                        cod: ''
+                    },
+                    cartTotal: '',
+                    filial: 300
+                })
             }
 
-            return next();
         } else {
             const nDAV = await Venda.getNDav();
             console.log(nDAV);
@@ -50,42 +61,78 @@ module.exports = {
                 let dia = date.getDate();
                 res.locals.data = `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`;
                 res.locals.total = await getCartTotal(req.user.id, req.session.filial);
+                return next();
+            } else {
+                res.render('errors/manipuladorErro', {
+                    err: {
+                        tit: 'Erro na Compra',
+                        msg: 'Erro Oracle no Processamento da sua Compra. Entre em contato conosco para solucionar esse caso',
+                        cod: ''
+                    },
+                    cartTotal: '',
+                    filial: 300
+                })
             }
-
-            return next();
         }
     },
 
     async confirmarVenda(req, res) {
         res.render('confirmacao/confirmacao', {
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial :  await getFilialName(req.session.filial)
+            filial: await getFilialName(req.session.filial)
         });
     },
 
-    async getHistorico(req,res){
+    async getHistorico(req, res) {
         const vendas = await Venda.getVendas(req.user.id, req.session.filial);
-        //console.log(vendas);
-        res.render('historico/historico', {
-            vendas : vendas,
-            cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial :  await getFilialName(req.session.filial)
-        })
+
+        if (vendas.erro) {
+            res.render('errors/manipuladorErro', {
+                err: {
+                    tit: vendas.tit,
+                    msg: vendas.msg,
+                    cod: vendas.cod
+                },
+                cartTotal: '',
+                filial: ''
+            });
+        } else {
+            res.render('historico/historico', {
+                vendas: vendas,
+                cartTotal: await getCartTotal(req.user.id, req.session.filial),
+                filial: await getFilialName(req.session.filial)
+            })
+        }
+
+
     },
 
-    async getDavDetalhe(req,res){
-        const dav = await Venda.getVendaById(req.params.id);
-        const produtos = await Venda.getVendaItens(req.params.id);
+    async getDavDetalhe(req, res) {
+        const dav = await Venda.getVendaById(req.params.id, req.session.filial, req.user.id);
 
-        res.render('vendaDetalhe/vendaDetalhe', {
-            nDav : dav.nDav,
-            data : dav.data,
-            totals : dav.total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
-            formPagt : dav.formPagt,
-            produtos : produtos,
-            cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial :  await getFilialName(req.session.filial)
+        if (dav.erro) {
+            res.render('errors/manipuladorErro', {
+                err: {
+                    tit: dav.tit,
+                    msg: dav.msg,
+                    cod: dav.cod
+                },
+                cartTotal: '',
+                filial: ''
+            })
+        } else {
+            const produtos = await Venda.getVendaItens(req.params.id, req.session.filial);
 
-        });
+            res.render('vendaDetalhe/vendaDetalhe', {
+                nDav: dav.codigoSG,
+                data: dav.data,
+                totals: dav.total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
+                formPagt: dav.formPagt,
+                produtos: produtos,
+                cartTotal: await getCartTotal(req.user.id, req.session.filial),
+                filial: await getFilialName(req.session.filial)
+
+            });
+        }
     }
 }

@@ -11,7 +11,12 @@ class Filial{
             conexao.execute(sql,[],{autoCommit : true}, function(err, result){
                 if(err){
                     console.log('Erro Oracle ao pegar as filiais 401: ' + err.message);
-                    resolve([]);
+                    resolve({
+                        erro : true,
+                        tit : 'Sem Comunicação com o Servidor',
+                        msg : err.message,
+                        cod : 401
+                    });
                 }else{
                     if(typeof(result.rows[0]) === 'undefined'){
                         console.log('Nenhuma filial foi encontrada');

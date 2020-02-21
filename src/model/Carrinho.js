@@ -85,7 +85,12 @@ class Carrinho {
             conexao.execute(sql, [], { autoCommit: true }, async function (err, result) {
                 if (err) {
                     console.log('Erro no Oracle ao requisitar produtos do carrinho 005: ' + err.message);
-                    resolve([]);
+                    resolve({
+                        erro : true,
+                        tit : 'Erro Oracle',
+                        msg : err.message,
+                        cod : '005'
+                    });
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
                         resolve(false);

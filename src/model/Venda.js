@@ -4,7 +4,8 @@ class Venda {
 
     static async getNDav() {
         const conexao = await connection;
-        const sql = `SELECT siac_ts.SEQ_PRODUCAO.nextval FROM dual`;
+        //const sql = `SELECT siac_ts.SEQ_PRODUCAO.nextval FROM dual`;
+        const sql = `SELECT siac_ts.SEQ_ORDE_SERV_02.nextval FROM dual`;
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
@@ -39,9 +40,9 @@ class Venda {
          DAV_OBSERVACAO,
          DAV_INTRANET,
          DAV_INTRANET_ATUALIZADO)
-          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${'DAV TESTE' + intervaloDeParcelas}' , 'S' , 'N')`;
+          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${intervaloDeParcelas}' , 'S' , 'N')`;
 
-
+        console.log(sql);
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
@@ -123,7 +124,7 @@ class Venda {
 
     static async getVendas(id, filial) {
         const conexao = await connection;
-        const sql = `SELECT DAV_CODIGO, DAV_DATA_ABERTURA, DAV_SUB_TOTAL FROM DAV
+        const sql = `SELECT DAV_CODIGO, DAV_DATA_ABERTURA, DAV_SUB_TOTAL, DAV_CODIGO_SG FROM DAV
         WHERE CLIE_CODIGO = ${id}
         AND FIL_CODIGO = ${filial}
         ORDER BY DAV_CODIGO DESC`;
@@ -132,7 +133,12 @@ class Venda {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
                 if (err) {
                     console.log('Erro no oracle ao pegar os davs para o historico 305: ' + err.message);
-                    resolve([]);
+                    resolve({
+                        erro : true,
+                        tit : 'Erro Oracle',
+                        msg : err.message,
+                        cod : 305
+                    });
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
                         resolve([]);
@@ -144,7 +150,8 @@ class Venda {
                             return {
                                 codigo: venda[0],
                                 data: `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
-                                total: venda[2].toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                                total: venda[2].toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
+                                codigoSG : venda[3]
                             }
                         });
                         //console.log(vendas);
@@ -155,23 +162,35 @@ class Venda {
         });
     }
 
-    static async getVendaById(id) {
+    static async getVendaById(id, filial, user) {
         const conexao = await connection;
-        const sql = `SELECT D.DAV_CODIGO, D.DAV_DATA_ABERTURA, D.DAV_SUB_TOTAL, F.FORM_PAGT_DESCRICAO 
+        const sql = `SELECT D.DAV_CODIGO, D.DAV_DATA_ABERTURA, D.DAV_SUB_TOTAL, F.FORM_PAGT_DESCRICAO, D.DAV_CODIGO_SG 
         FROM DAV D, dav_forma_pagamento DF, SIAC_TS.vw_forma_pagamento F
         WHERE D.DAV_CODIGO = df.dav_codigo
-        AND df.form_pagt_codigo = f.form_pagt_codigo
+        AND df.form_pagt_codigo = f.form_pagt_codigo 
+        AND D.FIL_CODIGO = ${filial} 
+        AND D.CLIE_CODIGO = ${user}
         AND D.DAV_CODIGO = ${id}`;
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
                 if (err) {
                     console.log('Erro Oracle ao pegar a venda pelo codigo 306: ' + err.message);
-                    resolve([]);
+                    resolve({
+                        erro : true,
+                        tit : 'Erro Oracle',
+                        msg : err.message,
+                        cod : 306
+                    });
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
                         console.log('Venda inexistente');
-                        resolve([]);
+                        resolve({
+                            erro : true,
+                            tit : 'Venda Inexistente',
+                            msg : 'Venda Inexistente',
+                            cod : 306
+                        });
                     } else {
                         const venda = result.rows[0];
                         const date = new Date(venda[1]);
@@ -181,7 +200,8 @@ class Venda {
                             nDav: venda[0],
                             data: `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
                             total: venda[2],
-                            formPagt: venda[3]
+                            formPagt: venda[3],
+                            codigoSG : venda[4]
                         });
                     }
                 }
@@ -189,12 +209,12 @@ class Venda {
         });
     }
 
-    static async getVendaItens(id) {
+    static async getVendaItens(id, filial) {
         const conexao = await connection;
         const sql = `SELECT d.prod_codigo, p.prod_descricao, d.dav_iten_preco_unit, d.dav_iten_qtd, d.dav_iten_total 
         FROM dav_itens D, SIAC_TS.vw_produto P
         WHERE d.prod_codigo = p.prod_codigo
-        AND p.fil_codigo = 2
+        AND p.fil_codigo = ${filial}
         AND DAV_CODIGO = ${id}`;
 
         return new Promise(async function (resolve) {

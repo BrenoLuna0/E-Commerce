@@ -13,6 +13,17 @@ module.exports = {
 
     async alterarSenha(req, res) {
         const resultado = await Cliente.alterarSenha(req.user.id, req.body.password);
+        if (!resultado) {
+            res.render('errors/manipuladorErro', {
+                err: {
+                    tit: 'Erro ao ALterar Senha',
+                    msg: 'Erro Oracle ao alterar a senha',
+                    cod: 502
+                },
+                cartTotal: '',
+                filial: ''
+            });
+        }
         const userId = req.user.id;
         const filialN = req.session.filial;
         req.logout();
