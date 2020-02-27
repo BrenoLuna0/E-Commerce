@@ -76,7 +76,15 @@ routes.post('/alterarSenha', authenticationMiddleware(), ClienteController.alter
 
 routes.get('*', (req, res) => {
     if (req.isAuthenticated()) {
-        res.redirect('/main');
+        res.render('errors/manipuladorErro', {
+            err: {
+                tit: 'Página não Encontrada',
+                msg: 'A página que você está tentando acessar não existe. Verifique se a URL está correta ou clique na Logo do site para ir para a página inicial',
+                cod: 600
+            },
+            cartTotal: '',
+            filial: ''
+        });
     }
     res.redirect('/login')
 });
