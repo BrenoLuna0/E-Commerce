@@ -52,25 +52,34 @@ routes.get('/logout', authenticationMiddleware(), function (req, res, next) {
 routes.get('/', authenticationMiddleware(), (req, res) => {
     res.redirect('/main');
 });
-routes.get('/main', authenticationMiddleware(), ProdutoController.show);//
-routes.get('/produto', authenticationMiddleware(), ProdutoController.paginate);//
-routes.get('/categorias/:catDescricao', authenticationMiddleware(), ProdutoController.getCategorias);//
-routes.get('/descricao', authenticationMiddleware(), ProdutoController.getByDescricao);//
-routes.get('/produto/:id', authenticationMiddleware(), ProdutoController.detail);//
+routes.get('/main', authenticationMiddleware(), ProdutoController.show);
+routes.get('/produto', authenticationMiddleware(), ProdutoController.paginate);
+routes.get('/categorias/:catDescricao', authenticationMiddleware(), ProdutoController.getCategorias);
+routes.get('/descricao', authenticationMiddleware(), ProdutoController.getByDescricao);
+routes.get('/produto/:id', authenticationMiddleware(), ProdutoController.detail);
 
-routes.get('/carrinho/', authenticationMiddleware(), CarrinhoController.showProducts);//
-routes.post('/carrinho/add', authenticationMiddleware(), CarrinhoController.adicionarAoCarrinho);//
-routes.delete('/carrinho/remove', authenticationMiddleware(), CarrinhoController.removerDoCarrinho);//
-routes.put('/carrinho/update',authenticationMiddleware(), CarrinhoController.atualizarCarrinho);//
+routes.get('/carrinho/', authenticationMiddleware(), CarrinhoController.showProducts);
+routes.post('/carrinho/add', authenticationMiddleware(), CarrinhoController.adicionarAoCarrinho);
+routes.delete('/carrinho/remove', authenticationMiddleware(), CarrinhoController.removerDoCarrinho);
+routes.put('/carrinho/update', authenticationMiddleware(), CarrinhoController.atualizarCarrinho);
 
-routes.get('/checkout', authenticationMiddleware(), CarrinhoController.checkout);//
-routes.post('/checkout', authenticationMiddleware(), CarrinhoController.isEmpty, VendaController.realizarDav, CarrinhoController.limparCarrinho);//
+routes.get('/checkout', authenticationMiddleware(), CarrinhoController.checkout);
+routes.post('/checkout', authenticationMiddleware(), CarrinhoController.isEmpty, VendaController.realizarDav, CarrinhoController.limparCarrinho);
 
-routes.get('/historico', authenticationMiddleware(), VendaController.getHistorico);//
-routes.get('/historico/:id', authenticationMiddleware(), VendaController.getDavDetalhe);//
+routes.get('/historico', authenticationMiddleware(), VendaController.getHistorico);
+routes.get('/historico/:id', authenticationMiddleware(), VendaController.getDavDetalhe);
 
-routes.get('/alterarSenha', authenticationMiddleware(), ClienteController.carregarFormulario);//
-routes.post('/alterarSenha', authenticationMiddleware(), ClienteController.alterarSenha);//
+routes.get('/alterarSenha', authenticationMiddleware(), ClienteController.carregarFormulario);
+routes.post('/alterarSenha', authenticationMiddleware(), ClienteController.alterarSenha);
+
+//rota genérica;
+
+routes.get('*', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.redirect('/main');
+    }
+    res.redirect('/login')
+});
 
 
 module.exports = routes;
