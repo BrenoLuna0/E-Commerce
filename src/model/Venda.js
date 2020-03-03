@@ -2,10 +2,10 @@ const connection = require('../connection');
 
 class Venda {
 
-    static async getNDav() {
+    static async getNDav(filial) {
         const conexao = await connection;
         //const sql = `SELECT siac_ts.SEQ_PRODUCAO.nextval FROM dual`;
-        const sql = `SELECT siac_ts.SEQ_ORDE_SERV_02.nextval FROM dual`;
+        const sql = `SELECT SIAC_TS.fretorna_seq_dav('${filial}') DAV_CODIGO FROM DUAL;`;
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {

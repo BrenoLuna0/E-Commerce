@@ -18,7 +18,7 @@ module.exports = {
         });
 
         if (req.body.formPagt === '11') {
-            const nDAV = await Venda.getNDav();
+            const nDAV = await Venda.getNDav(req.session.filial);
             console.log(nDAV);
             const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', '', req.session.filial);
             const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
@@ -47,7 +47,7 @@ module.exports = {
             }
 
         } else {
-            const nDAV = await Venda.getNDav();
+            const nDAV = await Venda.getNDav(req.session.filial);
             console.log(nDAV);
             const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', req.body.intervalo, req.session.filial);
             const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
