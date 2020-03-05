@@ -104,7 +104,7 @@
                 vendas.map(function(venda){
                     %>
                     <tr>
-                        <td class="destaque"><%=venda.codigoSG%></td>
+                        <td class="destaque"><%=venda.codigo%></td>
                         <td><%=venda.data%></td>
                         <td><%=venda.total%></td>
                         <td><button onclick="window.location.href='/historico/<%=venda.codigo%>'" type="button">Visualizar</button></td>

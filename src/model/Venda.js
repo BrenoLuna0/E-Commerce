@@ -209,10 +209,11 @@ class Venda {
     static async getVendaItens(id, filial) {
         const conexao = await connection;
         const sql = `SELECT d.prod_codigo, p.prod_descricao, d.dav_iten_preco_unit, d.dav_iten_qtd, d.dav_iten_total 
-        FROM dav_itens D, SIAC_TS.vw_produto P
+        FROM dav_itens D, SIAC_TS.VW_PRODUTO_WEB P
         WHERE d.prod_codigo = p.prod_codigo
         AND p.fil_codigo = ${filial}
         AND DAV_CODIGO = ${id}`;
+        console.log(sql);
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {

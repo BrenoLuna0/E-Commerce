@@ -70,7 +70,8 @@ routes.get('/historico', authenticationMiddleware(), VendaController.getHistoric
 routes.get('/historico/:id', authenticationMiddleware(), VendaController.getDavDetalhe);
 
 routes.get('/alterarSenha', authenticationMiddleware(), ClienteController.carregarFormulario);
-routes.post('/alterarSenha', authenticationMiddleware(), ClienteController.alterarSenha);
+routes.post('/alterarSenha', authenticationMiddleware(), ClienteController.verificarUsuario);
+routes.post('/modificarSenha', authenticationMiddleware(), ClienteController.alterarSenha);
 
 //rota genérica;
 

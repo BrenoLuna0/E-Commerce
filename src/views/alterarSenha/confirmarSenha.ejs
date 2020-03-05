@@ -61,73 +61,61 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-fill w-100">
-                  <li class="nav-item active ">
-                    <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item active ">
-                    <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item active ">
-                    <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item active ">
-                    <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item active ">
-                    <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item active ">
-                    <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item active ">
-                    <a class="nav-link" href="/categorias/TV?page=1">Televisão <span class="sr-only">(current)</span></a>
-                  </li>
-                </ul>
-              </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav nav-fill w-100">
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/produto?page=1">Produtos <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active ">
+                            <a class="nav-link" href="/categorias/TV?page=1">Televisão <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </nav>
+        </nav>
 
-        <%
-        if(resultado === null){
-            %>
-        <section>
-            <div class="form-wrapper">
-                <form action="/modificarSenha" method="POST">
-                    <div class="input-block">
-                        <label for="login-password">Digite sua Nova Senha</label>
-                        <input type="password" id="login-password" name="password" required />
-                    </div>
-                    <button type="submit" class="btn-login">Confirmar Senha</button>
-                </form>
-            </div>
-        </section>
-        <%
-        }else if(resultado === true){
-            %>
-        <section>
-            <div class="form-wrapper">
-                <form>
-                    <h3>Senha Alterada com Sucesso. Faça Login Novamente</h3>
 
-                    <button type="button" onclick="location.href = '/login'" class="btn-login">Login</button>
-                </form>
-            </div>
-        </section>
-        <%
-        }else{
-            %>
         <section>
             <div class="form-wrapper">
                 <form action="/alterarSenha" method="POST">
-                    <h3>Não Foi Possível Alterar Sua Senha Neste Momento. Tente Novamente Mais Tarde</h3>
+                    <div class="input-block">
+                        <label for="login-password">Digite sua Senha Atual</label>
+                        <input type="password" id="login-password" name="password" required />
+                    </div>
+                    <button type="submit" class="btn-login">Alterar Senha</button>
+                    <%
+                if(erro){
+                    %>
+                    <h3>Senha Incorreta. Digite sua Senha Novamente</h3>
+                    <%
+                }
+                %>
                 </form>
             </div>
         </section>
-        <%
-        }
-        %>
+
 
 
 

@@ -35,10 +35,38 @@ module.exports = {
     },
 
     async carregarFormulario(req, res) {
-        res.render('alterarSenha/alterarSenha', {
-            resultado: null,
+        res.render('alterarSenha/confirmarSenha', {
+            erro : null,
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
             filial: await getFilialName(req.session.filial)
         })
+    },
+
+    async verificarUsuario(req,res){
+        const verificacao = await Cliente.checarSenha(req.user.id, req.body.password);
+
+        if(verificacao === null){
+            res.render('errors/manipuladorErro', {
+                err: {
+                    tit: 'Erro ao ALterar Senha',
+                    msg: 'Erro Oracle ao alterar a senha',
+                    cod: 508
+                },
+                cartTotal: '',
+                filial: ''
+            });
+        }else if(verificacao === false){
+            res.render('alterarSenha/confirmarSenha', {
+                erro: true,
+                cartTotal: await getCartTotal(req.user.id, req.session.filial),
+                filial: await getFilialName(req.session.filial)
+            })
+        }else {
+            res.render('alterarSenha/alterarSenha', {
+                resultado: null,
+                cartTotal: await getCartTotal(req.user.id, req.session.filial),
+                filial: await getFilialName(req.session.filial)
+            })
+        }
     }
 }

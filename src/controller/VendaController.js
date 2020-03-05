@@ -197,7 +197,7 @@ module.exports = {
             const produtos = await Venda.getVendaItens(req.params.id, req.session.filial);
 
             res.render('vendaDetalhe/vendaDetalhe', {
-                nDav: dav.codigoSG,
+                nDav: dav.nDav,
                 data: dav.data,
                 totals: dav.total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
                 formPagt: dav.formPagt,
