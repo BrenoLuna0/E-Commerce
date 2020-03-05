@@ -27,12 +27,12 @@ module.exports = {
     },
 
     async paginate(req, res) {
-        let categoria;
-        if (req.query.cat) {
+        let categoria = req.query.cat || '%';
+        /*if (req.query.cat) {
             categoria = req.query.cat
         } else {
             categoria = '%';
-        }
+        }*/
         const produtos = await Produto.findAll(req.query.page, categoria, req.session.filial);
         if (produtos.erro) {
             res.render('errors/manipuladorErro', {
@@ -84,12 +84,12 @@ module.exports = {
 
     async getByDescricao(req, res) {
         let descricao = req.query.descricao.replace(/-E-/g, '/').replace(/-/g, ' ').toUpperCase();
-        let pagina;
-        if (!req.query.page) {
+        let pagina = req.query.page || 1;
+        /*if (!req.query.page) {
             pagina = 1
         } else {
             pagina = req.query.page;
-        }
+        }*/
 
         const produtos = await Produto.findByDescricao(pagina, descricao, req.session.filial);
 

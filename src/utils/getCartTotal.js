@@ -1,7 +1,7 @@
 const Carrinho = require('../model/Carrinho');
 
 module.exports = async function getCartTotal(id, filial) {
-    const produtosCarrinho = await Carrinho.getProdutos(id, filial);
+    const produtosCarrinho = await Carrinho.getProdutos(id, filial); 
 
     if(produtosCarrinho.erro){
         return produtosCarrinho;

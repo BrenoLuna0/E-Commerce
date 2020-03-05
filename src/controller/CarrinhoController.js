@@ -1,5 +1,4 @@
 const Carrinho = require('../model/Carrinho');
-const Categoria = require('../model/Categoria');
 const getCartTotal = require('../utils/getCartTotal');
 const Produto = require('../model/Produto');
 const getFilialName = require('../utils/getFilialName');
@@ -49,7 +48,6 @@ module.exports = {
 
     async removerDoCarrinho(req, res) {
         const result = await Carrinho.removerDoCarrinho(req.user.id, req.body.produto, req.session.filial);
-        console.log('remove');
         if (result) {
             res.send(true);
         } else {

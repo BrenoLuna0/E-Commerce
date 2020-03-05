@@ -40,8 +40,6 @@ class Venda {
          DAV_INTRANET,
          DAV_INTRANET_ATUALIZADO)
           VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${intervaloDeParcelas}' , 'S' , 'N')`;
-
-        console.log(sql);
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
@@ -133,10 +131,10 @@ class Venda {
                 if (err) {
                     console.log('Erro no oracle ao pegar os davs para o historico 305: ' + err.message);
                     resolve({
-                        erro : true,
-                        tit : 'Erro Oracle',
-                        msg : err.message,
-                        cod : 305
+                        erro: true,
+                        tit: 'Erro Oracle',
+                        msg: err.message,
+                        cod: 305
                     });
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
@@ -150,7 +148,7 @@ class Venda {
                                 codigo: venda[0],
                                 data: `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
                                 total: venda[2].toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
-                                codigoSG : venda[3]
+                                codigoSG: venda[3]
                             }
                         });
                         //console.log(vendas);
@@ -176,19 +174,19 @@ class Venda {
                 if (err) {
                     console.log('Erro Oracle ao pegar a venda pelo codigo 306: ' + err.message);
                     resolve({
-                        erro : true,
-                        tit : 'Erro Oracle',
-                        msg : err.message,
-                        cod : 306
+                        erro: true,
+                        tit: 'Erro Oracle',
+                        msg: err.message,
+                        cod: 306
                     });
                 } else {
                     if (typeof (result.rows[0]) === 'undefined') {
                         console.log('Venda inexistente');
                         resolve({
-                            erro : true,
-                            tit : 'Venda Inexistente',
-                            msg : 'Venda Inexistente',
-                            cod : 306
+                            erro: true,
+                            tit: 'Venda Inexistente',
+                            msg: 'Venda Inexistente',
+                            cod: 306
                         });
                     } else {
                         const venda = result.rows[0];
@@ -200,7 +198,7 @@ class Venda {
                             data: `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
                             total: venda[2],
                             formPagt: venda[3],
-                            codigoSG : venda[4]
+                            codigoSG: venda[4]
                         });
                     }
                 }
@@ -237,6 +235,69 @@ class Venda {
                         });
                         return resolve(itensArray);
                     }
+                }
+            });
+        });
+    }
+
+    static async deletarDav(nDav, filial) {
+        const conexao = await connection;
+        const sql = `DELETE FROM DAV WHERE DAV_CODIGO = ${nDav} AND FIL_CODIGO = ${filial}`;
+
+        return new Promise(async function (resolve) {
+            conexao.execute(sql, [], { autoCommit: true }, function (err) {
+                if (err) {
+                    console.log(`Transação Presa. Número do DAV : ${nDav}`);
+                    resolve({
+                        erro: true,
+                        tit: `Transação Presa. Número do DAV : ${nDav}`,
+                        msg: err.message,
+                        cod: 308
+                    })
+                } else {
+                    resolve(true);
+                }
+            });
+        });
+    }
+
+    static async deletarDavItens(nDav, filial) {
+        const conexao = await connection;
+        const sql = `DELETE FROM DAV_ITENS WHERE DAV_CODIGO = ${nDav} AND FIL_CODIGO = ${filial}`;
+
+        return new Promise(async function (resolve) {
+            conexao.execute(sql, [], { autoCommit: true }, function (err) {
+                if (err) {
+                    console.log(`Transação Presa. Número do DAV : ${nDav}`);
+                    resolve({
+                        erro: true,
+                        tit: `Transação Presa. Número do DAV : ${nDav}`,
+                        msg: err.message,
+                        cod: 309
+                    })
+                } else {
+                    resolve(true);
+                }
+            });
+        });
+    }
+
+    static async deletarDavFormaPagt(nDav, filial) {
+        const conexao = await connection;
+        const sql = `DELETE FROM DAV_FORMA_PAGAMENTO WHERE DAV_CODIGO = ${nDav} AND FIL_CODIGO = ${filial}`;
+
+        return new Promise(async function (resolve) {
+            conexao.execute(sql, [], { autoCommit: true }, function (err) {
+                if (err) {
+                    console.log(`Transação Presa. Número do DAV : ${nDav}`);
+                    resolve({
+                        erro: true,
+                        tit: `Transação Presa. Número do DAV : ${nDav}`,
+                        msg: err.message,
+                        cod: 310
+                    })
+                } else {
+                    resolve(true);
                 }
             });
         });

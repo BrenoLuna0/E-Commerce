@@ -35,15 +35,51 @@ module.exports = {
 
                 return next();
             } else {
-                res.render('errors/manipuladorErro', {
-                    err: {
-                        tit: 'Erro na Compra',
-                        msg: 'Erro Oracle no Processamento da sua Compra. Entre em contato conosco para solucionar esse caso',
-                        cod: ''
-                    },
-                    cartTotal: '',
-                    filial: 300
-                })
+                const reverterDav = Venda.deletarDav(nDAV, req.session.filial);
+                const reverterDavItens = Venda.deletarDavItens(nDAV, req.session.filial);
+                const reverterDavFormaPagt = Venda.deletarDavFormaPagt(nDAV, req.session.filial);
+                if (reverterDav.erro) {
+                    res.render('errors/manipuladorErro', {
+                        err: {
+                            tit: reverterDav.tit,
+                            msg: reverterDav.msg,
+                            cod: reverterDav.cod
+                        },
+                        cartTotal: '',
+                        filial: ''
+                    })
+                } else if (reverterDavItens.erro) {
+                    res.render('errors/manipuladorErro', {
+                        err: {
+                            tit: reverterDavItens.tit,
+                            msg: reverterDavItens.msg,
+                            cod: reverterDavItens.cod
+                        },
+                        cartTotal: '',
+                        filial: ''
+                    })
+                } else if (reverterDavFormaPagt.erro) {
+                    res.render('errors/manipuladorErro', {
+                        err: {
+                            tit: reverterDavFormaPagt.tit,
+                            msg: reverterDavFormaPagt.msg,
+                            cod: reverterDavFormaPagt.cod
+                        },
+                        cartTotal: '',
+                        filial: ''
+                    })
+
+                } else {
+                    res.render('errors/manipuladorErro', {
+                        err: {
+                            tit: 'Erro na Compra',
+                            msg: 'Erro Oracle no Processamento da sua Compra. Entre em contato conosco para solucionar esse caso',
+                            cod: 700
+                        },
+                        cartTotal: '',
+                        filial: ''
+                    })
+                }
             }
 
         } else {
@@ -63,15 +99,52 @@ module.exports = {
                 res.locals.total = await getCartTotal(req.user.id, req.session.filial);
                 return next();
             } else {
-                res.render('errors/manipuladorErro', {
-                    err: {
-                        tit: 'Erro na Compra',
-                        msg: 'Erro Oracle no Processamento da sua Compra. Entre em contato conosco para solucionar esse caso',
-                        cod: ''
-                    },
-                    cartTotal: '',
-                    filial: 300
-                })
+
+                const reverterDav = Venda.deletarDav(nDAV, req.session.filial);
+                const reverterDavItens = Venda.deletarDavItens(nDAV, req.session.filial);
+                const reverterDavFormaPagt = Venda.deletarDavFormaPagt(nDAV, req.session.filial);
+                if (reverterDav.erro) {
+                    res.render('errors/manipuladorErro', {
+                        err: {
+                            tit: reverterDav.tit,
+                            msg: reverterDav.msg,
+                            cod: reverterDav.cod
+                        },
+                        cartTotal: '',
+                        filial: ''
+                    })
+                } else if (reverterDavItens.erro) {
+                    res.render('errors/manipuladorErro', {
+                        err: {
+                            tit: reverterDavItens.tit,
+                            msg: reverterDavItens.msg,
+                            cod: reverterDavItens.cod
+                        },
+                        cartTotal: '',
+                        filial: ''
+                    })
+                } else if (reverterDavFormaPagt.erro) {
+                    res.render('errors/manipuladorErro', {
+                        err: {
+                            tit: reverterDavFormaPagt.tit,
+                            msg: reverterDavFormaPagt.msg,
+                            cod: reverterDavFormaPagt.cod
+                        },
+                        cartTotal: '',
+                        filial: ''
+                    })
+
+                } else {
+                    res.render('errors/manipuladorErro', {
+                        err: {
+                            tit: 'Erro na Compra',
+                            msg: 'Erro Oracle no Processamento da sua Compra. Entre em contato conosco para solucionar esse caso',
+                            cod: 700
+                        },
+                        cartTotal: '',
+                        filial: ''
+                    })
+                }
             }
         }
     },

@@ -200,11 +200,12 @@ async function getProdutosRelacionados(categorias, filial) {
     let control = 1;
 
     categorias.map(function (categoria) {
-        if (control === 1) {
+        control === 1 ? sql += `s.sub_grp_descricao = '${categoria}' ` : sql += `OR s.sub_grp_descricao = '${categoria}' `;
+        /*if (control === 1) {
             sql += `s.sub_grp_descricao = '${categoria}' `
         } else {
             sql += `OR s.sub_grp_descricao = '${categoria}' `
-        }
+        }*/
 
         control++;
     });
