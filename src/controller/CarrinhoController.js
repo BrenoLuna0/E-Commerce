@@ -41,8 +41,12 @@ module.exports = {
 
     async adicionarAoCarrinho(req, res) {
         const result = await Carrinho.adicionarNoCarrinho(req.user.id, req.body.produto, req.body.qtd, req.session.filial);
-
-        res.send(result);
+        if(result){
+            const cartTotal = await getCartTotal(req.user.id, req.session.filial);
+            res.send(cartTotal);
+        }else {
+            res.send(result);
+        }
 
     },
 

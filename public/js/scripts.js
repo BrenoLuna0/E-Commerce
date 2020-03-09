@@ -16,7 +16,7 @@ function adicionarNoCarrinho(idProduto, qtd = 1) {
 
     $.post("/carrinho/add", postObject, function (data) {
         if (data) {
-            console.log('Deu Certo');
+            document.getElementsByClassName('fas fa-shopping-cart')[0].innerHTML = 'Carrinho' + data;
             $(alertName).show();
         } else {
             alert('Erro na Inserção deste Produto no Carrinho. Tente Novamente Mais Tarde');
