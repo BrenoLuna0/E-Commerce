@@ -14,6 +14,8 @@
   <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/produtoDetalhe.css">
+  <link rel="stylesheet" href="/css/jquery-picZoomer.css">
+
 
 
 </head>
@@ -71,19 +73,24 @@
               <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
               <a class="nav-link" href="/categorias/TV?page=1">Televisão <span class="sr-only">(current)</span></a>
@@ -125,10 +132,32 @@
 
           <!--Grid column-->
           <div class="col-md-6 mb-4">
-
-            <img src=<%= produto.PROD_IMAG_PATH%> class="img-fluid" width="400" height="350">
+            
+            <div class="<%=produto.ZOOM%>">
+              <img src=<%= produto.PROD_IMAG_PATH[0]%> class="img-fluid" width="400" height="350">
+            </div>
+            
+            <div style="margin-top: 15px;">
+              <ul class="piclist">
+              <%
+              if(produto.PROD_IMAG_PATH.length > 1){
+                produto.PROD_IMAG_PATH.map(function(image){
+                  %>
+                  <li>
+                    <img src=<%= image%> alt="">
+                  </li>
+                  <%
+                })
+              }
+              %>
+              
+    
+            </ul>
+            </div>
+            
 
           </div>
+
           <!--Grid column-->
 
           <!--Grid column-->
@@ -137,44 +166,46 @@
             <!--Content-->
             <div class="p-4">
 
-              <p class="lead">
-                <strong><span><%=produto.PROD_PRECO.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></span></strong>
-              </p>
-              <!--
-                <%
-              if(produto.PROD_QTD_ATUAL === 0){
+              <div style="height: 350px;">
+                <p style="margin-top: 50px;" class="lead">
+                  <strong><span><h2><%=produto.PROD_PRECO.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></h2></span></strong>
+                </p>
+                <!--
+                  <%
+                if(produto.PROD_QTD_ATUAL === 0){
+                  %>
+                  <p>Produto disponível em estoque</p>
+                  <%
+                }else{
+                  %>
+                  <div style="background-color: red; width: 80%;">
+                    <p style="color: white;">Este produto não possui estoque disponível</p>
+                  </div>
+                  <%
+                }
                 %>
-                <p>Produto disponível em estoque</p>
-                <%
-              }else{
-                %>
-                <div style="background-color: red; width: 80%;">
-                  <p style="color: white;">Este produto não possui estoque disponível</p>
-                </div>
-                <%
-              }
-              %>
-            -->
+              -->
+  
+                <form style="margin-top: 150px;" id="addCarinho" class="d-flex justify-content-left" action="/carrinho/add" method="POST">
+                  <!-- Default input -->
+                  <input id="qtdId" type="number" name="qtd" value="1" aria-label="Search" class="form-control"
+                    style="width: 100px" min="1">
+                  <input type="hidden" name="produto" value=<%=produto.PROD_CODIGO%>>
+                  <button style="width: 200px" class=""
+                    onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>', $('#qtdId').val())" type="button">Adicionar
+                    no Carrinho
+                    <i class="fas fa-shopping-cart ml-1"></i>
+                  </button>
+  
+                </form>
+              </div>
+
+              
+
               <p class="lead font-weight-bold">Descrição</p>
 
               <p><%=produto.PROD_IMAG_DESCRICAO%></p>
-
-              <form id="addCarinho" class="d-flex justify-content-left" action="/carrinho/add" method="POST">
-                <!-- Default input -->
-                <input id="qtdId" type="number" name="qtd" value="1" aria-label="Search" class="form-control"
-                  style="width: 100px" min="1">
-                <input type="hidden" name="produto" value=<%=produto.PROD_CODIGO%>>
-                <button style="width: 200px" class=""
-                  onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>', $('#qtdId').val())" type="button">Adicionar
-                  no Carrinho
-                  <i class="fas fa-shopping-cart ml-1"></i>
-                </button>
-
-              </form>
-              <%
-
-            }) 
-            %>
+              
 
             </div>
             <!--Content-->
@@ -183,6 +214,13 @@
           <!--Grid column-->
 
         </div>
+
+        
+  
+        <%
+
+            }) 
+            %>
         <!--Grid row-->
 
         <hr>
@@ -276,6 +314,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
+    <script src="/js/jquery.picZoomer.js"></script>
+    <script src="/js/produtoDetalhe.js"></script>
     <script src="/js/scripts.js"></script>
 
     <!-- MDB core JavaScript -->
