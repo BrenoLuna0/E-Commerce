@@ -236,11 +236,14 @@
                       carrinho</a>.
                   </div>
                   <img class="image-zoom" src=<%=produto.PROD_IMAG_PATH%>>
-                  <p onclick="event.stopPropagation()"><strong><%=produto.PROD_DESCRICAO%></strong>
-                  </p>
-                  <p onclick="event.stopPropagation()">
-                    <strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong>
-                  </p>
+                  <div class="title">
+                    <p onclick="event.stopPropagation()"><strong><%=produto.PROD_DESCRICAO%></strong></p>
+                  </div>
+                  <div class="price">
+                    <p onclick="event.stopPropagation()">
+                      <strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong>
+                    </p>
+                  </div>
                   <div>
                     <button class="" onclick="event.stopPropagation();adicionarNoCarrinho('<%=produto.PROD_CODIGO%>',1)"
                       id=<%='button'+produto.PROD_CODIGO %>>Adicionar ao
