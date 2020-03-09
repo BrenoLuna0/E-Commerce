@@ -73,19 +73,24 @@
               <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
               <a class="nav-link" href="/categorias/TV?page=1">Televisão <span class="sr-only">(current)</span></a>
@@ -299,6 +304,7 @@
           data: { produto: idProduto },
           success: function (response) {
             if (response) {
+              location.reload();
               console.log('Deu certo');
             } else {
               alert('Erro na Remoção do Produto no Carrinho. Tente novamente mais tarde');
@@ -306,9 +312,6 @@
 
           }
         });
-
-        location.reload();
-
       }
 
       function atualizarCarrinho(idProduto) {
@@ -321,6 +324,7 @@
           data: { produto: idProduto, qtd: qtdNumber },
           success: function (response) {
             if (response) {
+              location.reload();
               console.log('Deu certo');
             } else {
               alert('Erro na Atualização da Quantidade do Produto no Carrinho. Tente novamente mais tarde');
@@ -328,8 +332,6 @@
 
           }
         });
-
-        location.reload();
 
       }
 
