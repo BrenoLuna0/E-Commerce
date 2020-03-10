@@ -46,7 +46,12 @@ routes.post('/login', function (req, res, next) {
 
 routes.get('/logout', authenticationMiddleware(), function (req, res, next) {
     req.logout();
-    res.redirect('/login');
+    res.status(200).clearCookie('connect.sid', {
+        path: '/login'
+    });
+    req.session.destroy(function (err) {
+        res.redirect('/login'); //Inside a callback… bulletproof!
+    });
 
 });
 routes.get('/', authenticationMiddleware(), (req, res) => {

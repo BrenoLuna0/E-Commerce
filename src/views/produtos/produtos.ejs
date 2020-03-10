@@ -12,7 +12,17 @@
 
 </head>
 
-<body>
+<%
+if(products.length === 0){
+  %>
+  <body style="overflow: hidden;">
+  <%
+}else{
+  %>
+  <body>
+  <%
+}
+%>
   <div class="principal">
     <main role="main">
       <div class="container">
@@ -92,7 +102,17 @@
         </div>
       </nav>
       <div class="row">
-        <div class="col-3 centerHorizontal sidebar">
+        <%
+        if(products.length === 0){
+          %>
+          <div class="col-3 centerHorizontal sidebar" style="height: 500px;">
+          <%
+        }else{
+          %>
+          <div class="col-3 centerHorizontal sidebar">
+          <%
+        }
+        %>
           <div class="subtitulo">
             <h3>Categorias de Produto</h3>
           </div>
@@ -117,6 +137,13 @@
             <div class="container">
 
               <div class="row">
+                <%
+                if(products.length === 0){
+                  %>
+                  <h2>Nenhum produto correspondente</h2>
+                  <%
+                }
+                %>
                 <% 
                     products.map(function(produto){
                       %>
@@ -157,26 +184,33 @@
               </div>
             </div>
           </div>
-          <div class="d-flex justify-content-center">
-            <nav aria-label="Page navigation example" class="ground">
-              <ul class="pagination">
-                <%
-                      let previousPage;
-                      if(parseInt(page) === 1){
-                        previousPage = 1;
-                      }else{
-                          previousPage = parseInt(page) - 1;
-                      }
-                      %>
-                <li class="page-item"><button id="prev" class=""
-                    onclick="window.location.href =  updateURLParameter(window.location.href,'page','<%=previousPage%>')">Anterior</button>
-                </li>
-                <li class="page-item"><button id="prox" class=""
-                    onclick="window.location.href = updateURLParameter(window.location.href,'page','<%=parseInt(page) + 1%>')">Próximo</button>
-                </li>
-              </ul>
-            </nav>
-          </div>
+          <%
+          if(products.length > 0){
+            %>
+            <div class="d-flex justify-content-center">
+              <nav aria-label="Page navigation example" class="ground">
+                <ul class="pagination">
+                  <%
+                        let previousPage;
+                        if(parseInt(page) === 1){
+                          previousPage = 1;
+                        }else{
+                            previousPage = parseInt(page) - 1;
+                        }
+                        %>
+                  <li class="page-item"><button id="prev" class=""
+                      onclick="window.location.href =  updateURLParameter(window.location.href,'page','<%=previousPage%>')">Anterior</button>
+                  </li>
+                  <li class="page-item"><button id="prox" class=""
+                      onclick="window.location.href = updateURLParameter(window.location.href,'page','<%=parseInt(page) + 1%>')">Próximo</button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <%
+          }
+          %>
+          
         </div>
       </div>
 
@@ -184,15 +218,34 @@
     </main>
   </div>
   <div>
-    <footer class="page-footer font-small blue pt-4 text-center">
-      <!-- Copyright -->
-      <p class="text-light"><strong>Filial: <%=filial%></strong></p>
-      <div class="footer-copyright text-center text-light">© 2020 Copyright:
-        <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
-      </div><br>
-      <!-- Copyright -->
-
-    </footer>
+    <%
+    if(products.length === 0){
+      %>
+      <footer class="page-footer font-small blue pt-4 text-center" style="position: fixed; left: 0; bottom: 0; width: 100%;">
+        <!-- Copyright -->
+        <p class="text-light"><strong>Filial: <%=filial%></strong></p>
+        <div class="footer-copyright text-center text-light">© 2020 Copyright:
+          <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
+        </div><br>
+        <!-- Copyright -->
+  
+      </footer>
+      <%
+    }else{
+      %>
+      <footer class="page-footer font-small blue pt-4 text-center">
+        <!-- Copyright -->
+        <p class="text-light"><strong>Filial: <%=filial%></strong></p>
+        <div class="footer-copyright text-center text-light">© 2020 Copyright:
+          <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
+        </div><br>
+        <!-- Copyright -->
+  
+      </footer>
+      <%
+    }
+    %>
+    
   </div>
 
   <!-- Bootstrap core JavaScript
