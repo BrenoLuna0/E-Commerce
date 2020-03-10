@@ -155,6 +155,18 @@
         crossorigin="anonymous"></script>
     <script src="/js/scripts.js"></script>
 
+    <%
+    if(resultado === true){
+        %>
+        <script>
+            setTimeout(function(){
+                window.location.href = '/login';
+            }, 7000)
+        </script>
+        <%
+    }
+    %>
+
 </body>
 
 </html>
