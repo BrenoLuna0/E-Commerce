@@ -199,7 +199,7 @@ module.exports = {
             res.render('vendaDetalhe/vendaDetalhe', {
                 nDav: dav.nDav,
                 data: dav.data,
-                totals: dav.total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
+                totals: dav.total,
                 formPagt: dav.formPagt,
                 produtos: produtos,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),

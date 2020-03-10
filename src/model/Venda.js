@@ -1,4 +1,5 @@
 const connection = require('../connection');
+const formatarMoeda = require('../utils/formatarMoeda');
 
 class Venda {
 
@@ -147,7 +148,7 @@ class Venda {
                             return {
                                 codigo: venda[0],
                                 data: `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
-                                total: venda[2].toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
+                                total: formatarMoeda(venda[2]),
                                 codigoSG: venda[3]
                             }
                         });
@@ -196,7 +197,7 @@ class Venda {
                         return resolve({
                             nDav: venda[0],
                             data: `${dia > 9 ? "" + dia : "0" + dia}/${mes > 9 ? "" + mes : "0" + mes}/${date.getUTCFullYear()}`,
-                            total: venda[2],
+                            total: formatarMoeda(venda[2]),
                             formPagt: venda[3],
                             codigoSG: venda[4]
                         });
@@ -229,9 +230,9 @@ class Venda {
                             return {
                                 codigo: produto[0],
                                 nome: produto[1],
-                                preco: produto[2],
+                                preco: formatarMoeda(produto[2]),
                                 qtd: produto[3],
-                                subtotal: produto[4]
+                                subtotal: formatarMoeda(produto[4])
                             }
                         });
                         return resolve(itensArray);
