@@ -6,6 +6,7 @@ class Categoria{
         const sql = `SELECT distinct sub_grp_descricao 
         FROM siac_ts.vw_subgrupo S, SIAC_TS.VW_PRODUTO_WEB P
         where s.sub_grp_codigo = p.sub_grp_codigo
+        AND P.PROD_ATIVO = 'S'
         AND P.FIL_CODIGO = ${filial}`;
 
         return new Promise(async function(resolve){

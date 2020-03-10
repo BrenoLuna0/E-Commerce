@@ -213,6 +213,7 @@ class Venda {
         FROM dav_itens D, SIAC_TS.VW_PRODUTO_WEB P
         WHERE d.prod_codigo = p.prod_codigo
         AND p.fil_codigo = ${filial}
+        AND P.PROD_ATIVO = 'S'
         AND DAV_CODIGO = ${id}`;
         console.log(sql);
 

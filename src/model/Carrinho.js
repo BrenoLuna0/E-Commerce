@@ -123,6 +123,7 @@ class Carrinho {
             FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
+            AND P.PROD_ATIVO = 'S'
             AND P.PROD_CODIGO = ${produto.codigo}`;
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
@@ -239,6 +240,7 @@ class Carrinho {
             FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
+            AND P.PROD_ATIVO = 'S'
             AND P.PROD_CODIGO = ${produto.codigo}`;
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
