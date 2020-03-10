@@ -106,7 +106,7 @@
 
       </div>
       <div class="col-7">
-        <div id=<%='alert'+produto.PROD_CODIGO%> class="alert alert-success alert-dismissible text-center" role="alert">
+        <div id=<%='alert'+produto.PROD_CODIGO%> class="alert alert-success alert-dismissible text-center collapse" role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver seu carrinho</a>.
         </div>
@@ -260,7 +260,7 @@
                     Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver seu
                       carrinho</a>.
                   </div>
-                  <img class="image-zoom" src=<%=produto.PROD_IMAG_PATH%>>
+                  <img class="image-zoom" src=<%=produto.PROD_IMAG_PATH[0]%>>
                   <div class="title">
                     <p onclick="event.stopPropagation()"><strong><%=produto.PROD_DESCRICAO%></strong></p>
                   </div>
