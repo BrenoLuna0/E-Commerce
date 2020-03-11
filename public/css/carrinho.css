@@ -35,14 +35,14 @@ a.info {
   font-weight:bold;
   font-size:1em;
   line-height:1em;
-  background-color: yellow;
+  background-color: #f0ad4e;
   margin-left: .25em;
   -webkit-border-radius:.75em;
   -moz-border-radius:.75em;
   border-radius:.75em;
 }
 a.info:hover {
-  background-color:yellow;
+  background-color:#f0ad4e;
   cursor: hand; 
   cursor: pointer;
 }
