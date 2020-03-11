@@ -122,9 +122,9 @@
                                         produtoObj.push([
                                             '[' + produto.codigo,
                                             produto.nome,
-                                            produto.preco,
+                                            parseFloat(produto.preco.replace('R$','').replace(',', '.')),
                                             produto.qtd,
-                                            produto.subtotal + ']'
+                                            parseFloat(produto.subtotal.replace('R$','').replace(',', '.')) + ']'
                                         ])
                                         %>
 

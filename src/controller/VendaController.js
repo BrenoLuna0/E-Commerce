@@ -5,6 +5,7 @@ const getFilialName = require('../utils/getFilialName');
 module.exports = {
     async realizarDav(req, res, next) {
 
+        //console.log(req.body.objProduto);
         let obj = JSON.parse(req.body.objProduto)
         let arr = obj.replace('[[', '').replace(']]', '').split('],[').map(substring => substring.split(','));
         const arrayObject = arr.map(function (produto) {
@@ -20,9 +21,10 @@ module.exports = {
         if (req.body.formPagt === '11') {
             const nDAV = await Venda.getNDav(req.session.filial);
             console.log(nDAV);
-            const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', '', req.session.filial);
+            //console.log(parseFloat(req.body.total.replace('0R$','').replace(',', '.')));
+            const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, parseFloat(req.body.total.replace('0R$','').replace(',', '.')), '07.626.6970002-30', '', req.session.filial);
             const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
-            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 11, 0, req.body.total, req.session.filial);
+            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 11, 0, parseFloat(req.body.total.replace('0R$','').replace(',', '.')), req.session.filial);
 
             if (confirmacaoDav && confirmacaoDavItens && confirmacaoDaVFormPagt) {
                 res.locals.nDAV = nDAV;

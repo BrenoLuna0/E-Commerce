@@ -41,6 +41,7 @@ class Venda {
          DAV_INTRANET,
          DAV_INTRANET_ATUALIZADO)
           VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${intervaloDeParcelas}' , 'S' , 'N')`;
+          
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
@@ -68,6 +69,7 @@ class Venda {
             DAV_ITEN_PRECO_UNIT, 
             DAV_ITEN_TOTAL)  
             VALUES (${filial} , ${nDAV} , '010264103000112' , ${i} , ${davItem.codigo} , ${davItem.qtd} , ${davItem.preco} , ${davItem.subtotal})`;
+            
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err) {
                     if (err) {
@@ -106,7 +108,6 @@ class Venda {
          DAV_FORM_PAGT_VALOR,
          DAV_FORM_PAGT_TOTAL)
          VALUES (${filial}, ${nDAV}, '010264103000112', 1, ${formPagtCodigo}, '', 0, ${parcelas}, 0, 0, 0, 0, ${vendaTotal}, ${vendaTotal})`;
-
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
@@ -215,7 +216,6 @@ class Venda {
         AND p.fil_codigo = ${filial}
         AND P.PROD_ATIVO = 'S'
         AND DAV_CODIGO = ${id}`;
-        console.log(sql);
 
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
