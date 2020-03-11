@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/main.css">
@@ -15,182 +18,186 @@
 <%
 if(products.length === 0){
   %>
-  <body style="overflow: hidden;">
+
+<body style="overflow: hidden;">
   <%
 }else{
   %>
+
   <body>
-  <%
+    <%
 }
 %>
-  <div class="principal">
-    <main role="main">
-      <div class="container">
-        <div class="row">
-          <div class="col-md">
-            <p>
-              <figure>
-                <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
-              </figure>
-            </p>
-          </div>
-          <div class="col-6 center">
-            <form action="/descricao/?page=1" method="GET">
-              <div class="form-row">
+    <div class="principal">
+      <main role="main">
+        <div class="container">
+          <div class="row">
+            <div class="col-md">
+              <p>
+                <figure>
+                  <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+                </figure>
+              </p>
+            </div>
+            <div class="col-6 center">
+              <form action="/descricao/?page=1" method="GET">
+                <div class="form-row">
+                  <div class="col">
+                    <input type="text" id="descricao" name="descricao" class="form-control"
+                      placeholder="Pesquise Seus Produtos">
+                  </div>
+                  <div class="col">
+                    <button type="submit" class="">Pesquisar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md center">
+              <div class="row">
                 <div class="col">
-                  <input type="text" id="descricao" name="descricao" class="form-control"
-                    placeholder="Pesquise Seus Produtos">
+                  <p>
+                    <a class="color" href="/historico"><i class="fas fa-user">Historico</i></a>
+                    <a class="color" href="/carrinho"><i
+                        class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
+                    <br>
+                    <a class="color" href="/alterarSenha"><i class="fas fa-key">Modificar Senha</i></a>
+                  </p>
                 </div>
                 <div class="col">
-                  <button type="submit" class="">Pesquisar</button>
+                  <p class="text-right">
+                    <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
+                  </p>
                 </div>
-              </div>
-            </form>
-          </div>
-          <div class="col-md center">
-            <div class="row">
-              <div class="col">
-                <p>
-                  <a class="color" href="/historico"><i class="fas fa-user">Historico</i></a>
-                  <a class="color" href="/carrinho"><i class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
-                  <br>
-                  <a class="color" href="/alterarSenha"><i class="fas fa-key">Modificar Senha</i></a>
-                </p>
-              </div>
-              <div class="col">
-                <p class="text-right">
-                  <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
-                </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav nav-fill w-100">
-              <li class="nav-item active ">
-                <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active ">
-                <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span
-                    class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active ">
-                <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span
-                    class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active ">
-                <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span
-                    class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active ">
-                <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span
-                    class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active ">
-                <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span
-                    class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active ">
-                <a class="nav-link" href="/categorias/TV?page=1">Televisão <span class="sr-only">(current)</span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div class="row">
-        <%
-        if(products.length === 0){
-          %>
-          <div class="col-3 centerHorizontal sidebar" style="height: 500px;">
-          <%
-        }else{
-          %>
-          <div class="col-3 centerHorizontal sidebar">
-          <%
-        }
-        %>
-          <div class="subtitulo">
-            <h3>Categorias de Produto</h3>
-          </div>
-          <div class="overflow">
-            <div class="conter">
-              <ul>
-                <%
-                categories.map(function(categoria){
-                    %>
-                <li><a
-                    href=<%='/categorias/' + categoria.descricao.replace(/\s/g , "+").replace(/\//g , "@") + '?page=1' %>><%= categoria.descricao%></a>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav nav-fill w-100">
+                <li class="nav-item active ">
+                  <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
                 </li>
-                <%
-                });
-                %>
+                <li class="nav-item active ">
+                  <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span
+                      class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active ">
+                  <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span
+                      class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active ">
+                  <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span
+                      class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active ">
+                  <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span
+                      class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active ">
+                  <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span
+                      class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active ">
+                  <a class="nav-link" href="/categorias/TV?page=1">Televisão <span class="sr-only">(current)</span></a>
+                </li>
               </ul>
             </div>
           </div>
-        </div>
-        <div class="col-9">
-          <div class="album py-5">
-            <div class="container">
+        </nav>
+        <div class="row">
+          <%
+        if(products.length === 0){
+          %>
+          <div class="col-3 centerHorizontal sidebar" style="height: 500px;">
+            <%
+        }else{
+          %>
+            <div class="col-3 centerHorizontal sidebar">
+              <%
+        }
+        %>
+              <div class="subtitulo">
+                <h3>Categorias de Produto</h3>
+              </div>
+              <div class="overflow">
+                <div class="conter">
+                  <ul>
+                    <%
+                categories.map(function(categoria){
+                    %>
+                    <li><a
+                        href=<%='/categorias/' + categoria.descricao.replace(/\s/g , "+").replace(/\//g , "@") + '?page=1' %>><%= categoria.descricao%></a>
+                    </li>
+                    <%
+                });
+                %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-9">
+              <div class="album py-5">
+                <div class="container">
 
-              <div class="row">
-                <%
+                  <div class="row">
+                    <%
                 if(products.length === 0){
                   %>
-                  <h2>Nenhum produto correspondente</h2>
-                  <%
+                    <h2>Nenhum produto correspondente</h2>
+                    <%
                 }
                 %>
-                <% 
+                    <% 
                     products.map(function(produto){
                       %>
 
-                <div class="col-md-4">
-                  <div>
-                    <div class="card mb-4 shadow-sm">
-                      <div class="card-body" onclick="showProduct('<%=produto.PROD_CODIGO%>')">
-                        <div onclick="event.stopPropagation()" id=<%='alert'+produto.PROD_CODIGO%>
-                          class="alert alert-success alert-dismissible text-center collapse" role="alert">
-                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                          Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver
-                            seu
-                            carrinho</a>.
-                        </div>
-                        <img src=<%=produto.PROD_IMAG_PATH[0]%>>
-                        <div class="title">
-                          <p onclick="event.stopPropagation()"><strong><%=produto.PROD_DESCRICAO%></strong></p>
-                        </div>
-                        <div class="price">
-                          <p onclick="event.stopPropagation()">
-                            <strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong>
-                          </p>
-                        </div>
-                        <div>
-                          <button onclick="event.stopPropagation();adicionarNoCarrinho('<%=produto.PROD_CODIGO%>')"
-                            class="" id=<%='button'+produto.PROD_CODIGO %>>Adicionar
-                            ao Carrinho</button>
+                    <div class="col-md-4">
+                      <div>
+                        <div class="card mb-4 shadow-sm">
+                          <div class="card-body" onclick="showProduct('<%=produto.PROD_CODIGO%>')">
+                            <div onclick="event.stopPropagation()" id=<%='alert'+produto.PROD_CODIGO%>
+                              class="alert alert-success alert-dismissible text-center collapse" role="alert">
+                              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                              Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para
+                                ver
+                                seu
+                                carrinho</a>.
+                            </div>
+                            <img src=<%=produto.PROD_IMAG_PATH[0]%>>
+                            <div class="title">
+                              <p onclick="event.stopPropagation()"><strong><%=produto.PROD_DESCRICAO%></strong></p>
+                            </div>
+                            <div class="price">
+                              <p onclick="event.stopPropagation()">
+                                <strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong>
+                              </p>
+                            </div>
+                            <div>
+                              <button onclick="event.stopPropagation();adicionarNoCarrinho('<%=produto.PROD_CODIGO%>')"
+                                class="" id=<%='button'+produto.PROD_CODIGO %>>Adicionar
+                                ao Carrinho</button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                <%
+                    <%
                     }) %>
 
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <%
+              <%
           if(products.length > 0){
             %>
-            <div class="d-flex justify-content-center">
-              <nav aria-label="Page navigation example" class="ground">
-                <ul class="pagination">
-                  <%
+              <div class="d-flex justify-content-center">
+                <nav aria-label="Page navigation example" class="ground">
+                  <ul class="pagination">
+                    <%
                         let previousPage;
                         if(parseInt(page) === 1){
                           previousPage = 1;
@@ -198,37 +205,38 @@ if(products.length === 0){
                             previousPage = parseInt(page) - 1;
                         }
                         %>
-                  <li class="page-item"><button id="prev" class=""
-                      onclick="window.location.href =  updateURLParameter(window.location.href,'page','<%=previousPage%>')">Anterior</button>
-                  </li>
-                  <li class="page-item"><button id="prox" class=""
-                      onclick="window.location.href = updateURLParameter(window.location.href,'page','<%=parseInt(page) + 1%>')">Próximo</button>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <%
+                    <li class="page-item"><button id="prev" class=""
+                        onclick="window.location.href =  updateURLParameter(window.location.href,'page','<%=previousPage%>')">Anterior</button>
+                    </li>
+                    <li class="page-item"><button id="prox" class=""
+                        onclick="window.location.href = updateURLParameter(window.location.href,'page','<%=parseInt(page) + 1%>')">Próximo</button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <%
           }
           %>
-          
-        </div>
-      </div>
+
+            </div>
+          </div>
 
 
-    </main>
-  </div>
-  <div>
-    <%
+      </main>
+    </div>
+    <div>
+      <%
     if(products.length === 0){
       %>
-      <footer class="page-footer font-small blue pt-4 text-center" style="position: fixed; left: 0; bottom: 0; width: 100%;">
+      <footer class="page-footer font-small blue pt-4 text-center"
+        style="position: fixed; left: 0; bottom: 0; width: 100%;">
         <!-- Copyright -->
         <p class="text-light"><strong>Filial: <%=filial%></strong></p>
         <div class="footer-copyright text-center text-light">© 2020 Copyright:
           <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
         </div><br>
         <!-- Copyright -->
-  
+
       </footer>
       <%
     }else{
@@ -240,37 +248,37 @@ if(products.length === 0){
           <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
         </div><br>
         <!-- Copyright -->
-  
+
       </footer>
       <%
     }
     %>
-    
-  </div>
 
-  <!-- Bootstrap core JavaScript
+    </div>
+
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-  <script src="/js/scripts.js"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
+    <script src="/js/scripts.js"></script>
 
 
-  <%
+    <%
   if(products.length < 30){
     %>
-  <script>
-    $('#prox').prop("disabled", true);;
-  </script>
-  <%
+    <script>
+      $('#prox').prop("disabled", true);;
+    </script>
+    <%
   }
   %>
 
-</body>
+  </body>
 
 </html>

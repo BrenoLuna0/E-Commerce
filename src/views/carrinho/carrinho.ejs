@@ -2,10 +2,13 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Produto</title>
+  <title>Carrinho</title>
 
   <link rel="icon" href="/assets/favicon.ico">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -139,6 +142,18 @@
                       <input type="hidden" name="produto" value=<%=produto.codigo%>>
                       <input type="number" class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1"
                         value=<%=produto.qtd%>>
+                      <%
+                      if(produto.qtd > produto.qtd_estoque){
+                        %>
+                      <label>
+                        <a class="info" data-toggle="popover" data-placement="right"
+                          data-content="Produto Sujeito a Análise de Disponibilidade." title=""
+                          data-original-title="Produto em Análise">Info</a>
+
+                      </label>
+                      <%
+                      }
+                      %>
                     </form>
                   </td>
                   <td class="col-sm-1 col-md-1 text-center">
@@ -295,6 +310,19 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
     <script>
+      $('.info').popover();
+
+
+      $(':not(#anything)').on('click', function (e) {
+        $('.info').each(function () {
+          //the 'is' for buttons that trigger popups
+          //the 'has' for icons and other elements within a button that triggers a popup
+          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+            return;
+          }
+        });
+      });
 
       function removerDoCarrinho(idProduto) {
 

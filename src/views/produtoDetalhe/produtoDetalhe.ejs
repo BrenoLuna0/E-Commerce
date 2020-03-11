@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -50,7 +53,8 @@
             <div class="col">
               <p>
                 <a class="color" href="/historico"><i class="fas fa-user">Historico</i></a>
-                <a id="carrinho" class="color" href="/carrinho"><i class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
+                <a id="carrinho" class="color" href="/carrinho"><i
+                    class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
                 <br>
                 <a class="color" href="/alterarSenha"><i class="fas fa-key">Modificar Senha</i></a>
               </p>
@@ -106,7 +110,8 @@
 
       </div>
       <div class="col-7">
-        <div id=<%='alert'+produto.PROD_CODIGO%> class="alert alert-success alert-dismissible text-center collapse" role="alert">
+        <div id=<%='alert'+produto.PROD_CODIGO%> class="alert alert-success alert-dismissible text-center collapse"
+          role="alert">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           Produto adicionado no carrinho. <a href="/carrinho" class="alert-link">Clique aqui para ver seu carrinho</a>.
         </div>
@@ -132,29 +137,29 @@
 
           <!--Grid column-->
           <div class="col-md-6 mb-4">
-            
+
             <div class="<%=produto.ZOOM%>">
               <img src=<%= produto.PROD_IMAG_PATH[0]%> class="img-fluid" width="500" height="350">
             </div>
-            
+
             <div style="margin-top: 15px;">
               <ul class="piclist">
-              <%
+                <%
               if(produto.PROD_IMAG_PATH.length > 1){
                 produto.PROD_IMAG_PATH.map(function(image){
                   %>
-                  <li>
-                    <img src=<%= image%> alt="">
-                  </li>
-                  <%
+                <li>
+                  <img src=<%= image%> alt="">
+                </li>
+                <%
                 })
               }
               %>
-              
-    
-            </ul>
+
+
+              </ul>
             </div>
-            
+
 
           </div>
 
@@ -168,8 +173,13 @@
 
               <div style="height: 350px;">
                 <p style="margin-top: 50px;" class="lead">
-                  <strong><span><h2><%=produto.PROD_PRECO.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></h2></span></strong>
+                  <strong><span>
+                      <h2><%=produto.PROD_PRECO.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></h2>
+                    </span></strong>
                 </p>
+                <div class="alert alert-warning collapse" role="alert" id="msgAlerta">
+                  Produto Sujeito a Análise de Disponibilidade
+                </div>
                 <!--
                   <%
                 if(produto.PROD_QTD_ATUAL === 0){
@@ -185,27 +195,27 @@
                 }
                 %>
               -->
-  
-                <form style="margin-top: 150px;" id="addCarinho" class="d-flex justify-content-left" action="/carrinho/add" method="POST">
+
+                <form style="margin-top: 150px;" id="addCarinho" class="d-flex justify-content-left"
+                  action="/carrinho/add" method="POST">
                   <!-- Default input -->
                   <input id="qtdId" type="number" name="qtd" value="1" aria-label="Search" class="form-control"
                     style="width: 100px" min="1">
                   <input type="hidden" name="produto" value=<%=produto.PROD_CODIGO%>>
                   <button style="width: 200px" class=""
-                    onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>', $('#qtdId').val())" type="button">Adicionar
+                    onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>', '<%=produto.PROD_QTD_ATUAL%>' ,$('#qtdId').val())" type="button">Adicionar
                     no Carrinho
                     <i class="fas fa-shopping-cart ml-1"></i>
                   </button>
-  
+
                 </form>
               </div>
 
-              
 
               <p class="lead font-weight-bold">Descrição</p>
 
               <p><%=produto.PROD_IMAG_DESCRICAO%></p>
-              
+
 
             </div>
             <!--Content-->
@@ -215,8 +225,8 @@
 
         </div>
 
-        
-  
+
+
         <%
 
             }) 

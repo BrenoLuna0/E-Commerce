@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <title>Histórico</title>
@@ -67,19 +70,24 @@
               <a class="nav-link" href="/produto?page=1">Produtos <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-              <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span
+                  class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
               <a class="nav-link" href="/categorias/TV?page=1">Televisão <span class="sr-only">(current)</span></a>
@@ -90,32 +98,33 @@
     </nav>
 
     <div class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Código da Venda</th>
-                    <th>Data</th>
-                    <th>Total</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%
+      <table>
+        <thead>
+          <tr>
+            <th>Código da Venda</th>
+            <th>Data</th>
+            <th>Total</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%
                 vendas.map(function(venda){
                     %>
-                    <tr>
-                        <td class="destaque"><%=venda.codigo%></td>
-                        <td><%=venda.data%></td>
-                        <td><%=venda.total%></td>
-                        <td><button onclick="window.location.href='/historico/<%=venda.codigo%>'" type="button">Visualizar</button></td>
-                    </tr>
-                    
-                    <%
+          <tr>
+            <td class="destaque"><%=venda.codigo%></td>
+            <td><%=venda.data%></td>
+            <td><%=venda.total%></td>
+            <td><button onclick="window.location.href='/historico/<%=venda.codigo%>'" type="button">Visualizar</button>
+            </td>
+          </tr>
+
+          <%
                 });
                 
                 %>
-            </tbody>
-        </table>
+        </tbody>
+      </table>
     </div>
   </main>
 

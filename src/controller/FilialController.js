@@ -16,7 +16,8 @@ module.exports = {
             });
         } else {
             res.render('login/login', {
-                filiais
+                filiais,
+                reload : false
             })
         }
 

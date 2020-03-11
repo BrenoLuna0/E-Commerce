@@ -57,6 +57,17 @@
       $("#login-username").mask("00.000.000/0000-00");
     });
   </script>
+
+  <%
+  if(reload){
+    reolado = false;
+    %>
+    <script>
+      window.location.reload(true);
+    </script>
+    <%
+  }
+  %>
 </body>
 
 </html>

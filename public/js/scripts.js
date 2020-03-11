@@ -4,10 +4,8 @@ script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 $('.alert').hide();
-function adicionarNoCarrinho(idProduto, qtd = 1) {
-    console.log('track 1' + qtd);
+function adicionarNoCarrinho(idProduto, estoque, qtd = 1) {
     let alertName = '#alert' + idProduto;
-    console.log(alertName);
     let postObject = {
         produto: idProduto,
         qtd: qtd,
@@ -18,6 +16,9 @@ function adicionarNoCarrinho(idProduto, qtd = 1) {
         if (data) {
             document.getElementsByClassName('fas fa-shopping-cart')[0].innerHTML = 'Carrinho' + data;
             $(alertName).show();
+            if(qtd > estoque){
+                $('#msgAlerta').show();
+            }
         } else {
             alert('Erro na Inserção deste Produto no Carrinho. Tente Novamente Mais Tarde');
         }
