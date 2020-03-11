@@ -124,6 +124,7 @@ class Carrinho {
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_ATIVO = 'S'
+            AND p.prod_preco_01 > 0
             AND P.PROD_CODIGO = ${produto.codigo}`;
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
@@ -241,6 +242,7 @@ class Carrinho {
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_ATIVO = 'S'
+            AND p.prod_preco_01 > 0
             AND P.PROD_CODIGO = ${produto.codigo}`;
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {

@@ -77,6 +77,7 @@ async function getProdutos(pageNumber = 1, categoria = '%', filial) {
                 AND pw.FIL_CODIGO = ${filial}
                 AND sg.SUB_GRP_DESCRICAO LIKE '${categoria}' 
                 AND PW.PROD_ATIVO = 'S'
+                AND pw.PROD_PRECO_01 > 0
                 ORDER BY PROD_CODIGO DESC
             ) a
             WHERE rownum < ((${pageNumber} * 30) + 1 )
@@ -118,6 +119,7 @@ async function getNineProdutos(filial) {
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
         AND P.FIL_CODIGO = ${filial}
         AND P.PROD_ATIVO = 'S'
+        AND p.prod_preco_01 > 0
         ORDER BY dbms_random.value
     )
     where ROWNUM <= 9`;
@@ -163,6 +165,7 @@ async function getProdutosByDescricao(pageNumber, descricao, filial) {
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_DESCRICAO LIKE '%${descricao}%'
             AND P.PROD_ATIVO = 'S'
+            AND p.prod_preco_01 > 0
             ORDER BY P.PROD_CODIGO DESC
         ) a
         WHERE rownum < ((${pageNumber} * 30) + 1 )
@@ -202,6 +205,7 @@ async function getProdutosRelacionados(categorias, filial) {
         FROM SIAC_TS.VW_PRODUTO_WEB P, siac_ts.vw_subgrupo S
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
         AND P.PROD_ATIVO = 'S'
+        AND p.prod_preco_01 > 0
         AND P.FIL_CODIGO = ${filial} AND (`;
     let control = 1;
 
@@ -247,6 +251,7 @@ async function getProdutoById(id, filial) {
     FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
     WHERE p.sub_grp_codigo = s.sub_grp_codigo
     AND P.PROD_ATIVO = 'S' 
+    AND p.prod_preco_01 > 0
     AND P.FIL_CODIGO = ${filial}
     AND P.PROD_CODIGO = ${id}`;
 

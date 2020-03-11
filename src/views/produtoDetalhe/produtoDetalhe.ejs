@@ -174,7 +174,7 @@
               <div style="height: 350px;">
                 <p style="margin-top: 50px;" class="lead">
                   <strong><span>
-                      <h2><%=produto.PROD_PRECO.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })%></h2>
+                      <h2><%=produto.PROD_PRECO%></h2>
                     </span></strong>
                 </p>
                 <div class="alert alert-warning collapse" role="alert" id="msgAlerta">
@@ -276,7 +276,7 @@
                   </div>
                   <div class="price">
                     <p onclick="event.stopPropagation()">
-                      <strong><%=produto.PROD_PRECO.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})%></strong>
+                      <strong><%=produto.PROD_PRECO%></strong>
                     </p>
                   </div>
                   <div>
