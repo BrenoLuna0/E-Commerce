@@ -4,7 +4,7 @@ class Categoria{
     static async categorias(filial){
         const conexao = await connection;
         const sql = `SELECT distinct sub_grp_descricao 
-        FROM siac_ts.vw_subgrupo S, SIAC_TS.VW_PRODUTO_WEB P
+        FROM siac_ts.vw_subgrupo S, SIAC_TS.VW_PRODUTO P
         where s.sub_grp_codigo = p.sub_grp_codigo
         AND P.PROD_ATIVO = 'S'
         AND p.prod_preco_01 > 0

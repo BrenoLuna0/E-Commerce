@@ -120,7 +120,7 @@ class Carrinho {
 
         const produtosdetalhes = await produtos.map(function (produto) {
             let sql = `SELECT DISTINCT P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL
-            FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
+            FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_ATIVO = 'S'
@@ -238,7 +238,7 @@ class Carrinho {
 
         const produtosdetalhes = await produtos.map(function (produto) {
             let sql = `SELECT DISTINCT P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL
-            FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
+            FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_ATIVO = 'S'

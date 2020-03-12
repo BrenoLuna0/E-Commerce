@@ -71,7 +71,7 @@ async function getProdutos(pageNumber = 1, categoria = '%', filial) {
             FROM
             (
                 SELECT DISTINCT pw.PROD_CODIGO,pw.PROD_DESCRICAO,pw.PROD_PRECO_01,sg.SUB_GRP_DESCRICAO, pw.PROD_QTD_ATUAL
-                FROM SIAC_TS.VW_PRODUTO_WEB pw,
+                FROM SIAC_TS.VW_PRODUTO pw,
                 siac_ts.vw_subgrupo sg
                 WHERE pw.sub_grp_codigo = sg.sub_grp_codigo
                 AND pw.FIL_CODIGO = ${filial}
@@ -115,7 +115,7 @@ async function getNineProdutos(filial) {
     const conexao = await connection;
     const sql = `SELECT * FROM (
         SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL 
-        FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
+        FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
         AND P.FIL_CODIGO = ${filial}
         AND P.PROD_ATIVO = 'S'
@@ -160,7 +160,7 @@ async function getProdutosByDescricao(pageNumber, descricao, filial) {
         FROM
         (
             SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL
-            FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
+            FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_DESCRICAO LIKE '%${descricao}%'
@@ -202,7 +202,7 @@ async function getProdutosRelacionados(categorias, filial) {
     const conexao = await connection;
     let sql = `SELECT * FROM (
         SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL 
-        FROM SIAC_TS.VW_PRODUTO_WEB P, siac_ts.vw_subgrupo S
+        FROM SIAC_TS.VW_PRODUTO P, siac_ts.vw_subgrupo S
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
         AND P.PROD_ATIVO = 'S'
         AND p.prod_preco_01 > 0
@@ -248,7 +248,7 @@ async function getProdutosRelacionados(categorias, filial) {
 async function getProdutoById(id, filial) {
     const conexao = await connection;
     const sql = `SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL
-    FROM SIAC_TS.VW_PRODUTO_WEB P , siac_ts.vw_subgrupo S
+    FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
     WHERE p.sub_grp_codigo = s.sub_grp_codigo
     AND P.PROD_ATIVO = 'S' 
     AND p.prod_preco_01 > 0
