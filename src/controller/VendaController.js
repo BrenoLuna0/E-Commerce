@@ -87,9 +87,9 @@ module.exports = {
         } else {
             const nDAV = await Venda.getNDav(req.session.filial);
             console.log(nDAV);
-            const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, req.body.total, '07.626.6970002-30', req.body.intervalo, req.session.filial);
+            const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, parseFloat(req.body.total.replace('0R$','').replace(',', '.')), '07.626.6970002-30', req.body.intervalo, req.session.filial);
             const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
-            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 18, req.body.parcelas, req.body.total, req.session.filial);
+            const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, 18, req.body.parcelas, parseFloat(req.body.total.replace('0R$','').replace(',', '.')), req.session.filial);
 
             if (confirmacaoDav && confirmacaoDavItens && confirmacaoDaVFormPagt) {
                 res.locals.nDAV = nDAV;
