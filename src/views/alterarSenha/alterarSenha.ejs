@@ -109,7 +109,12 @@
                         <label for="login-password">Digite sua Nova Senha</label>
                         <input type="password" id="login-password" name="password" maxlength="8" required />
                     </div>
-                    <button type="submit" class="btn-login">Confirmar Senha</button>
+                    <div class="input-block">
+                        <label for="login-password-confirm">Confirme Sua Senha</label>
+                        <input type="password" id="login-password-confirm" name="password-confirm" maxlength="8" onkeyup="passwordVerify()" required />
+                        <small id="message" class="form-text text-muted">Senha Inválida</small>
+                    </div>
+                    <button id="btn-login" type="submit" class="btn-login" disabled = "true" style="cursor: default;">Confirmar Senha</button>
                 </form>
             </div>
         </section>
@@ -176,6 +181,28 @@
     <%
     }
     %>
+
+    <script>
+        function passwordVerify(){
+            let pass1;
+            let pass2;
+            
+            pass1 = $('#login-password').val();
+            pass2 = $('#login-password-confirm').val();
+
+            if(pass1 != pass2){
+                $('#message').html('Senha Inválida');
+                $('#btn-login').prop("disabled", true);
+            }
+
+            if(pass1 == pass2){
+                $('#message').html('Senha Confirmada');
+                $('#btn-login').prop("disabled", false);
+                $('#btn-login').prop("style", 'cursor : pointer');
+
+            }
+        }
+    </script>
 
 </body>
 
