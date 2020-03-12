@@ -84,7 +84,7 @@ module.exports = {
 
     async getByDescricao(req, res) {
         const descricaoTmp = req.query.descricao || '';
-        let descricao = descricaoTmp.replace(/-E-/g, '/').replace(/-/g, ' ').toUpperCase();
+        let descricao = descricaoTmp.replace(/-E-/g, '/').toUpperCase();
         let pagina = req.query.page || 1;
         /*if (!req.query.page) {
             pagina = 1

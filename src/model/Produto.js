@@ -254,7 +254,7 @@ async function getProdutoById(id, filial) {
     AND p.prod_preco_01 > 0
     AND P.FIL_CODIGO = ${filial}
     AND P.PROD_CODIGO = ${id}`;
-
+    
     return new Promise(async function (resolve) {
         await conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
             if (err) {
