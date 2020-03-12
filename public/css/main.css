@@ -12,6 +12,7 @@
   body {
     background-color: #efeff5;
     font-family: Roboto, Arial, sans-serif;
+    overflow-y:scroll;
   }
 
   nav {
