@@ -28,11 +28,6 @@ module.exports = {
 
     async paginate(req, res) {
         let categoria = req.query.cat || '%';
-        /*if (req.query.cat) {
-            categoria = req.query.cat
-        } else {
-            categoria = '%';
-        }*/
         const produtos = await Produto.findAll(req.query.page, categoria, req.session.filial);
         if (produtos.erro) {
             res.render('errors/manipuladorErro', {
@@ -45,11 +40,13 @@ module.exports = {
                 filial: ''
             });
         } else {
+            const produtoQtd = await Produto.getProdutosQtd('%', req.session.filial,'');
             const categorias = await Categoria.categorias(req.session.filial);
             res.render('produtos/produtos', {
                 products: produtos,
                 page: req.query.page,
                 categories: categorias,
+                produtoQtd,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
                 filial: await getFilialName(req.session.filial)
             });
@@ -70,12 +67,14 @@ module.exports = {
                 filial: ''
             });
         } else {
+            const produtoQtd = await Produto.getProdutosQtd(req.params.catDescricao.replace(/\+/g, ' ').replace(/@/g, '/'), req.session.filial,'');
             const categorias = await Categoria.categorias(req.session.filial);
 
             res.render('produtos/produtos', {
                 products: produtos,
                 page: req.query.page,
                 categories: categorias,
+                produtoQtd,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
                 filial: await getFilialName(req.session.filial)
             });
@@ -86,11 +85,7 @@ module.exports = {
         const descricaoTmp = req.query.descricao || '';
         let descricao = descricaoTmp.replace(/-E-/g, '/').toUpperCase();
         let pagina = req.query.page || 1;
-        /*if (!req.query.page) {
-            pagina = 1
-        } else {
-            pagina = req.query.page;
-        }*/
+        
 
         const produtos = await Produto.findByDescricao(pagina, descricao, req.session.filial);
 
@@ -105,6 +100,7 @@ module.exports = {
                 filial: ''
             });
         } else {
+            const produtoQtd = await Produto.getProdutosQtd('%', req.session.filial, descricao);
             const categorias = await Categoria.categorias(req.session.filial);
 
 
@@ -112,6 +108,7 @@ module.exports = {
                 products: produtos,
                 page: pagina,
                 categories: categorias,
+                produtoQtd,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
                 filial: await getFilialName(req.session.filial)
             });
@@ -133,9 +130,6 @@ module.exports = {
         } else {
             let alert;
 
-            if (!produto.PROD_IMAG_DESCRICAO) {
-                produto.PROD_IMAG_DESCRICAO = 'Não há Descrição Para esse Produto'
-            }
             const produtosRelacionados = await Produto.produtosRelacionados([produto[0].PROD_CATEGORIA], req.session.filial);
             if (req.query.msg) {
                 alert = true;

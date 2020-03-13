@@ -61,6 +61,39 @@ class Produto {
 
     }
 
+    static async getProdutosQtd(categoria, filial, descricao){
+
+        const conexao = await connection;
+        const sql = `SELECT COUNT(*) 
+        FROM SIAC_TS.VW_PRODUTO pw, siac_ts.vw_subgrupo sg
+        WHERE pw.sub_grp_codigo = sg.sub_grp_codigo
+        AND pw.FIL_CODIGO = ${filial}
+        AND sg.SUB_GRP_DESCRICAO LIKE '${categoria}' 
+        AND pw.PROD_DESCRICAO LIKE '%${descricao}%'
+        AND PW.PROD_ATIVO = 'S'
+        AND pw.PROD_PRECO_01 > 0
+        ORDER BY PROD_CODIGO DESC`;
+
+        return new Promise(async function(resolve){
+            conexao.execute(sql,[],{autoCommit : true}, function(err,result){
+                if(err){
+                    resolve({
+                        erro : true,
+                        tit : 'Erro Oracle ao solicitar quantidade de prodtudo',
+                        msg : err.message,
+                        cod : 207
+                    });
+                }else {
+                    if(typeof(result.rows[0]) === 'undefined'){
+                        resolve(0);
+                    }else {
+                        resolve(result.rows[0][0]);
+                    }
+                }
+            });
+        });
+    }
+
 }
 
 async function getProdutos(pageNumber = 1, categoria = '%', filial) {
@@ -333,6 +366,8 @@ async function getProdutosImagem(produtos) {
         resultado = results;
     });
     return resultado;
+
+
 
 }
 

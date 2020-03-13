@@ -4,15 +4,11 @@
     padding: 0;
   }
   
-  html,
-  body {
-    height: 100vh;
-  }
-  
-  body {
+  html, body {
     background-color: #efeff5;
     font-family: Roboto, Arial, sans-serif;
-    overflow-y:scroll;
+    height: 100vh;
+    -ms-overflow-style: scrollbar;
   }
 
   nav {

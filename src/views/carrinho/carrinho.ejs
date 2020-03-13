@@ -310,10 +310,9 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
     <script>
-      $('.info').popover();
+      $('.info').popover({ trigger: "hover" });
 
-
-      $(':not(#anything)').on('click', function (e) {
+      $(':not(#anything)').on('hover', function (e) {
         $('.info').each(function () {
           //the 'is' for buttons that trigger popups
           //the 'has' for icons and other elements within a button that triggers a popup
