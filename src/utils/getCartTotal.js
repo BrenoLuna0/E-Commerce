@@ -18,7 +18,6 @@ module.exports = async function getCartTotal(id, filial) {
         const final = formatarMoeda(parcial);
 
         return final;
-        //return parcial.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
     }
 
 }
