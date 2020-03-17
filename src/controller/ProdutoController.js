@@ -39,11 +39,9 @@ module.exports = {
     async paginate(req, res) {
 
         //Se a categoria não for especificada na url, é atribuido o valor '%'
-        //!!!!!Obs.: Pode ser q essa variável não seja importante para o código. Verificar depois
-        let categoria = req.query.cat || '%';
 
         //Os produtos vêm do banco de dados de acordo com o número da página referida na url
-        const produtos = await Produto.findAll(req.query.page, categoria, req.session.filial);
+        const produtos = await Produto.findAll(req.query.page, '%', req.session.filial);
         
         //Se houver algum erro de conexão com o banco de dados, é renderizada uma página de erro...
         if (produtos.erro) {
