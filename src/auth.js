@@ -1,8 +1,19 @@
+/**
+ * Aqui se encontra a estratégia de autenticação para login de usuários
+ */
+
 const md5 = require('md5');
 const LocalStrategy = require('passport-local').Strategy;
 const connection = require('./connection');
 
 module.exports = function (passport) {
+
+    /**
+     * As funções <findUser()> e <findUserById()> são as funções base para a nossa estratégia de autenticação.
+     * Como seus próprios nomes já dizem, uma vai encontrar o usuário pelo login, e a outra, pelo código.
+     * Tudo isso é feito através de consultas no banco de dados.
+     */
+
     async function findUser(username, callback) {
         
         const conexao = await connection;
@@ -41,6 +52,12 @@ module.exports = function (passport) {
         });
     }
 
+    /**
+     * As próximas funções são para serializar e desserializar o usuário.
+     * Estas funções são necessárias para que o processo de autenticação funcione normalmente
+     * Obs.:Peguei tudo isso da internet, não exatamente o que essas funções fazem
+     */
+
     passport.serializeUser(function (user, done) {
         done(null, user.id);
     });
@@ -51,12 +68,14 @@ module.exports = function (passport) {
         });
     });
 
+    //ESTRATÉGIA DE AUTENTICAÇÃO
     passport.use(new LocalStrategy({
         usernameField: 'username',
         passwordField: 'password',
         filial : 'filial'
     },
         (username, password, done) => {
+            //Utilizando a função <finUser()>, achamos o usuário pelo login...
             findUser(username, (err, user) => {
                 if (err) { return done(err) }
                 

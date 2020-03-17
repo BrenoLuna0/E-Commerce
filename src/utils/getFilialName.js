@@ -1,3 +1,7 @@
+/**
+ * Função, que dado o código da filia, ela retorna o nome da respectiva filial
+ */
+
 const Filial = require('../model/Filial');
 
 module.exports = async function getFilialName(fil_codigo){
