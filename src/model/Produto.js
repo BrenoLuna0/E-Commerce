@@ -244,12 +244,7 @@ async function getProdutosRelacionados(categorias, filial) {
 
     categorias.map(function (categoria) {
         control === 1 ? sql += `s.sub_grp_descricao = '${categoria}' ` : sql += `OR s.sub_grp_descricao = '${categoria}' `;
-        /*if (control === 1) {
-            sql += `s.sub_grp_descricao = '${categoria}' `
-        } else {
-            sql += `OR s.sub_grp_descricao = '${categoria}' `
-        }*/
-
+        
         control++;
     });
 

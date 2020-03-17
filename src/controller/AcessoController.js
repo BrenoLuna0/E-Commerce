@@ -11,9 +11,6 @@ module.exports = {
      * é exibida através do cache do navegador.
      */
     async logout(req, res) {
-        //Aqui ele pega todas as filiais antes de se deslogar para poder renderizar a página de login
-        const filiais = await Filial.findAll();
-
         //Efutuação do logout
         req.logout();
         res.status(200).clearCookie('connect.sid', {
@@ -22,10 +19,7 @@ module.exports = {
 
         //A sessão é destruida e então é renderizada a página de login com as filiais já previamente carregadas
         req.session.destroy(function (err) {
-            res.render('login/login', {
-                filiais,
-                reload: true
-            })
+            res.redirect('/login');
         });
     },
 

@@ -12,13 +12,6 @@ class Carrinho {
         prvQtd ? sql = `UPDATE SITE_CARRINHO SET PROD_QTD = ${parseInt(qtd) + parseInt(prvQtd)} WHERE CLIE_CODIGO = ${userId} AND PROD_CODIGO = ${productId} AND FIL_CODIGO = ${filial}` : 
                 sql = `INSERT INTO SITE_CARRINHO (CLIE_CODIGO, PROD_CODIGO, PROD_QTD, FIL_CODIGO) VALUES (${userId},${productId},${qtd}, ${filial})`;
 
-        /*if (prvQtd) {
-            const qtdFinal = parseInt(qtd) + parseInt(prvQtd);
-            sql = `UPDATE SITE_CARRINHO SET PROD_QTD = ${qtdFinal} WHERE CLIE_CODIGO = ${userId} AND PROD_CODIGO = ${productId} AND FIL_CODIGO = ${filial}`;
-        } else {
-            sql = `INSERT INTO SITE_CARRINHO (CLIE_CODIGO, PROD_CODIGO, PROD_QTD, FIL_CODIGO) VALUES (${userId},${productId},${qtd}, ${filial})`;
-        }*/
-
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
                 if (err) {
