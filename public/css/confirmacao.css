@@ -1,9 +1,3 @@
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
 
 nav{
     margin-bottom: 55px;
@@ -13,7 +7,7 @@ ul {
     width : 800px;
 }
 
-.container ul li {
+.dados ul li {
     list-style: none;
     border: 1px solid;
 }
@@ -37,7 +31,16 @@ ul li p strong {
     width: 150px;
 }
 
-.container ul li:hover {
+.dados ul li:hover {
     background-color: #d0d0e2;
 }
 
+
+@media screen and (min-height: 850px){
+    footer  {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+}

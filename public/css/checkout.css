@@ -1,19 +1,9 @@
-.tab-content, tab-pane {
-    width: 1050px;
-    height: 300px;
-    margin-left: -135px;
-}
-
-.nav-tabs{
-    margin-left: -150px;
+.tab-content, .tab-pane {
+    width: 100%;
 }
 
 .background {
     background-color: #29293d;
-}
-
-.new-nav {
-    width: 900px;
 }
 
 .tab-pane form select {
@@ -36,9 +26,6 @@
     width : 100%;
 }
 
-.tab-content , tab-pane {
-    width : 110%;
-}
 
 footer {
     position: relative;

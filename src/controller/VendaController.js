@@ -47,7 +47,7 @@ module.exports = {
 
             //...Informações como código do dav, data, e total são armazenados nas variáveis da sessão, e é passado então para a próxima etapa da venda
             res.locals.nDAV = nDAV;
-            res.locals.formPagt = 'Dinheiro';
+            req.body.formPagt == 11 ? res.locals.formPagt = 'Dinheiro' : res.locals.formPagt = 'Duplicata';
             let date = new Date();
             let mes = date.getMonth() + 1;
             let dia = date.getDate();
