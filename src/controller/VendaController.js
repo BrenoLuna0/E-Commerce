@@ -34,7 +34,7 @@ module.exports = {
         const nDAV = await Venda.getNDav(req.session.filial);
 
         //Inserimos a informação da venda na tabela de DAV (1). É retornado um valor -true- ou -false- de acordo com o resultado da operação
-        const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, parseFloat(req.body.total.replace('0R$', '').replace(',', '.')), '07.626.6970002-30', '', req.session.filial);
+        const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, parseFloat(req.body.total.replace('0R$', '').replace(',', '.')), '07.626.6970002-30', req.body.intervalo || '', req.session.filial);
 
         //Inserimos os produtos da venda na tabela DavItens (2). É retornado um valor -true- ou -false- de acordo com o resultado da operação
         const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
