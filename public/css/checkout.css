@@ -26,11 +26,14 @@
     width : 100%;
 }
 
-
-footer {
-    position: relative;
-}
-
 table tr td a {
     color : #29293d;
+}
+
+.btn-block {
+    margin-bottom: 100px;
+}
+
+#tabs {
+    margin-top: 35px;
 }
