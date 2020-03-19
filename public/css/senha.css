@@ -1,9 +1,4 @@
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
+
 
 section {
     display: flex;
@@ -13,7 +8,8 @@ section {
   }
 
 .form-wrapper form {
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 75px;
     background-color: white;
     padding: 30px 25px;
     border-radius: 5px;
@@ -74,4 +70,14 @@ section {
 
   .form-wrapper form .btn-login:hover {
     background-color: #32324e;
+}
+
+@media screen and (min-height: 850px){
+  footer  {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+  }
+
 }
