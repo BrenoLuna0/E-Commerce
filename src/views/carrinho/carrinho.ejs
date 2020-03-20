@@ -140,7 +140,7 @@
                   <td class="col-sm-1 col-md-1" style="text-align: center">
                     <form>
                       <input type="hidden" name="produto" value=<%=produto.codigo%>>
-                      <input type="number" onkeyup="atualizarCarrinhoNoClick(event,'<%=produto.codigo%>')" class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1"
+                      <input type="number" class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1"
                         value=<%=produto.qtd%>>
                       <%
                       if(produto.qtd > produto.qtd_estoque){
