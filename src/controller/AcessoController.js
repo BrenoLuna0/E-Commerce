@@ -1,6 +1,5 @@
 //Arquivo com as funções responsáveis por fazer o login e o logout do usuário
 
-const Filial = require('../model/Filial');
 const passport = require('passport');
 require('../auth')(passport);
 
@@ -26,7 +25,10 @@ module.exports = {
     async login(req, res, next) {
         //Através do Passport, é feita a autenticação do usuário usando a estratégia local em -src/auth.js-
         passport.authenticate('local', function (err, user, info) {
-            if (err) { return next(err); }
+            if (err) {
+                return next(err);
+            }
+
             if (!user) { return res.redirect('/login'); }
             req.logIn(user, function (err) {
                 if (err) { return next(err); }

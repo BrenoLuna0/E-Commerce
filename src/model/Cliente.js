@@ -11,6 +11,68 @@ class Cliente {
         this.ULTIMA_TENTATIVA = ULTIMA_TENTATIVA;
     }
 
+    static async getNumeroTentativas(id){
+        const conexao = await connection;
+        const sql = `SELECT NRO_TENTATIVAS FROM CLIENTE_SENHA WHERE CLIE_CODIGO = ${id}`;
+
+        return new Promise(async function(resolve){
+            conexao.execute(sql,[],{autoCommit : true}, function(err,result){
+                if(err){
+                    resolve({
+                        tit: 'Erro na conexão com banco de dados',
+                        msg: 'Erro ao tentar efetuar login',
+                        cod: 504
+                    })
+                } else{
+                    if(typeof(result.rows[0]) === 'undefined'){
+                        resolve(false);
+                    }else{
+                        resolve(result.rows[0][0]);
+                    }
+                }
+            });
+        });
+    }
+
+    static async getClienteCodigo(login){
+        const conexao = await connection;
+        const sql = `SELECT CLIE_CODIGO FROM CLIENTE_SENHA WHERE CLIE_LOGIN = ${login}`;
+
+        return new Promise(async function(resolve){
+            conexao.execute(sql,[],{autoCommit : true}, function(err,result){
+                if(err){
+                    resolve({
+                        tit: 'Erro na conexão com banco de dados',
+                        msg: 'Erro ao tentar efetuar login',
+                        cod: 506
+                    })
+                } else{
+                    if(typeof(result.rows[0]) === 'undefined'){
+                        resolve(false);
+                    }else{
+                        resolve(result.rows[0][0]);
+                    }
+                }
+            });
+        });
+    }
+
+    static async adicionarTentativaLogin(id,tentativas) {
+        const conexao = await connection;
+        const sql = `UPDATE CLIENTE_SENHA SET NRO_TENTATIVAS = ${tentativas} WHERE CLIE_CODIGO = ${id}`;
+
+        return new Promise(async function (resolve) {
+            conexao.execute(sql, [], { autoCommit: true }, function (err) {
+                if (err) {
+                    console.log('Erro ao coloar as tentativas do usuario 505: ' + err.message);
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
+    }
+
     static async resetarTentativas(id) {
         const conexao = await connection;
         const sql = `UPDATE CLIENTE_SENHA SET NRO_TENTATIVAS = 0 WHERE CLIE_CODIGO = ${id}`;
