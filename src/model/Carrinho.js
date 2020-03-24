@@ -127,14 +127,7 @@ class Carrinho {
                     } else {
                         if (typeof (result.rows[0]) === 'undefined') {
                             console.log('Nunhuk resultad');
-                            resolve({
-                                codigo: produto.codigo,
-                                nome: 'produto generico',
-                                preco: 5,
-                                qtd: 1,
-                                subtotal: 5,
-                                qtd_estoque: 0
-                            });
+                            resolve([]);
                         } else {
                             const produtoFinal = result.rows[0];
                             resolve({
