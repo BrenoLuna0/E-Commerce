@@ -34,13 +34,13 @@ module.exports = {
         const nDAV = await Venda.getNDav(req.session.filial);
 
         //Inserimos a informação da venda na tabela de DAV (1). É retornado um valor -true- ou -false- de acordo com o resultado da operação
-        const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, parseFloat(req.body.total.replace('0R$', '').replace(',', '.')), '07.626.6970002-30', req.body.intervalo || '', req.session.filial);
+        const confirmacaoDav = await Venda.inserirDAV(nDAV, req.user.id, parseFloat(req.body.total.replace('R$', '').replace(',', '.')), '07.626.6970002-30', req.body.intervalo || '', req.session.filial);
 
         //Inserimos os produtos da venda na tabela DavItens (2). É retornado um valor -true- ou -false- de acordo com o resultado da operação
         const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
 
         //Inserimos a forma de pagamento (3). É retornado um valor -true- ou -false- de acordo com o resultado da operação
-        const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, req.body.formPagt, req.body.parcelas || 0, parseFloat(req.body.total.replace('0R$', '').replace(',', '.')), req.session.filial);
+        const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, req.body.formPagt, req.body.parcelas || 0, parseFloat(req.body.total.replace('R$', '').replace(',', '.')), req.session.filial);
 
         //Se, e somente se, todas essas operações retornarem -true-...
         if (confirmacaoDav && confirmacaoDavItens && confirmacaoDaVFormPagt) {
