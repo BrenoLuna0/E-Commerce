@@ -69,7 +69,6 @@ class Venda {
             DAV_ITEN_PRECO_UNIT, 
             DAV_ITEN_TOTAL)  
             VALUES (${filial} , ${nDAV} , '010264103000112' , ${i} , ${davItem.codigo} , ${davItem.qtd} , ${davItem.preco} , ${davItem.subtotal})`;
-            
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err) {
                     if (err) {

@@ -4,7 +4,9 @@
 
 module.exports = function (valor) {
     if(valor){
-        return "R$" + valor.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+        const valorFormatado = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }).replace(',','@').replace('.',',').replace('@','.');
+        return valorFormatado;
+        //return "R$" + valor.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
     }
 
 }
