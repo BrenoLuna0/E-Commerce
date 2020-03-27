@@ -7,7 +7,7 @@ class Categoria{
         FROM siac_ts.vw_subgrupo S, SIAC_TS.VW_PRODUTO P
         where s.sub_grp_codigo = p.sub_grp_codigo
         AND P.PROD_ATIVO = 'S'
-        AND p.prod_preco_01 > 0
+        AND p.PROD_PRECO_VENDA > 0
         AND P.FIL_CODIGO = ${filial}`;
 
         return new Promise(async function(resolve){

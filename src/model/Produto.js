@@ -71,7 +71,7 @@ class Produto {
         AND sg.SUB_GRP_DESCRICAO LIKE '${categoria}' 
         AND pw.PROD_DESCRICAO LIKE '%${descricao}%'
         AND PW.PROD_ATIVO = 'S'
-        AND pw.PROD_PRECO_01 > 0
+        AND pw.PROD_PRECO_VENDA > 0
         ORDER BY PROD_CODIGO DESC`;
 
         return new Promise(async function(resolve){
@@ -103,14 +103,14 @@ async function getProdutos(pageNumber = 1, categoria = '%', filial) {
             SELECT a.*, rownum r__
             FROM
             (
-                SELECT DISTINCT pw.PROD_CODIGO,pw.PROD_DESCRICAO,pw.PROD_PRECO_01,sg.SUB_GRP_DESCRICAO, pw.PROD_QTD_ATUAL
+                SELECT DISTINCT pw.PROD_CODIGO,pw.PROD_DESCRICAO,pw.PROD_PRECO_VENDA,sg.SUB_GRP_DESCRICAO, pw.PROD_QTD_ATUAL
                 FROM SIAC_TS.VW_PRODUTO pw,
                 siac_ts.vw_subgrupo sg
                 WHERE pw.sub_grp_codigo = sg.sub_grp_codigo
                 AND pw.FIL_CODIGO = ${filial}
                 AND sg.SUB_GRP_DESCRICAO LIKE '${categoria}' 
                 AND PW.PROD_ATIVO = 'S'
-                AND pw.PROD_PRECO_01 > 0
+                AND pw.PROD_PRECO_VENDA > 0
                 ORDER BY PROD_CODIGO DESC
             ) a
             WHERE rownum < ((${pageNumber} * 30) + 1 )
@@ -147,12 +147,12 @@ async function getProdutos(pageNumber = 1, categoria = '%', filial) {
 async function getNineProdutos(filial) {
     const conexao = await connection;
     const sql = `SELECT * FROM (
-        SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL 
+        SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.PROD_PRECO_VENDA, s.sub_grp_descricao, P.PROD_QTD_ATUAL 
         FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
         AND P.FIL_CODIGO = ${filial}
         AND P.PROD_ATIVO = 'S'
-        AND p.prod_preco_01 > 0
+        AND p.PROD_PRECO_VENDA > 0
         ORDER BY dbms_random.value
     )
     where ROWNUM <= 9`;
@@ -192,13 +192,13 @@ async function getProdutosByDescricao(pageNumber, descricao, filial) {
         SELECT a.*, rownum r__
         FROM
         (
-            SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL
+            SELECT distinct P.PROD_CODIGO, P.PROD_DESCRICAO, p.PROD_PRECO_VENDA, s.sub_grp_descricao, P.PROD_QTD_ATUAL
             FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_DESCRICAO LIKE '%${descricao}%'
             AND P.PROD_ATIVO = 'S'
-            AND p.prod_preco_01 > 0
+            AND p.PROD_PRECO_VENDA > 0
             ORDER BY P.PROD_CODIGO DESC
         ) a
         WHERE rownum < ((${pageNumber} * 30) + 1 )
@@ -234,11 +234,11 @@ async function getProdutosByDescricao(pageNumber, descricao, filial) {
 async function getProdutosRelacionados(categorias, filial) {
     const conexao = await connection;
     let sql = `SELECT * FROM (
-        SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL 
+        SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.PROD_PRECO_VENDA, s.sub_grp_descricao, P.PROD_QTD_ATUAL 
         FROM SIAC_TS.VW_PRODUTO P, siac_ts.vw_subgrupo S
         WHERE p.sub_grp_codigo = s.sub_grp_codigo
         AND P.PROD_ATIVO = 'S'
-        AND p.prod_preco_01 > 0
+        AND p.PROD_PRECO_VENDA > 0
         AND P.FIL_CODIGO = ${filial} AND (`;
     let control = 1;
 
@@ -275,11 +275,11 @@ async function getProdutosRelacionados(categorias, filial) {
 
 async function getProdutoById(id, filial) {
     const conexao = await connection;
-    const sql = `SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL
+    const sql = `SELECT DISTINCT P.PROD_CODIGO, P.PROD_DESCRICAO, p.PROD_PRECO_VENDA, s.sub_grp_descricao, P.PROD_QTD_ATUAL
     FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
     WHERE p.sub_grp_codigo = s.sub_grp_codigo
     AND P.PROD_ATIVO = 'S' 
-    AND p.prod_preco_01 > 0
+    AND p.PROD_PRECO_VENDA > 0
     AND P.FIL_CODIGO = ${filial}
     AND P.PROD_CODIGO = ${id}`;
     

@@ -112,12 +112,12 @@ class Carrinho {
 
 
         const produtosdetalhes = await produtos.map(function (produto) {
-            let sql = `SELECT DISTINCT P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL
+            let sql = `SELECT DISTINCT P.PROD_DESCRICAO, p.PROD_PRECO_VENDA, s.sub_grp_descricao, P.PROD_QTD_ATUAL
             FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_ATIVO = 'S'
-            AND p.prod_preco_01 > 0
+            AND p.PROD_PRECO_VENDA > 0
             AND P.PROD_CODIGO = ${produto.codigo}`;
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
@@ -223,12 +223,12 @@ class Carrinho {
 
 
         const produtosdetalhes = await produtos.map(function (produto) {
-            let sql = `SELECT DISTINCT P.PROD_DESCRICAO, p.prod_preco_01, s.sub_grp_descricao, P.PROD_QTD_ATUAL
+            let sql = `SELECT DISTINCT P.PROD_DESCRICAO, p.PROD_PRECO_VENDA, s.sub_grp_descricao, P.PROD_QTD_ATUAL
             FROM SIAC_TS.VW_PRODUTO P , siac_ts.vw_subgrupo S
             WHERE p.sub_grp_codigo = s.sub_grp_codigo
             AND P.FIL_CODIGO = ${filial}
             AND P.PROD_ATIVO = 'S'
-            AND p.prod_preco_01 > 0
+            AND p.PROD_PRECO_VENDA > 0
             AND P.PROD_CODIGO = ${produto.codigo}`;
             return new Promise(async function (resolve) {
                 conexao.execute(sql, [], { autoCommit: true }, function (err, result) {

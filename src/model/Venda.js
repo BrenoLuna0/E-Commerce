@@ -214,7 +214,7 @@ class Venda {
         WHERE d.prod_codigo = p.prod_codigo
         AND p.fil_codigo = ${filial}
         AND P.PROD_ATIVO = 'S'
-        AND p.prod_preco_01 > 0
+        AND p.PROD_PRECO_VENDA > 0
         AND DAV_CODIGO = ${id}`;
 
         return new Promise(async function (resolve) {
