@@ -40,14 +40,15 @@ module.exports = {
         const confirmacaoDavItens = await Venda.inserirDAVItens(nDAV, arrayObject, req.session.filial);
 
         //Inserimos a forma de pagamento (3). É retornado um valor -true- ou -false- de acordo com o resultado da operação
-        const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, req.body.formPagt, req.body.parcelas || 0, parseFloat(req.body.total.replace('R$', '').replace('.','').replace(',','.')), req.session.filial);
+        const confirmacaoDaVFormPagt = await Venda.inserirDAVFormaDePagamento(nDAV, req.body.formPagt, req.body.parcelas || 1, parseFloat(req.body.total.replace('R$', '').replace('.','').replace(',','.')), req.session.filial);
 
         //Se, e somente se, todas essas operações retornarem -true-...
         if (confirmacaoDav && confirmacaoDavItens && confirmacaoDaVFormPagt) {
 
             //...Informações como código do dav, data, e total são armazenados nas variáveis da sessão, e é passado então para a próxima etapa da venda
             res.locals.nDAV = nDAV;
-            req.body.formPagt == 11 ? res.locals.formPagt = 'Dinheiro' : res.locals.formPagt = 'Duplicata';
+            //req.body.formPagt == 11 ? res.locals.formPagt = 'Dinheiro' : res.locals.formPagt = 'Duplicata';
+            res.locals.formPagt = req.body.formPagtNome;
             let date = new Date();
             let mes = date.getMonth() + 1;
             let dia = date.getDate();

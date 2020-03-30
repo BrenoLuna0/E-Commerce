@@ -31,7 +31,17 @@
         <div class="col-md">
           <p>
             <figure>
-              <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+              <%
+              if(filial.includes('VIP')){
+                %>
+                <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+                <%
+              }else {
+                %>
+                <a href="/main"><img src="/assets/logo_viana.png" alt="Minha Figura"></a>
+                <%
+              }
+              %>
             </figure>
           </p>
         </div>
@@ -138,23 +148,23 @@
                     </div>
                   </td>
                   <td class="col-sm-1 col-md-1" style="text-align: center">
-                    
-                      <input type="hidden" name="produto" value=<%=produto.codigo%>>
-                      <input type="number" onkeyup="atualizarCarrinhoNoClick(event,'<%=produto.codigo%>')" class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1"
-                        value=<%=produto.qtd%>>
-                      <%
+
+                    <input type="hidden" name="produto" value=<%=produto.codigo%>>
+                    <input type="number" onkeyup="atualizarCarrinhoNoClick(event,'<%=produto.codigo%>')"
+                      class="form-control" name="qtd" id=<%='qtd'+ produto.codigo%> min="1" value=<%=produto.qtd%>>
+                    <%
                       if(produto.qtd > produto.qtd_estoque){
                         %>
-                      <label>
-                        <a class="info" data-toggle="popover" data-placement="right"
-                          data-content="Produto Sujeito a Análise de Disponibilidade." title=""
-                          data-original-title="Produto em Análise">Info</a>
+                    <label>
+                      <a class="info" data-toggle="popover" data-placement="right"
+                        data-content="Produto Sujeito a Análise de Disponibilidade." title=""
+                        data-original-title="Produto em Análise">Info</a>
 
-                      </label>
-                      <%
+                    </label>
+                    <%
                       }
                       %>
-                    
+
                   </td>
                   <td class="col-sm-1 col-md-1 text-center">
                     <strong><%=produto.preco%></strong>

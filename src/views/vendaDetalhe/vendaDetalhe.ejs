@@ -25,7 +25,17 @@
                 <div class="col-md">
                     <p>
                         <figure>
-                            <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+                            <%
+                            if(filial.includes('VIP')){
+                                %>
+                                <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+                                <%
+                            }else {
+                                %>
+                                <a href="/main"><img src="/assets/logo_viana.png" alt="Minha Figura"></a>
+                                <%
+                            }
+                            %>
                         </figure>
                     </p>
                 </div>
