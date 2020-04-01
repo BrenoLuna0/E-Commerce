@@ -39,7 +39,7 @@ module.exports = {
                     cod: 502
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         }
         //Caso retorne -true-...
@@ -59,7 +59,7 @@ module.exports = {
         res.render('alterarSenha/confirmarSenha', {
             erro : null,
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial: await getFilialName(req.session.filial)
+            filial: req.session.filialName
         })
     },
 
@@ -79,19 +79,19 @@ module.exports = {
                     cod: 508
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         }else if(verificacao === false){
             res.render('alterarSenha/confirmarSenha', {
                 erro: true,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             })
         }else {
             res.render('alterarSenha/alterarSenha', {
                 resultado: null,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             })
         }
     }

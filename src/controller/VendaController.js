@@ -5,7 +5,6 @@
 const Venda = require('../model/Venda');
 const Carrinho = require('../model/Carrinho');
 const getCartTotal = require('../utils/getCartTotal');
-const getFilialName = require('../utils/getFilialName');
 const mandarEmail = require('../utils/mandarEmail');
 
 module.exports = {
@@ -76,7 +75,7 @@ module.exports = {
                         cod: reverterDav.cod
                     },
                     cartTotal: '',
-                    filial: ''
+                    filial: req.session.filialName
                 })
             } else if (reverterDavItens.erro) {
                 res.render('errors/manipuladorErro', {
@@ -86,7 +85,7 @@ module.exports = {
                         cod: reverterDavItens.cod
                     },
                     cartTotal: '',
-                    filial: ''
+                    filial: req.session.filialName
                 })
             } else if (reverterDavFormaPagt.erro) {
                 res.render('errors/manipuladorErro', {
@@ -96,7 +95,7 @@ module.exports = {
                         cod: reverterDavFormaPagt.cod
                     },
                     cartTotal: '',
-                    filial: ''
+                    filial: req.session.filialName
                 })
 
             } else {
@@ -107,7 +106,7 @@ module.exports = {
                         cod: 700
                     },
                     cartTotal: '',
-                    filial: ''
+                    filial: req.session.filialName
                 })
             }
         }
@@ -119,7 +118,7 @@ module.exports = {
     async confirmarVenda(req, res) {
         res.render('confirmacao/confirmacao', {
             cartTotal: await getCartTotal(req.user.id, req.session.filial),
-            filial: await getFilialName(req.session.filial)
+            filial: req.session.filialName
         });
     },
 
@@ -138,7 +137,7 @@ module.exports = {
                     cod: vendas.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         }
         //Senão, a página de histórico é carregada normalmente
@@ -146,7 +145,7 @@ module.exports = {
             res.render('historico/historico', {
                 vendas: vendas,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             })
         }
 
@@ -168,7 +167,7 @@ module.exports = {
                     cod: dav.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             })
         }
         //Senão, renderiza a tela de detalhamento de dav normalmente
@@ -182,7 +181,7 @@ module.exports = {
                 formPagt: dav.formPagt,
                 produtos: produtos,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
 
             });
         }
@@ -203,7 +202,7 @@ module.exports = {
                     cod: dav.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             })
         }
         //Senão, o email é enviado para o vendedor normalmente

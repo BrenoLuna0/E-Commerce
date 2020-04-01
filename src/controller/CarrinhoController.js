@@ -6,7 +6,6 @@ const Carrinho = require('../model/Carrinho');
 const getCartTotal = require('../utils/getCartTotal');
 const Produto = require('../model/Produto'); //Este require é necessário para pegar os produtos relacionados aos que estão no carrinho
 const Vendedor = require('../model/Vendedor'); 
-const getFilialName = require('../utils/getFilialName');
 
 module.exports = {
 
@@ -29,7 +28,7 @@ module.exports = {
                     cod: produtosCarrinho.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
 
         } 
@@ -37,7 +36,7 @@ module.exports = {
         else if (!produtosCarrinho) {
             res.render('carrinhoVazio/carrinhoVazio', {
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         } 
         //...Caso dê tudo certo, serão feitos alguns procedimentos:
@@ -58,7 +57,7 @@ module.exports = {
                 produtos: produtosFinais,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
                 produtosRelacionados: produtosRelacionados,
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         }
 
@@ -140,7 +139,7 @@ module.exports = {
                     cod: produtosCarrinho.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
 
         } 
@@ -148,7 +147,7 @@ module.exports = {
         else if (!produtosCarrinho) {
             res.render('carrinhoVazio/carrinhoVazio', {
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         } 
         //...Caso dê tudo certo:
@@ -161,7 +160,7 @@ module.exports = {
             res.render('checkout/checkout', {
                 produtos: produtosFinais,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         }
 
@@ -186,7 +185,7 @@ module.exports = {
                 cartTotal: '',
                 total: res.locals.total,
                 vendedores,
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         } 
         //Em caso de falha, é renderizada a página de erro, porém a compra foi concluída com sucesso. Só o carrinho que não foi esvaziado
@@ -198,7 +197,7 @@ module.exports = {
                     cod: '003'
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         }
 
@@ -217,7 +216,7 @@ module.exports = {
                     cod: total.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         } else {
             return res.redirect('/main');

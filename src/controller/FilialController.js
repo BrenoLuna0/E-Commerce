@@ -19,7 +19,7 @@ module.exports = {
                     cod: filiais.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         } 
         //Senão, a página de login será exibida normalmente

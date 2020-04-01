@@ -1,7 +1,6 @@
 const Produto = require('../model/Produto');
 const Categoria = require('../model/Categoria');
 const getCartTotal = require('../utils/getCartTotal');
-const getFilialName = require('../utils/getFilialName');
 
 module.exports = {
 
@@ -21,7 +20,7 @@ module.exports = {
                     cod: produtos.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         } 
         //...Senão a página principal é carregada normalmente
@@ -29,7 +28,7 @@ module.exports = {
             res.render('front/front', {
                 products: produtos,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         }
 
@@ -52,7 +51,7 @@ module.exports = {
                     cod: produtos.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         } 
         //...senão são pegos a quantidade de produtos total que vem dessa consulta e as categorias para a exibição na view
@@ -66,7 +65,7 @@ module.exports = {
                 categories: categorias,
                 produtoQtd,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         }
     },
@@ -87,7 +86,7 @@ module.exports = {
                     cod: produtos.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         } 
         //...Senão, a página de produtos é renderizada com as informações da quantidade total de produtos e as categorias
@@ -101,7 +100,7 @@ module.exports = {
                 categories: categorias,
                 produtoQtd,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         }
     },
@@ -129,7 +128,7 @@ module.exports = {
                     cod: produtos.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         } 
         //...Senão, a página de produtos é renderizada com as informações da quantidade total de produtos e as categorias
@@ -144,7 +143,7 @@ module.exports = {
                 categories: categorias,
                 produtoQtd,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         }
     },
@@ -164,7 +163,7 @@ module.exports = {
                     cod: produto.cod
                 },
                 cartTotal: '',
-                filial: ''
+                filial: req.session.filialName
             });
         } 
         //...Senão, a página é renderizada normalmente
@@ -184,7 +183,7 @@ module.exports = {
                 produtosRelacionados: produtosRelacionados,
                 alerta: alert,
                 cartTotal: await getCartTotal(req.user.id, req.session.filial),
-                filial: await getFilialName(req.session.filial)
+                filial: req.session.filialName
             });
         }
 

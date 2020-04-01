@@ -72,7 +72,7 @@ routes.get('*', (req, res) => {
                 cod: 600
             },
             cartTotal: '',
-            filial: ''
+            filial: req.session.filialName
         });
     }
     res.redirect('/login')

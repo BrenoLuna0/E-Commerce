@@ -1,5 +1,6 @@
 //Arquivo com as funções responsáveis por fazer o login e o logout do usuário
 
+const getFilialName = require('../utils/getFilialName');
 const passport = require('passport');
 require('../auth')(passport);
 
@@ -30,9 +31,10 @@ module.exports = {
             }
 
             if (!user) { return res.redirect('/login'); }
-            req.logIn(user, function (err) {
+            req.logIn(user, async function (err) {
                 if (err) { return next(err); }
                 req.session.filial = req.body.filial;
+                req.session.filialName = await getFilialName(req.body.filial);
                 return res.redirect('/main');
             });
         })(req, res, next);
