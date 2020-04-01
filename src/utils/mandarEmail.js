@@ -1,5 +1,8 @@
+//Este é o arquivo responsável por enviar o email
+
 const nodemailer = require('nodemailer');
 
+//Primeiro é definida as configurações do email que será o remetente e colocado dentro da variavel <transporter>
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -11,7 +14,13 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+/**
+ * Aqui se encontra a função em si que irá mandar o email
+ * O texto enviado no email é um html, que é formatado dependendo dos parâmetros recebidos da função
+ */
 module.exports = async function (emailDestino, produtos, venda) {
+
+    //Este é o html referente às informações da venda e do cabeçalho do email
     let htmlVenda = `<h1>Informações da venda ${venda.nDav}</h1>
 
     <div class="container center">
@@ -37,6 +46,7 @@ module.exports = async function (emailDestino, produtos, venda) {
             
         <hr>`;
 
+    //Este é o html que faz a exibição dos produtos em formato de tabela como é feito no site
     let htmlProdutos = `<div class="container center">
     <div class="row container center">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
@@ -97,8 +107,10 @@ module.exports = async function (emailDestino, produtos, venda) {
                 </div>`
 
 
+    //Esses dois HTMLs são concatenados
     let html = htmlVenda + htmlProdutos;
 
+    //Aqui estão as informações que vão no email, como remetente, destinatario, o assunto do email e o corpo (html)
     const opcoesEmail = {
         from: 'luna.breno99@gmail.com',
         to: emailDestino,
@@ -108,6 +120,7 @@ module.exports = async function (emailDestino, produtos, venda) {
 
     let result;
 
+    //O email é enviado
     transporter.sendMail(opcoesEmail, (err,info)=>{
         if(err){
             console.log(err);
