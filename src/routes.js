@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = express.Router();
+const mandarEmail = require('./utils/mandarEmail');
 
 
 const ProdutoController = require('./controller/ProdutoController');
@@ -58,6 +59,8 @@ routes.get('/alterarSenha', authenticationMiddleware(), ClienteController.carreg
 routes.post('/alterarSenha', authenticationMiddleware(), ClienteController.verificarUsuario);
 routes.post('/modificarSenha', authenticationMiddleware(), ClienteController.alterarSenha);
 
+routes.post('/email', authenticationMiddleware(), VendaController.enviarEmail);
+
 //rota genérica;
 
 routes.get('*', (req, res) => {
@@ -74,6 +77,7 @@ routes.get('*', (req, res) => {
     }
     res.redirect('/login')
 });
+
 
 
 module.exports = routes;

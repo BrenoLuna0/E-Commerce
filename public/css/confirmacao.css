@@ -26,6 +26,11 @@ ul li p strong {
     font-size: 22px;
 }
 
+ul li button {
+    display: flex;
+    justify-content: center;
+}
+
 .button {
     height: 55px;
     width: 150px;
@@ -36,7 +41,7 @@ ul li p strong {
 }
 
 
-@media screen and (min-height: 850px){
+@media screen and (min-height: 1050px){
     footer  {
         position: fixed;
         left: 0;

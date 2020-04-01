@@ -5,6 +5,7 @@
 const Carrinho = require('../model/Carrinho');
 const getCartTotal = require('../utils/getCartTotal');
 const Produto = require('../model/Produto'); //Este require é necessário para pegar os produtos relacionados aos que estão no carrinho
+const Vendedor = require('../model/Vendedor'); 
 const getFilialName = require('../utils/getFilialName');
 
 module.exports = {
@@ -177,12 +178,14 @@ module.exports = {
         
         //Em caso de sucesso, é renderizada a página de confirmação da compra, com todas as informações
         if (result) {
+            const vendedores = await Vendedor.getVendedores(req.session.filial);
             res.render('confirmacao/confirmacao', {
                 nDav: res.locals.nDAV,
                 formPagt: res.locals.formPagt,
                 data: res.locals.data,
                 cartTotal: '',
                 total: res.locals.total,
+                vendedores,
                 filial: await getFilialName(req.session.filial)
             });
         } 
