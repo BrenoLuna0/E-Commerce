@@ -26,9 +26,9 @@ async function connect(){
     try{
         //São definidos o usuário, senha e ip do banco de dados
         connection = await oracledb.getConnection({
-             user : 'csm_mobile',
-             password : 'mobile',
-             connectString : '187.84.80.162:1521/bdvip01'
+             user : process.env.DB_USER,
+             password : process.env.DB_PASS,
+             connectString : process.env.DB_HOST
         });
         console.log("Successfully connected to Oracle!" + connection);
         //retornamos a conexão para que todas as models usem apenas uma conexão, ao invés de abrir uma conexão por consulta

@@ -61,6 +61,10 @@ routes.post('/modificarSenha', authenticationMiddleware(), ClienteController.alt
 
 routes.post('/email', authenticationMiddleware(), VendaController.enviarEmail);
 
+/*routes.get('/teste', (req,res)=>{
+    mandarEmail('','','');
+});*/
+
 //rota genérica;
 
 routes.get('*', (req, res) => {

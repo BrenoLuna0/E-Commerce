@@ -4,11 +4,15 @@ const nodemailer = require('nodemailer');
 
 //Primeiro é definida as configurações do email que será o remetente e colocado dentro da variavel <transporter>
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: process.env.MAIL_HOST,
+    port: 587,
+    secure: false,
     auth: {
-        user: 'luna.breno99@gmail.com',
-        pass: '%ComeKouzeon1240%'
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS
     },
+    logger: false,
+    debug: false, // include SMTP traffic in the logs
     tls: {
         rejectUnauthorized: false
     }
@@ -60,8 +64,8 @@ module.exports = async function (emailDestino, produtos, venda) {
                     </tr>
                 </thead>
                 <tbody>`;
-    
-    produtos.map(function(produto){
+
+    produtos.map(function (produto) {
         htmlProdutos += `<tr>
         <td class="col-sm-8 col-md-6">
             <div class="media">
@@ -112,22 +116,29 @@ module.exports = async function (emailDestino, produtos, venda) {
 
     //Aqui estão as informações que vão no email, como remetente, destinatario, o assunto do email e o corpo (html)
     const opcoesEmail = {
-        from: 'luna.breno99@gmail.com',
+        from: 'pedido@vipinformatica.com.br',
         to: emailDestino,
         subject: 'DAV Realizado no Site',
         html
     };
 
+    /*const opcoesEmail = {
+        from: 'pedido@vipinformatica.com.br',
+        to: 'breno.luna_@hotmail.com',
+        subject: 'DAV Realizado no Site',
+        text : 'PEGOUUU'
+    };*/
+
     let result;
 
     //O email é enviado
-    transporter.sendMail(opcoesEmail, (err,info)=>{
-        if(err){
+    transporter.sendMail(opcoesEmail, (err, info) => {
+        if (err) {
             console.log(err);
             result = false;
-        }else{
+        } else {
             console.log('Email enviado' + info.response);
-            result = true; 
+            result = true;
         }
     });
 
