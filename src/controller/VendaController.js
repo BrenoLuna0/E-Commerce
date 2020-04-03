@@ -210,7 +210,7 @@ module.exports = {
             const produtos = await Venda.getVendaItens(req.body.id, req.session.filial);
 
 
-            const result = await mandarEmail(req.body.email, produtos, dav);
+            const result = await mandarEmail(req.body.email, produtos, dav, req.session.filial);
             //console.log(result);
 
             res.send(true);

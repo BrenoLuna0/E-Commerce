@@ -2,27 +2,53 @@
 
 const nodemailer = require('nodemailer');
 
-//Primeiro é definida as configurações do email que será o remetente e colocado dentro da variavel <transporter>
-const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: 587,
-    secure: false,
-    auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS
+const transporterData = {
+    vip: {
+        host: process.env.VIP_MAIL_HOST,
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.VIP_MAIL_USER,
+            pass: process.env.VIP_MAIL_PASS
+        },
+        logger: false,
+        debug: false, // include SMTP traffic in the logs
+        tls: {
+            rejectUnauthorized: false
+        }
     },
-    logger: false,
-    debug: false, // include SMTP traffic in the logs
-    tls: {
-        rejectUnauthorized: false
+
+    viana : {
+        host: process.env.VIANA_MAIL_HOST,
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.VIANA_MAIL_USER,
+            pass: process.env.VIANA_MAIL_PASS
+        },
+        logger: false,
+        debug: false, // include SMTP traffic in the logs
+        tls: {
+            rejectUnauthorized: false
+        }
     }
-});
+}
+
 
 /**
  * Aqui se encontra a função em si que irá mandar o email
  * O texto enviado no email é um html, que é formatado dependendo dos parâmetros recebidos da função
  */
-module.exports = async function (emailDestino, produtos, venda) {
+module.exports = async function (emailDestino, produtos, venda, origem) {
+
+    let transporter;
+    
+    //Primeiro é definida as configurações do email que será o remetente e colocado dentro da variavel <transporter>
+    if(parseInt(origem) <= 3){
+        transporter = nodemailer.createTransport(transporterData.vip);
+    }else {
+        transporter = nodemailer.createTransport(transporterData.viana);
+    }
 
     //Este é o html referente às informações da venda e do cabeçalho do email
     let htmlVenda = `<h1>Informações da venda ${venda.nDav}</h1>
