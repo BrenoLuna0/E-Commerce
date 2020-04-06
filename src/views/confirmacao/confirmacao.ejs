@@ -108,6 +108,9 @@
     </nav>
 
     <div class="container dados">
+      <h2>Pedido Realizado Com Sucesso</h2>
+    </div>
+    <div class="container dados">
       <ul>
         <li>
           <p>Número do Pedido</p>
@@ -129,6 +132,7 @@
           <p>Escolha um Vendedor para Associar na sua Compra</p>
           <input type="hidden" name="id" , id="nDav" value=<%=nDav%>>
           <select class="form-control" name="email" id="email">
+            <option value="">Selecione</option>
             <%
             vendedores.map(function(vendedor){
               %>
@@ -173,6 +177,11 @@
 
   <script>
     function enviarEmail() {
+      if($('#email option:selected').val() === ''){
+        alert('Selecione alguém para enviar o email')
+      }else{
+        alert('Serviço de Email temporariamente indisponível');
+      }
       /*let postObject = {
         id: $('#nDav').val(),
         email : $('#email option:selected').val()
@@ -187,8 +196,6 @@
           alert('Falha no Envio do Email, tente novamente mais tarde');
         }
       });*/
-
-      alert('Serviço de Email temporariamente indisponível');
     }
   </script>
 </body>

@@ -40,7 +40,7 @@ class Venda {
          DAV_OBSERVACAO,
          DAV_INTRANET,
          DAV_INTRANET_ATUALIZADO)
-          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${intervaloDeParcelas}' , 'S' , 'N')`;
+          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , 'Intervalo de dias: ${intervaloDeParcelas}' , 'S' , 'N')`;
           
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
