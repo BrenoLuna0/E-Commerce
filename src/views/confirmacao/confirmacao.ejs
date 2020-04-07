@@ -146,7 +146,7 @@
             <button class="button" onclick="enviarEmail()">Enviar Email para o Vendedor</button>
 
           </div>
-          
+
         </li>
       </ul>
     </div>
@@ -177,25 +177,26 @@
 
   <script>
     function enviarEmail() {
-      if($('#email option:selected').val() === ''){
-        alert('Selecione alguém para enviar o email')
-      }else{
+      if ($('#email option:selected').val() === '') {
+        alert('Selecione um vendedor para enviar o email')
+      } else {
+        /*let postObject = {
+          id: $('#nDav').val(),
+          email: $('#email option:selected').val()
+        }
+
+        $.post("/email", postObject, function (data) {
+          if (data) {
+            console.log(data)
+            alert('Email Enviado com sucesso');
+
+          } else {
+            alert('Falha no Envio do Email, tente novamente mais tarde');
+          }
+        });*/
         alert('Serviço de Email temporariamente indisponível');
       }
-      /*let postObject = {
-        id: $('#nDav').val(),
-        email : $('#email option:selected').val()
-      }
 
-      $.post("/email", postObject, function (data) {
-        if (data) {
-          console.log(data)
-          alert('Email Enviado com sucesso');
-
-        } else {
-          alert('Falha no Envio do Email, tente novamente mais tarde');
-        }
-      });*/
     }
   </script>
 </body>

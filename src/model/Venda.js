@@ -20,6 +20,12 @@ class Venda {
     }
 
     static async inserirDAV(nDAV, userId, vendaTotal, cnpj, intervaloDeParcelas, filial) {
+        let observacao;
+        if(intervaloDeParcelas === ''){
+            observacao = ''
+        }else {
+            observacao = `Intervalo de Dias: ${intervaloDeParcelas}`
+        }
         const conexao = await connection;
         var today = new Date();
         var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
@@ -40,7 +46,7 @@ class Venda {
          DAV_OBSERVACAO,
          DAV_INTRANET,
          DAV_INTRANET_ATUALIZADO)
-          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , 'Intervalo de dias: ${intervaloDeParcelas}' , 'S' , 'N')`;
+          VALUES(${filial}, ${nDAV} , '010264103000112' , '${date}' , ${userId} , 1 , 'A' , ${vendaTotal} , 0 , 0 , ${vendaTotal} , 4 , '${cnpj}' , '${observacao}' , 'S' , 'N')`;
           
         return new Promise(async function (resolve) {
             conexao.execute(sql, [], { autoCommit: true }, function (err) {
