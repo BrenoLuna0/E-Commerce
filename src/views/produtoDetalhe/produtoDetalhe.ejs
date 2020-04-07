@@ -34,12 +34,12 @@
               <%
               if(filial.includes('VIP')){
                 %>
-                <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
-                <%
+              <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+              <%
               }else {
                 %>
-                <a href="/main"><img src="/assets/logo_viana.png" alt="Minha Figura"></a>
-                <%
+              <a href="/main"><img src="/assets/logo_viana.png" alt="Minha Figura"></a>
+              <%
               }
               %>
             </figure>
@@ -208,11 +208,13 @@
 
                 <div style="margin-top: 150px;" id="addCarinho" class="d-flex justify-content-left">
                   <!-- Default input -->
-                  <input id="qtdId" type="number" name="qtd" value="1" aria-label="Search" class="form-control"
-                    style="width: 100px" min="1" onkeyup="atualizarCarrinhoNoClick(event,'<%=produto.PROD_CODIGO%>', '<%=produto.PROD_QTD_ATUAL%>' ,$('#qtdId').val())">
+                  <input id="qtdId" type="number" name="qtd" value="1" aria-label="Search" class="form-control inputQtd"
+                    style="width: 100px" min="1"
+                    onkeyup="atualizarCarrinhoNoClick(event,'<%=produto.PROD_CODIGO%>', '<%=produto.PROD_QTD_ATUAL%>' ,$('#qtdId').val())">
                   <input type="hidden" name="produto" value=<%=produto.PROD_CODIGO%>>
                   <button style="width: 200px" class=""
-                    onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>', '<%=produto.PROD_QTD_ATUAL%>' ,$('#qtdId').val())" type="button">Adicionar
+                    onclick="adicionarNoCarrinho('<%=produto.PROD_CODIGO%>', '<%=produto.PROD_QTD_ATUAL%>' ,$('#qtdId').val())"
+                    type="button">Adicionar
                     no Carrinho
                     <i class="fas fa-shopping-cart ml-1"></i>
                   </button>
@@ -341,9 +343,15 @@
 
       function atualizarCarrinhoNoClick(event, idProduto, estoque, qtd) {
         if (event.which == 13 || event.keyCode == 13) {
-          adicionarNoCarrinho(idProduto,estoque,qtd);
+          adicionarNoCarrinho(idProduto, estoque, qtd);
         }
       }
+
+      $('.inputQtd').change(function () {
+        if ($(this).val() <= 0) {
+          $(this).val(1);
+        }
+      });
 
     </script>
 
