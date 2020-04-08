@@ -34,12 +34,12 @@
               <%
               if(filial.includes('VIP')){
                 %>
-                <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
-                <%
+              <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
+              <%
               }else {
                 %>
-                <a href="/main"><img src="/assets/logo_viana.png" alt="Minha Figura"></a>
-                <%
+              <a href="/main"><img src="/assets/logo_viana.png" alt="Minha Figura"></a>
+              <%
               }
               %>
             </figure>
@@ -151,7 +151,8 @@
 
                     <input type="hidden" name="produto" value=<%=produto.codigo%>>
                     <input type="number" onkeyup="atualizarCarrinhoNoClick(event,'<%=produto.codigo%>')"
-                      class="form-control inputQtd" name="qtd" id=<%='qtd'+ produto.codigo%> min="1" value=<%=produto.qtd%>>
+                      class="form-control inputQtd" name="qtd" id=<%='qtd'+ produto.codigo%> min="1" max="999"
+                      value=<%=produto.qtd%>>
                     <%
                       if(produto.qtd > produto.qtd_estoque){
                         %>
@@ -333,9 +334,11 @@
         });
       });
 
-      $('.inputQtd').change(function(){
-        if($(this).val()  <= 0){
-          $(this).val(1);
+      $('.inputQtd').keydown(function () {
+        if ($(this).val() > 99) {
+          const numberString = $(this).val().toString();
+          const newString = numberString.slice(1);
+          $(this).val(parseInt(newString));
         }
       });
 
@@ -358,23 +361,28 @@
       }
 
       function atualizarCarrinho(idProduto) {
-        const qtd = $('#qtd' + idProduto).val();
-        const qtdNumber = parseInt(qtd);
+        if ($('#qtd' + idProduto).val() <= 0) {
+          alert('Número inválido');
+        } else {
+          const qtd = $('#qtd' + idProduto).val();
+          const qtdNumber = parseInt(qtd);
 
-        $.ajax({
-          url: '/carrinho/update',
-          type: 'PUT',
-          data: { produto: idProduto, qtd: qtdNumber },
-          success: function (response) {
-            if (response) {
-              location.reload();
-              console.log('Deu certo');
-            } else {
-              alert('Erro na Atualização da Quantidade do Produto no Carrinho. Tente novamente mais tarde');
+          $.ajax({
+            url: '/carrinho/update',
+            type: 'PUT',
+            data: { produto: idProduto, qtd: qtdNumber },
+            success: function (response) {
+              if (response) {
+                location.reload();
+                console.log('Deu certo');
+              } else {
+                alert('Erro na Atualização da Quantidade do Produto no Carrinho. Tente novamente mais tarde');
+              }
+
             }
+          });
+        }
 
-          }
-        });
 
       }
 
