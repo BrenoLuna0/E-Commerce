@@ -344,6 +344,7 @@
       function addCarrinhoHandler(idProduto, estoque, qtd){
         if($('.inputQtd').val() <= 0){
           alert('Número inválido');
+          window.location.reload();
         }else{
           adicionarNoCarrinho(idProduto, estoque, qtd);
         }
@@ -355,10 +356,10 @@
         }
       }
 
-      $('.inputQtd').keydown(function () {
-        if ($(this).val() > 99) {
+      $('.inputQtd').keypress(function () {
+        if ($(this).val().toString().length > 2) {
           const numberString = $(this).val().toString();
-          const newString = numberString.slice(1);
+          const newString = numberString.substr(0, 2);
           $(this).val(parseInt(newString));
         }
       });
