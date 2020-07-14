@@ -397,7 +397,7 @@ async function getProdutosImagem(produtos) {
             );
           } else {
             const images = result.rows.map(function (imagem) {
-              return "http://187.84.80.162:8081/images/" + imagem[1];
+              return "http://187.84.80.162/imagens/" + imagem[1];
             });
             resolve(
               new Produto(
