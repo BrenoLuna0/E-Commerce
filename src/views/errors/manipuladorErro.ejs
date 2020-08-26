@@ -1,150 +1,162 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <head>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
     <title>Erro</title>
-    <link rel="icon" href="/assets/favicon.ico">
-    <script src="https://kit.fontawesome.com/415900c0c9.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/senha.css">
+    <link rel="icon" href="/assets/favicon.ico" />
+    <script
+      src="https://kit.fontawesome.com/415900c0c9.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/senha.css" />
+  </head>
 
-
-</head>
-
-<body>
-
+  <body>
     <main role="main">
-        <div class="container">
+      <div class="container">
+        <div class="row">
+          <div class="col-md">
+            <p></p>
+          </div>
+          <div class="col-6 center">
+            <form action="/descricao?page=1" method="GET">
+              <div class="form-row">
+                <div class="col">
+                  <input
+                    type="text"
+                    id="descricao"
+                    name="descricao"
+                    class="form-control"
+                    placeholder="Pesquise Seus Produtos"
+                  />
+                </div>
+                <div class="col">
+                  <button type="submit" class="">Pesquisar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md center">
             <div class="row">
-                <div class="col-md ">
-                    <p>
-                        <figure>
-                            <%
-                            if(filial.includes('VIP')){
-                                %>
-                                <a href="/main"><img src="/assets/logo_vip_informatica.png" alt="Minha Figura"></a>
-                                <%
-                            }else {
-                                %>
-                                <a href="/main"><img src="/assets/logo_viana.png" alt="Minha Figura"></a>
-                                <%
-                            }
-                            %>
-                        </figure>
-                    </p>
-                </div>
-                <div class="col-6 center">
-                    <form action="/descricao?page=1" method="GET">
-                        <div class="form-row">
-                            <div class="col">
-                                <input type="text" id="descricao" name="descricao" class="form-control"
-                                    placeholder="Pesquise Seus Produtos">
-                            </div>
-                            <div class="col">
-                                <button type="submit" class="">Pesquisar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md center">
-                    <div class="row">
-                        <div class="col">
-                            <p>
-                                <a class="color" href="/historico"><i class="fas fa-user">Historico</i></a>
-                                <a class="color" href="/carrinho"><i
-                                        class="fas fa-shopping-cart"><%='Carrinho' + cartTotal%></i></a>
-                                <br>
-                                <a class="color" href="/alterarSenha"><i class="fas fa-key">Modificar Senha</i></a>
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p class="text-right">
-                                <a class="color" href="/logout"><i class="fas fa-sign-out-alt">Sair</i></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+              <div class="col">
+                <p>
+                  <a class="color" href="/historico"
+                    ><i class="fas fa-user">Historico</i></a
+                  >
+                  <a class="color" href="/carrinho"
+                    ><i class="fas fa-shopping-cart"
+                      ><%='Carrinho' + cartTotal%></i
+                    ></a
+                  >
+                  <br />
+                  <a class="color" href="/alterarSenha"
+                    ><i class="fas fa-key">Modificar Senha</i></a
+                  >
+                </p>
+              </div>
+              <div class="col">
+                <p class="text-right">
+                  <a class="color" href="/logout"
+                    ><i class="fas fa-sign-out-alt">Sair</i></a
+                  >
+                </p>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
 
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav nav-fill w-100">
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="/produto?page=1">Produtos <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="/categorias/COMPUTADOR?page=1">Computadores <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="/categorias/ACESSORIOS?page=1">Acessórios <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="/categorias/IMPRESSORA?page=1">Impressoras <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="/categorias/TELEFONE?page=1">Telefonia <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1">Notebooks <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active ">
-                            <a class="nav-link" href="/categorias/TV?page=1">Televisão <span
-                                    class="sr-only">(current)</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-fill w-100">
+              <li class="nav-item active">
+                <a class="nav-link" href="/produto?page=1"
+                  >Produtos <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/categorias/COMPUTADOR?page=1"
+                  >Computadores <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/categorias/ACESSORIOS?page=1"
+                  >Acessórios <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/categorias/IMPRESSORA?page=1"
+                  >Impressoras <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/categorias/TELEFONE?page=1"
+                  >Telefonia <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/categorias/NOTEBOOK@GRAVADOR?page=1"
+                  >Notebooks <span class="sr-only">(current)</span></a
+                >
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/categorias/TV?page=1"
+                  >Televisão <span class="sr-only">(current)</span></a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
 
-
-        <section>
-            <div class="form-wrapper">
-                <form action="/alterarSenha" method="POST">
-                    <h3><%=err.tit%></h3>
-                    <h4>Mensagem do erro: <strong><%=err.msg%></strong></h4>
-                    <h4>Código do erro: <strong><%=err.cod%></strong></h4>
-                </form>
-            </div>
-        </section>
-
-
+      <section>
+        <div class="form-wrapper">
+          <form action="/alterarSenha" method="POST">
+            <h3><%=err.tit%></h3>
+            <h4>Mensagem do erro: <strong><%=err.msg%></strong></h4>
+            <h4>Código do erro: <strong><%=err.cod%></strong></h4>
+          </form>
+        </div>
+      </section>
     </main>
 
     <footer class="page-footer font-small blue pt-4 text-center">
-        <!-- Copyright -->
-        <p class="text-light"><strong>Filial: <%=filial%></strong></p>
-        <div class="footer-copyright text-center text-light">© 2020 Copyright:
-            <a class="text-light" href="https://csmti.com.br"> CSM Tecnologia da Informação</a>
-        </div><br>
-        <!-- Copyright -->
-
+      <!-- Copyright -->
+      <p class="text-light"><strong>Filial: <%=filial%></strong></p>
+      <div class="footer-copyright text-center text-light">
+        © 2020 Copyright:
+        <a class="text-light" href="https://csmti.com.br">
+          CSM Tecnologia da Informação</a
+        >
+      </div>
+      <br />
+      <!-- Copyright -->
     </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
     <script src="/js/scripts.js"></script>
-
-</body>
-
+  </body>
 </html>
