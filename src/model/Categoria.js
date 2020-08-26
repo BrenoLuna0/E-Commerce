@@ -1,33 +1,26 @@
-const connection = require('../connection');
+const knex = require("../knexConnection");
 
-class Categoria{
-    static async categorias(filial){
-        const conexao = await connection;
-        const sql = `SELECT distinct sub_grp_descricao 
+class Categoria {
+  static async categorias(filial) {
+    return await knex
+      .raw(
+        `SELECT distinct sub_grp_descricao 
         FROM siac_ts.vw_subgrupo S, SIAC_TS.VW_PRODUTO P
         where s.sub_grp_codigo = p.sub_grp_codigo
         AND P.PROD_ATIVO = 'S'
         AND p.PROD_PRECO_VENDA > 0
-        AND P.FIL_CODIGO = ${filial}`;
-
-        return new Promise(async function(resolve){
-            await conexao.execute(sql,[],{autoCommit : true}, function(err, result){
-                if(err){
-                    console.log('Erro Oracle ao requisitar Categorias 101');
-                    resolve(err.message);
-                }else{
-                    if(typeof(result.rows[0]) === 'undefined'){
-                        resolve([]);
-                    }else{
-                        const objectArray = result.rows.map(function(categorias){
-                            return {descricao : categorias[0]/*.replace(/\s/g , "-").replace(/\//g , "-E-")*/}
-                        });
-                        resolve(objectArray);
-                    }
-                }
-            });
+        AND P.FIL_CODIGO = ${filial}`
+      )
+      .then((response) => {
+        return response.map((categorias) => {
+          return { descricao: categorias.SUB_GRP_DESCRICAO };
         });
-    }
+      })
+      .catch((err) => {
+        console.log("Erro Oracle ao requisitar Categorias 101");
+        return err;
+      });
+  }
 }
 
 module.exports = Categoria;
