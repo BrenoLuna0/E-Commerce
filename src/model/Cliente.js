@@ -1,7 +1,5 @@
-const connection = require("../connection");
 const knex = require("../knexConnection");
 const md5 = require("md5");
-const { response } = require("express");
 
 class Cliente {
   constructor(
@@ -21,26 +19,19 @@ class Cliente {
   }
 
   static async getNumeroTentativas(id) {
-    const conexao = await connection;
-    const sql = `SELECT NRO_TENTATIVAS FROM CLIENTE_SENHA WHERE CLIE_CODIGO = ${id}`;
-
-    return new Promise(async function (resolve) {
-      conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
-        if (err) {
-          resolve({
-            tit: "Erro na conexão com banco de dados",
-            msg: "Erro ao tentar efetuar login",
-            cod: 504,
-          });
-        } else {
-          if (typeof result.rows[0] === "undefined") {
-            resolve(false);
-          } else {
-            resolve(result.rows[0][0]);
-          }
-        }
+    return await knex
+      .raw(`SELECT NRO_TENTATIVAS FROM CLIENTE_SENHA WHERE CLIE_CODIGO = ${id}`)
+      .then((response) => {
+        return response[0].NRO_TENTATIVAS;
+      })
+      .catch((err) => {
+        console.log(err);
+        return {
+          tit: "Erro na conexão com banco de dados",
+          msg: "Erro ao tentar efetuar login",
+          cod: 504,
+        };
       });
-    });
   }
 
   static async getClienteCodigo(login) {
@@ -57,104 +48,68 @@ class Cliente {
           cod: 506,
         };
       });
-
-    /*const conexao = await connection;
-        const sql = `SELECT CLIE_CODIGO FROM CLIENTE_SENHA WHERE CLIE_LOGIN = ${login}`;
-
-        return new Promise(async function(resolve){
-            conexao.execute(sql,[],{autoCommit : true}, function(err,result){
-                if(err){
-                    resolve({
-                        tit: 'Erro na conexão com banco de dados',
-                        msg: 'Erro ao tentar efetuar login',
-                        cod: 506
-                    })
-                } else{
-                    if(typeof(result.rows[0]) === 'undefined'){
-                        resolve(false);
-                    }else{
-                        resolve(result.rows[0][0]);
-                    }
-                }
-            });
-        });*/
   }
 
   static async adicionarTentativaLogin(id, tentativas) {
-    const conexao = await connection;
-    const sql = `UPDATE CLIENTE_SENHA SET NRO_TENTATIVAS = ${tentativas} WHERE CLIE_CODIGO = ${id}`;
-
-    return new Promise(async function (resolve) {
-      conexao.execute(sql, [], { autoCommit: true }, function (err) {
-        if (err) {
-          console.log(
-            "Erro ao coloar as tentativas do usuario 505: " + err.message
-          );
-          resolve(false);
-        } else {
-          resolve(true);
-        }
+    return await knex
+      .raw(
+        `UPDATE CLIENTE_SENHA SET NRO_TENTATIVAS = ${tentativas} WHERE CLIE_CODIGO = ${id}`
+      )
+      .then((response) => {
+        return true;
+      })
+      .catch((err) => {
+        console.log("Erro ao coloar as tentativas do usuario 505: " + err);
+        return false;
       });
-    });
   }
 
   static async resetarTentativas(id) {
-    const conexao = await connection;
-    const sql = `UPDATE CLIENTE_SENHA SET NRO_TENTATIVAS = 0 WHERE CLIE_CODIGO = ${id}`;
-
-    return new Promise(async function (resolve) {
-      conexao.execute(sql, [], { autoCommit: true }, function (err) {
-        if (err) {
-          console.log(
-            "Erro ao zerar o numero de tentativas do usuario 501: " +
-              err.message
-          );
-          resolve(false);
-        } else {
-          resolve(true);
-        }
+    return await knex
+      .raw(
+        `UPDATE CLIENTE_SENHA SET NRO_TENTATIVAS = 0 WHERE CLIE_CODIGO = ${id}`
+      )
+      .then((response) => {
+        return true;
+      })
+      .catch((err) => {
+        console.log(
+          "Erro ao zerar o numero de tentativas do usuario 501: " + err
+        );
+        return false;
       });
-    });
   }
 
   static async alterarSenha(id, password) {
-    const conexao = await connection;
-    const sql = `UPDATE CLIENTE_SENHA SET SENHA_MD5 = '${md5(
-      password
-    )}' WHERE CLIE_CODIGO = ${id}`;
-
-    return new Promise(async function (resolve) {
-      conexao.execute(sql, [], { autoCommit: true }, function (err) {
-        if (err) {
-          console.log("Erro ao alterar a senha do usuario 502: " + err.message);
-          resolve(false);
-        } else {
-          resolve(true);
-        }
+    return await knex
+      .raw(
+        `UPDATE CLIENTE_SENHA SET SENHA_MD5 = '${md5(
+          password
+        )}' WHERE CLIE_CODIGO = ${id}`
+      )
+      .then((response) => {
+        return true;
+      })
+      .catch((err) => {
+        console.log("Erro ao alterar a senha do usuario 502: " + err);
+        return false;
       });
-    });
   }
 
   static async checarSenha(id, senha) {
-    const conexao = await connection;
-    const sql = `SELECT * FROM CLIENTE_SENHA WHERE SENHA_MD5 = '${md5(
-      senha
-    )}' AND CLIE_CODIGO = ${id}`;
-
-    return new Promise(async function (resolve) {
-      conexao.execute(sql, [], { autoCommit: true }, function (err, result) {
-        if (err) {
-          console.log("Erro ao pegar a senha do usuario 503: " + err.message);
-          resolve(null);
-        } else {
-          if (typeof result.rows[0] === "undefined") {
-            resolve(false);
-          } else {
-            resolve(true);
-          }
-        }
+    return await knex
+      .raw(
+        `SELECT * FROM CLIENTE_SENHA WHERE SENHA_MD5 = '${md5(
+          senha
+        )}' AND CLIE_CODIGO = ${id}`
+      )
+      .then((response) => {
+        return response.length === 0 ? false : true;
+      })
+      .catch((err) => {
+        console.log("Erro ao pegar a senha do usuario 503: " + err);
+        return null;
       });
-    });
   }
 }
 
