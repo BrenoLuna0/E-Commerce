@@ -162,7 +162,7 @@ class Carrinho {
                   qtd: produto.qtd,
                   subtotal: formatarMoeda(produto.qtd * produto.preco),
                   path:
-                    "http://187.84.80.162:8081/imagens/" +
+                    "http://187.84.80.162:81/imagens/" +
                     response[0].PROD_IMAG_NOME,
                   qtd_estoque: produto.qtd_estoque,
                 };
