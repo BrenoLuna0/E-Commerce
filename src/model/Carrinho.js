@@ -1,4 +1,3 @@
-const connection2 = require("../connection");
 const knex = require("../knexConnection");
 const formatarMoeda = require("../utils/formatarMoeda");
 
@@ -20,6 +19,7 @@ class Carrinho {
         console.log(
           "Erro no oracle para adicionar produto no Carrinho 001: " + err
         );
+        knex.initialize();
         return false;
       });
   }
@@ -34,6 +34,7 @@ class Carrinho {
         console.log(
           "Erro no Oracle ao deletar produto do carrinho 002: " + err
         );
+        knex.initialize();
         return false;
       });
   }
@@ -46,6 +47,7 @@ class Carrinho {
       .then(() => true)
       .catch((err) => {
         console.log("Erro no Oracle ao limpar carrinho 003: " + err);
+        knex.initialize();
         return false;
       });
   }
@@ -61,6 +63,7 @@ class Carrinho {
           "Erro no Oracle ao atualizar quantidade de item no carrinho 004: " +
             err
         );
+        knex.initialize();
         return false;
       });
   }
@@ -82,12 +85,13 @@ class Carrinho {
         console.log(
           "Erro no Oracle ao requisitar produtos do carrinho 005: " + err
         );
-        resolve({
+        knex.initialize();
+        return {
           erro: true,
           tit: "Erro Oracle",
           msg: err,
           cod: "005",
-        });
+        };
       });
   }
 
@@ -118,6 +122,7 @@ class Carrinho {
           console.log(
             "Erro no Oracle ao requisitar produtos do carrinho 006: " + err
           );
+          knex.initialize();
           return [];
         });
     });
@@ -165,6 +170,7 @@ class Carrinho {
             console.log(
               "Erro no Oracle ao requisitar produtos do carrinho 007: " + err
             );
+            knex.initialize();
             return [];
           });
       });
@@ -185,6 +191,7 @@ class Carrinho {
       })
       .catch((err) => {
         console.log("Erro Oracle ao verificar produto 008: " + err);
+        knex.initialize();
         return false;
       });
   }
@@ -216,6 +223,7 @@ class Carrinho {
           console.log(
             "Erro no Oracle ao requisitar produtos do carrinho 006: " + err
           );
+          knex.initialize();
           return [];
         });
     });

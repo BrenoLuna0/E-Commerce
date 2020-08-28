@@ -9,6 +9,7 @@ class Venda {
       .then((response) => response[0].DAV_CODIGO)
       .catch((err) => {
         console.log("Erro oracle ao pegar o numero do DAV 301: " + err);
+        knex.initialize();
         return false;
       });
   }
@@ -60,6 +61,7 @@ class Venda {
       .then(() => true)
       .catch((err) => {
         console.log("Erro oracle ao inserir DAV 302: " + err);
+        knex.initialize();
         return false;
       });
   }
@@ -85,6 +87,7 @@ class Venda {
         .then(() => true)
         .catch((err) => {
           console.log("Erro no Oracle ao inserir DavItens 303: " + err);
+          knex.initialize();
           return false;
         });
     });
@@ -127,6 +130,7 @@ class Venda {
         console.log(
           "Erro no oracle ao inserir DavFormadePagamento 304: " + err
         );
+        knex.initialize();
         return false;
       });
   }
@@ -158,12 +162,13 @@ class Venda {
         console.log(
           "Erro no oracle ao pegar os davs para o historico 305: " + err
         );
-        resolve({
+        knex.initialize();
+        return {
           erro: true,
           tit: "Erro Oracle",
           msg: err,
           cod: 305,
-        });
+        };
       });
   }
 
@@ -205,6 +210,7 @@ class Venda {
       })
       .catch((err) => {
         console.log("Erro Oracle ao pegar a venda pelo codigo 306: " + err);
+        knex.initialize();
         return {
           erro: true,
           tit: "Erro Oracle",
@@ -236,6 +242,7 @@ class Venda {
       })
       .catch((err) => {
         console.log("Erro oracle ao pegar os itens do dav 307: " + err);
+        knex.initialize();
         return [];
       });
   }
@@ -248,6 +255,7 @@ class Venda {
       .then(() => true)
       .catch((err) => {
         console.log(`Transação Presa. Número do DAV : ${nDav}`);
+        knex.initialize();
         return {
           erro: true,
           tit: `Transação Presa. Número do DAV : ${nDav}`,
@@ -265,6 +273,7 @@ class Venda {
       .then(() => true)
       .catch((err) => {
         console.log(`Transação Presa. Número do DAV : ${nDav}`);
+        knex.initialize();
         return {
           erro: true,
           tit: `Transação Presa. Número do DAV : ${nDav}`,
@@ -282,6 +291,7 @@ class Venda {
       .then(() => true)
       .catch((err) => {
         console.log(`Transação Presa. Número do DAV : ${nDav}`);
+        knex.initialize();
         return {
           erro: true,
           tit: `Transação Presa. Número do DAV : ${nDav}`,

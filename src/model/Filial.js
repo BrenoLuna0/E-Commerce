@@ -17,6 +17,7 @@ class Filial {
       })
       .catch((err) => {
         console.log("Erro Oracle ao pegar as filiais 401: " + err);
+        knex.initialize();
         return {
           erro: true,
           tit: "Sem Comunicação com o Servidor",
@@ -34,6 +35,7 @@ class Filial {
       })
       .catch((err) => {
         console.log("Erro Oracle ao pegar o nome da filial 402: " + err);
+        knex.initialize();
         return [];
       });
   }

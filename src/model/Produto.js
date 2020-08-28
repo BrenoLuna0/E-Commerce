@@ -86,6 +86,7 @@ class Produto {
       })
       .catch((err) => {
         console.log(err);
+        knex.initialize();
         return {
           erro: true,
           tit: "Erro Oracle ao solicitar quantidade de prodtudo",
@@ -131,6 +132,7 @@ async function getProdutos(pageNumber = 1, categoria = "%", filial) {
     })
     .catch((err) => {
       console.log("Erro na paginação de produtos 201: " + err);
+      knex.initialize();
       return {
         erro: true,
         tit: "Erro Oracle",
@@ -159,6 +161,7 @@ async function getNineProdutos(filial) {
     })
     .catch((err) => {
       console.log("Erro oracle na captura dos produtos main 202: " + err);
+      knex.initialize();
       return {
         erro: true,
         tit: "Erro Oracle",
@@ -202,6 +205,7 @@ async function getProdutosByDescricao(pageNumber, descricao, filial) {
     })
     .catch((err) => {
       console.log("Erro oracle ao pegar produtos pela descrição 203: " + err);
+      knex.initialize();
       return {
         erro: true,
         tit: "Erro Oracle",
@@ -248,6 +252,7 @@ async function getProdutosRelacionados(categorias, filial) {
     })
     .catch((err) => {
       console.log("Erro Oracle ao pegar produtos relacionados 204: " + err);
+      knex.initialize();
       resolve([]);
     });
 }
@@ -287,12 +292,13 @@ async function getProdutoById(id, filial) {
     })
     .catch((err) => {
       console.log("Erro oracle ao pegar produto pelo codigo 205: " + err);
-      resolve({
+      knex.initialize();
+      return {
         erro: true,
         tit: "Erro Oracle",
         msg: err,
         cod: 205,
-      });
+      };
     });
 }
 
@@ -336,6 +342,7 @@ async function getProdutosImagem(produtos) {
       })
       .catch((err) => {
         console.log("Erro oracle na requisicao das imagens 206: " + err);
+        knex.initialize();
         return [];
       });
   });

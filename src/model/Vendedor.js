@@ -27,6 +27,7 @@ class Vendedor {
       })
       .catch((err) => {
         console.log(err);
+        knex.initialize();
         return {
           erro: true,
           tit: "Erro Ao pegar os vendedores no banco de dados",

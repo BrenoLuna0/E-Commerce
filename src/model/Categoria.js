@@ -18,6 +18,7 @@ class Categoria {
       })
       .catch((err) => {
         console.log("Erro Oracle ao requisitar Categorias 101");
+        knex.initialize();
         return err;
       });
   }

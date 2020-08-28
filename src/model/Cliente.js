@@ -26,6 +26,7 @@ class Cliente {
       })
       .catch((err) => {
         console.log(err);
+        knex.initialize();
         return {
           tit: "Erro na conexão com banco de dados",
           msg: "Erro ao tentar efetuar login",
@@ -42,6 +43,7 @@ class Cliente {
       })
       .catch((err) => {
         console.log(err);
+        knex.initialize();
         return {
           tit: "Erro na conexão com banco de dados",
           msg: "Erro ao tentar efetuar login",
@@ -60,6 +62,7 @@ class Cliente {
       })
       .catch((err) => {
         console.log("Erro ao coloar as tentativas do usuario 505: " + err);
+        knex.initialize();
         return false;
       });
   }
@@ -76,6 +79,7 @@ class Cliente {
         console.log(
           "Erro ao zerar o numero de tentativas do usuario 501: " + err
         );
+        knex.initialize();
         return false;
       });
   }
@@ -108,6 +112,7 @@ class Cliente {
       })
       .catch((err) => {
         console.log("Erro ao pegar a senha do usuario 503: " + err);
+        knex.initialize();
         return null;
       });
   }
