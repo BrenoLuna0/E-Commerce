@@ -24,6 +24,6 @@ app.set("views", path.join(__dirname, "src/views"));
 app.set("view engine", "ejs");
 
 app.use("/", require("./src/routes"));
-app.listen(process.env.PORT || 5000, () => {
-  console.log("Servidor ouvindo na porta 5000");
+app.listen(process.env.PORT || 8081, () => {
+  console.log("Servidor ouvindo na porta 8081");
 });
