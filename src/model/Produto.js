@@ -325,7 +325,7 @@ async function getProdutosImagem(produtos) {
           );
         } else {
           const images = response.map(function (imagem) {
-            return "http://localhost/imagens/" + imagem.PROD_IMAG_NOME;
+            return "http://187.84.80.162:8081/imagens/" + imagem.PROD_IMAG_NOME;
           });
 
           return new Produto(
