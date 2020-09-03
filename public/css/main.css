@@ -1,163 +1,174 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  html, body {
-    background-color: #efeff5;
-    font-family: Roboto, Arial, sans-serif;
-    height: 100vh;
-    -ms-overflow-style: scrollbar;
-  }
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  nav {
-      background-color: #29293d;
-  }
+html,
+body {
+  background-color: #efeff5;
+  font-family: Roboto, Arial, sans-serif;
+  height: 100vh;
+  -ms-overflow-style: scrollbar;
+}
 
-  button {
-      width : 120px;
-      height: 39px;
-      background-color: #29293d;
-      color : white;
-      border-radius: 7px;
-      transition: 0.2s;
-  }
+nav {
+  background-color: #29293d;
+}
 
-  .card-body {
-      position: relative;
-      height: 400px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      transition: 0.3s;
-      text-align: center;
-      cursor: pointer;
-  }
+button {
+  width: 120px;
+  height: 39px;
+  background-color: #29293d;
+  color: white;
+  border-radius: 7px;
+  transition: 0.2s;
+}
 
-  .card-body button {
-      position: absolute;
-      bottom: 10px;
-      width: 90%;
-      background-color: #29293d;
-      left: 5%;
-  }
+.card-body {
+  position: relative;
+  height: 400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.3s;
+  text-align: center;
+  cursor: pointer;
+}
 
-  .card-body a {
-      color: #29293d;
-  }
+.card-body button {
+  position: absolute;
+  bottom: 10px;
+  width: 90%;
+  background-color: #29293d;
+  left: 5%;
+}
 
-  .dropdown-menu {
-      background-color: #efeff5;
-  }
+.card-body a {
+  color: #29293d;
+}
 
-  .alert {
-      position: relative;
-      float: left;
-      position: absolute;
-  }
+.dropdown-menu {
+  background-color: #efeff5;
+}
 
-  .card-body:hover {
-      background-color: #d0d0e2;
-  }
+.alert {
+  position: relative;
+  float: left;
+  position: absolute;
+}
 
-  .center {
-      margin-top: auto;
-      margin-bottom: auto;
-  }
+.card-body:hover {
+  background-color: #d0d0e2;
+}
 
-  .push-bottom {
-      margin-top: 70px;
-  }
+.center {
+  margin-top: auto;
+  margin-bottom: auto;
+}
 
-  .color {
-      color: #29293d;
-  }
+.push-bottom {
+  margin-top: 70px;
+}
 
-  .ground {
-      background-color: #efeff5;
-  }
+.color {
+  color: #29293d;
+}
 
-  .centerHorizontal {
-    text-align: center;
-    width: auto;
-  }
+.ground {
+  background-color: #efeff5;
+}
 
-  button:hover {
-      background-color: #32324e;
-  }
+.centerHorizontal {
+  text-align: center;
+  width: auto;
+}
+
+button:hover {
+  background-color: #32324e;
+}
 
 .card-body img {
-    width: 100%;
-    height: 240px;
+  width: 100%;
+  height: 240px;
 }
 
 footer {
-    background-color: #29293d;
+  background-color: #29293d;
 }
 
 .text-light {
-    color : #efeff5;
+  color: #efeff5;
 }
 
 .dropbtn {
-    color: white;
-    font-size: 16px;
-    border: none;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    z-index: 99;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
+  color: white;
+  font-size: 16px;
+  border: none;
+}
 
-  .dropdown:hover .dropdown-content {display: block;}
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 99;
+}
 
-  .carousel {
-    position: relative;
-    margin-top: 50px;
-    height: 150px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
 
-  .carousel-inner {
-    height: 150px;
-  }
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
-  .bg-img {
-    position: absolute;
-    background-color: #47476b;
-    height: 150px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-  }
+.carousel {
+  position: relative;
+  margin-top: 50px;
+  height: 150px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  .card-body p {
-    cursor: text;
-    font-size: 15px;
-  }
+.carousel-inner {
+  height: 150px;
+}
 
-  .card-body .title {
-    width: 100%; 
-    height: 70px;
-  }
+.bg-img {
+  position: absolute;
+  background-color: #47476b;
+  height: 150px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
 
-  .card-body .price {
-    flex : 1;
-  }
+.card-body p {
+  cursor: text;
+  font-size: 15px;
+}
+
+.card-body .title {
+  width: 100%;
+  height: 70px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  height: calc(3 * 18px);
+  word-wrap: break-word;
+}
+
+.card-body .price {
+  flex: 1;
+}
