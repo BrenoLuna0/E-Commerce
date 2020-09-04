@@ -9,7 +9,8 @@ class Categoria {
         where s.sub_grp_codigo = p.sub_grp_codigo
         AND P.PROD_ATIVO = 'S'
         AND p.PROD_PRECO_VENDA > 0
-        AND P.FIL_CODIGO = ${filial}`
+        AND P.FIL_CODIGO = ${filial} 
+        ORDER BY sub_grp_descricao`
       )
       .then((response) => {
         return response.map((categorias) => {

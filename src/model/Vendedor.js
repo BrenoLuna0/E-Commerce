@@ -13,7 +13,8 @@ class Vendedor {
       .raw(
         `SELECT vendedor_codigo, vendedor_nome, vendedor_email 
         FROM SIAC_TS.vw_vendedor
-        WHERE fil_codigo = ${fil_codigo}`
+        WHERE fil_codigo = ${fil_codigo} 
+        ORDER BY vendedor_nome`
       )
       .then((response) => {
         return response.map(
