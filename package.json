@@ -19,7 +19,7 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "knex": "^0.21.5",
+    "knex": "^2.4.0",
     "md5": "^2.2.1",
     "nodemailer": "^6.4.6",
     "oracledb": "^4.2.0",
